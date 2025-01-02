@@ -14,17 +14,24 @@ body {
 
 header {
     background-color: #ffffff;
-    padding: 10px 30px;
-    border-bottom: 1px solid #ddd;
+    padding: 20px 30px;
+    border-bottom: 1px solid #002744;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 header .logo {
+    display: flex;
+    align-items: center;
     font-size: 25px;
     font-weight: bold;
     color: #002744;
+}
+
+header .logo img {
+    height: 80px;
+    margin-right: 10px;
 }
 
 nav ul {
