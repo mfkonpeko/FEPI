@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../estilos/registro.css">
+    <title>Registro de Empresa</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="../img/image.png" alt="ESCO-Nectados Logo">
+                <span>ESCO-NECTADOS</span>
+            </div>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Empleos</a></li>
+                <li><a href="#">Tips y Consejos</a></li>
+                <li><a href="#">Certificaciones</a></li>
+                <li><a href="#">Servicio Social</a></li>
+                <li><a href="#">Sobre Nosotros</a></li>
+            </ul>
+            <button class="login-btn">Iniciar Sesión</button>
+        </nav>
+    </header>
+    <main>
+        <section class="registro">
+            <h1>Registro de Empresa</h1>
+            <form action="#" method="post">
+                <fieldset>
+                    <legend>Información básica de la empresa</legend>
+                    <div class="left-section">
+                        <label for="nombre-empresa">Nombre de la empresa*</label>
+                        <input type="text" id="nombre-empresa" name="nombre-empresa" required>
+
+                        <label for="correo-corporativo">Correo corporativo*</label>
+                        <input type="email" id="correo-corporativo" name="correo-corporativo" required>
+
+                        <label for="telefono-corporativo">Teléfono corporativo*</label>
+                        <input type="tel" id="telefono-corporativo" name="telefono-corporativo" required>
+                    </div>
+                    <div class="right-section">
+                        <label for="contrasena">Contraseña*</label>
+                        <input type="password" id="contrasena" name="contrasena" required>
+
+                        <label for="confirmar-contrasena">Confirmar contraseña*</label>
+                        <input type="password" id="confirmar-contrasena" name="confirmar-contrasena" required>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Contacto de la empresa</legend>
+                    <div class="left-section">
+                        <label for="nombre-representante">Nombre representante*</label>
+                        <input type="text" id="nombre-representante" name="nombre-representante" required>
+
+                        <label for="cargo-corporativo">Cargo corporativo*</label>
+                        <input type="text" id="cargo-corporativo" name="cargo-corporativo" required>
+                    </div>
+                    <div class="right-section">
+                        <label for="correo-representante">Correo*</label>
+                        <input type="email" id="correo-representante" name="correo-representante" required>
+
+                        <label for="telefono-representante">Teléfono*</label>
+                        <input type="tel" id="telefono-representante" name="telefono-representante" required>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Información empresarial</legend>
+                    <div class="left-section">
+                        <label for="tipo-empresa">Tipo de empresa*</label>
+                        <input type="text" id="tipo-empresa" name="tipo-empresa" required>
+
+                        <label for="ubicacion-principal">Ubicación principal*</label>
+                        <input type="text" id="ubicacion-principal" name="ubicacion-principal" required>
+
+                        <label for="rubro-industria">Rubro o Industria*</label>
+                        <input type="text" id="rubro-industria" name="rubro-industria" required>
+                    </div>
+                    <div class="right-section">
+                        <label for="tamano-empresa">Tamaño de empresa*</label>
+                        <input type="text" id="tamano-empresa" name="tamano-empresa" required>
+
+                        <label for="pagina-web">Página web corporativa*</label>
+                        <input type="url" id="pagina-web" name="pagina-web" required>
+
+                        <label for="descripcion-empresa">Descripción de la empresa*</label>
+                        <textarea id="descripcion-empresa" name="descripcion-empresa" required></textarea>
+                    </div>
+                </fieldset>
+
+                <div class="terms-container">
+                    <div class="terms">
+                        <input type="checkbox" id="terminos" name="terminos" required>
+                        <label for="terminos">Aceptación de Términos y Condiciones *</label>
+                    </div>
+    
+                    <div class="terms">
+                        <input type="checkbox" id="privacidad" name="privacidad" required>
+                        <label for="privacidad">Política de Privacidad *</label>
+                    </div>
+                </div>
+                
+
+                <button type="submit">Acceder</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        &copy; 2024 ESCO-NECTADOS. Todos los derechos reservados.
+    </footer>
+</body>
+</html>

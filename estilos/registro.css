@@ -1,0 +1,217 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #fff;
+    padding: 1rem;
+    color: #fff;
+    padding: 20px 30px;
+    font-size: 18px;
+    border-bottom: 1px solid #002744;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #002744;
+}
+
+header .logo img {
+    height: 80px;
+    margin-right: 10px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+
+}
+
+nav ul li {
+    margin: 0 1rem;
+    
+}
+
+nav ul li a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-btn {
+    background-color: #00796b;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+main {
+    padding: 2rem;
+}
+
+.registro {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.registro h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #00796b;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+form fieldset {
+    padding: 1rem;
+    border-radius: 5px;
+    grid-column: span 2;
+}
+
+form legend {
+    font-weight: bold;
+    color: #00796b;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+form label {
+    display: block;
+    font-weight: bold;
+    color: #333;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 0.7rem;
+    margin-top: 0.3rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+form textarea {
+    resize: vertical;
+    height: 120px;
+}
+
+form .left-section {
+    grid-column: span 1;
+}
+
+form .right-section {
+    grid-column: span 1;
+}
+
+form .full-width {
+    grid-column: span 2;
+}
+
+form .column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+form input[type="text"], form input[type="password"], form input[type="tel"], form input[type="email"], form input[type="url"], textarea {
+    background-color: #ddd;
+}
+form .terms-container {
+    display: flex;
+    width: 700px;
+    justify-content: flex-start;
+}
+
+form .terms {
+    grid-column: span 2;
+    display: flex;
+    align-items: center;
+    margin: 1.5rem 1rem;
+    flex-direction: row-reverse;
+    justify-content: center;
+}
+
+button[type="submit"] {
+    display: block;
+    width: 100%;
+    background-color: #00796b;
+    color: #fff;
+    border: none;
+    padding: 1rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    grid-column: span 2;
+}
+
+button[type="submit"]:hover {
+    background-color: #005a4f;
+}
+
+footer {
+    text-align: center;
+    background-color: #002744;
+    color: #fff;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+form fieldset {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+form .left-section label, 
+form .right-section label {
+    grid-column: span 1;
+}
+
+form input, form textarea {
+    grid-column: span 2; /* Inputs ocupan todo el ancho dentro de las dos columnas */
+    width: 100%;
+    padding: 0.7rem;
+    margin-top: 0.3rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+form input[type="checkbox"] {
+    width: 50px;
+    transform: scale(1.5);
+}
