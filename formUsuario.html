@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <title>ESCO-NECTADOS</title>
+</head>
+
+<body class="w-full bg-principal_2">
+  <header>
+    <nav class="m-auto bg-principal text-base font-bold text-azul drop-shadow-md">
+      <div class="relative flex items-center justify-between custom:mx-7">
+        <!-- Logo -->
+        <div class="flex items-center">
+          <img src="/logo.png" alt="Logo" class="h-16 w-auto" />
+          <span class="font-bold">ESCO-NECTADOS</span>
+        </div>
+
+        <ul id="menu"
+          class=" absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 custom:relative custom:top-0 custom:flex custom:w-auto custom:flex-row custom:items-center custom:gap-6">
+          <li>
+            <a href="index.html" class="hover:text-verde">INICIO</a>
+          </li>
+          <li>
+            <a href="empleos.html" class="hover:text-verde">EMPLEOS</a>
+          </li>
+          <li>
+            <a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a>
+          </li>
+          <li>
+            <a href="certificaciones.html" class="hover:text-verde">CERTIFICACIONES</a>
+          </li>
+          <li>
+            <a href="servicioSocial.html" class="hover:text-verde">SERVICIO SOCIAL</a>
+          </li>
+          <li>
+            <a href="sobreNosotros.html" class="hover:text-verde">SOBRE NOSOTROS</a>
+          </li>
+        </ul>
+
+        <!-- Botón Iniciar Sesión e icono de menú -->
+        <div class="flex items-center justify-end gap-4">
+          <a href="iniciarSesion.html"
+            class="rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde">
+            INICIAR SESIÓN
+          </a>
+          <ion-icon class="cursor-pointer text-3xl custom:hidden" id="menuToggle" name="menu"></ion-icon>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div class="space-y-16">
+    <div class="mt-8 flex flex-col justify-between gap-8 text-azul">
+      <h1 class="text-center text-5xl font-bold">
+        Registro de Egresado
+      </h1>
+    </div>
+
+    <div
+      class="flex flex-col justify-between gap-4 text-center sm:flex sm:flex-row sm:justify-around sm:gap-4 sm:text-center ">
+      <section
+        class="m-auto flex w-full flex-col justify-between gap-2 rounded-xl bg-principal px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between lg:w-1/2 sm:gap-2 sm:w-2/3 ">
+        <!-- <h3 class="text-2xl font-semibold">Ingresa tus datos para acceder</h3> -->
+        <!-- <p class="max-w-xs text-lg leading-relaxed">
+              Accede a estudiantes y egresados con habilidades frescas y
+              potencial.
+            </p> -->
+
+        <form action="#" class="p-6 space-y-6 text-azul">
+          <label for="" class="text-verde font-semibold text-xl">Información personal</label>
+          <div class="grid grid-cols-6 gap-6 ">
+            <div class="col-span-6 sm:col-span-3">
+              <label for="product-name" class="text-sm font-medium  block mb-2">Nombre</label>
+              <input type="text" name="product-name" id="product-name"
+                class="shadow-sm bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                placeholder="Nombre" required="">
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+              <label for="category" class="text-sm font-medium  block mb-2">Apellidos</label>
+              <input type="text" name="category" id="category"
+                class="shadow-sm bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                placeholder="Apellidos" required="">
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+              <label for="brand" class="text-sm font-medium  block mb-2">Telefono</label>
+              <input type="text" name="brand" id="brand"
+                class="shadow-sm bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                placeholder="Telefono" required="">
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+              <label for="price" class="text-sm font-medium  block mb-2">Correo electrónico</label>
+              <input type="correo" name="price" id="price"
+                class="shadow-sm bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                placeholder="Correo" required="">
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+              <label for="brand" class="text-sm font-medium  block mb-2">Contraseña</label>
+              <input type="password" name="brand" id="brand"
+                class="shadow-sm bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                placeholder="Contraseña" required="">
+            </div>
+            <div class=" col-span-6 sm:col-span-3">
+              <label for="price" class="text-sm font-medium  block mb-2">Confirmar contraseña</label>
+              <input type="password" name="price" id="price"
+                class="shadow-sm bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                placeholder="Confirmar contraseña" required="">
+            </div>
+
+          </div>
+          <label for="" class="block  text-xl  text-verde font-semibold">Información académica y laboral</label>
+
+          <div class=" grid grid-cols-6 gap-6 pt-3 ">
+            <div class="col-span-6 sm:col-span-3">
+              <label for="product-name" class="text-sm font-medium  block mb-2">Institucion
+                Académica</label>
+              <input type="text" name="product-name" id="product-name"
+                class="shadow-sm bg-gray-50 border border-gray-300  outline-verde sm:text-sm rounded-lg focus:ring-verde focus:border-verde block w-full p-2.5"
+                placeholder="Institucion Académica" required="">
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+              <label for="product-name" class="text-sm font-medium  block mb-2">Carrera o especialidad*:</label>
+              <input type="text" name="product-name" id="product-name"
+                class="shadow-sm bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                placeholder="Carrera o Especialidad" required="">
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+              <label for="product-name" class="text-sm font-medium  block mb-2">Fecha de egreso</label>
+              <input type="date" name="product-name" id="product-name"
+                class="shadow-sm bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                placeholder="”" required="">
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+              <label for="product-name" class="text-sm font-medium  block mb-2">Área de interés profesional:</label>
+              <input type="text" name="product-name" id="product-name"
+                class="shadow-sm bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                placeholder="Área de interes" required="">
+            </div>
+
+            <div class="col-span-full">
+              <label for="product-details" class="text-sm font-medium  block mb-2">Habilidades
+                clave</label>
+              <textarea id="product-details" rows="6"
+                class="bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-4"
+                placeholder="Habilidades Clave"></textarea>
+            </div>
+          </div>
+          <label class="mt-8 flex content-start"><input type="checkbox" name="remember"
+              class="mr-2 form-checkbox rounded-none ring-0 focus:border-tan-500 border-tan-300 border-2 w-5 h-5 text-highlight">
+            <span class="text-sm text-verde font-bold">Aceptación de Términos y Condiciones</span>
+          </label>
+          <label class="mt-8 flex content-start"><input type="checkbox" name="remember"
+              class="mr-2 form-checkbox rounded-none ring-0 focus:border-tan-500 border-tan-300 border-2 w-5 h-5 text-highlight">
+            <span class="text-sm font-bold text-verde">Suscripción a Boletines y Alertas de empleo</span>
+          </label>
+        </form>
+
+
+        <div class="p-6 border-t border-gray-200 rounded-b">
+          <a href="./iniciarSesion.html"
+            class="rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde">
+            Registrarse
+          </a>
+        </div>
+    </div>
+
+  </div>
+  </form>
+  </section>
+  </div>
+  </div>
+
+  <footer
+    class="mt-4 bg-gradient-to-b from-verde to-azul p-5 text-center text-white sm:relative sm:mt-8  lg:inset-x-0 lg:bottom-0">
+    <div class="text-1xl">
+      © 2024 Copyright:
+      <a href="#" class="text-verde underline">KICR, IMO, MFLP, JELG, JUMJ</a>
+    </div>
+  </footer>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+
+</html>
