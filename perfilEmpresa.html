@@ -6,11 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <title>Perfil Empresa - ESCO-NECTADOS</title>
+    <style>
+        .bg-principal {
+            background-color: #f8f9fa;
+        }
+        .bg-principal_2 {
+            background-color: #ffffff;
+        }
+        .text-verde {
+            color: #009a70;
+        }
+        .text-azul {
+            color: #0d213f;
+        }
+        .bg-verde {
+            background-color: #009a70;
+        }
+        .hover\:text-verde:hover {
+            color: #009a70;
+        }
+        .border-verde {
+            border-color: #009a70;
+        }
+    </style>
 </head>
 
 <body class="w-full bg-principal min-h-screen flex flex-col">
-    <!-- Script de verificación -->
     <script>
         if (!localStorage.getItem('sessionToken') ||
             !localStorage.getItem('user') ||
@@ -23,7 +46,7 @@
     <div class="flex-grow">
         <header>
             <nav class="m-auto bg-principal text-base font-bold text-azul drop-shadow-md">
-                <div class="relative flex items-center justify-between custom:mx-7">
+                <div class="relative flex items-center justify-between px-7">
                     <!-- Logo -->
                     <div class="flex items-center">
                         <img src="/logo.png" alt="Logo" class="h-16 w-auto" />
@@ -31,54 +54,43 @@
                     </div>
 
                     <!-- Lista de enlaces -->
-                    <ul id="menu" class="absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 custom:relative custom:top-0 custom:flex custom:w-auto custom:flex-row custom:items-center custom:gap-6">
-                        <li>
-                            <a href="index.html" class="hover:text-verde">INICIO</a>
-                        </li>
-                        <li>
-                            <a href="empleos.html" class="hover:text-verde">EMPLEOS</a>
-                        </li>
-                        <li>
-                            <a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a>
-                        </li>
-                        <li>
-                            <a href="certificaciones.html" class="hover:text-verde">CERTIFICACIONES</a>
-                        </li>
-                        <li>
-                            <a href="servicioSocial.html" class="hover:text-verde">SERVICIO SOCIAL</a>
-                        </li>
-                        <li>
-                            <a href="sobreNosotros.html" class="hover:text-verde">SOBRE NOSOTROS</a>
-                        </li>
+                    <ul id="menu" class="absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 md:relative md:top-0 md:flex md:w-auto md:flex-row md:items-center md:gap-6">
+                        <li><a href="index.html" class="hover:text-verde">INICIO</a></li>
+                        <li><a href="empleos.html" class="hover:text-verde">EMPLEOS</a></li>
+                        <li><a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a></li>
+                        <li><a href="certificaciones.html" class="hover:text-verde">CERTIFICACIONES</a></li>
+                        <li><a href="servicioSocial.html" class="hover:text-verde">SERVICIO SOCIAL</a></li>
+                        <li><a href="sobreNosotros.html" class="hover:text-verde">SOBRE NOSOTROS</a></li>
                     </ul>
 
                     <!-- Botón Cerrar Sesión e icono de menú -->
                     <div class="flex items-center justify-end gap-4">
                         <button onclick="confirmarCierreSesion()"
-                            class="sm:text-sm rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde">
+                            class="rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde">
                             CERRAR SESIÓN
                         </button>
-                        <ion-icon class="cursor-pointer text-3xl custom:hidden" id="menuToggle" name="menu"></ion-icon>
+                        <ion-icon class="cursor-pointer text-3xl md:hidden" id="menuToggle" name="menu"></ion-icon>
                     </div>
                 </div>
             </nav>
         </header>
 
-        <div class="mt-8 flex flex-col justify-between gap-8 text-azul">
-            <h1 class="text-center text-4xl font-bold">Panel de Empresa</h1>
+        <div class="container mx-auto px-4">
+            <h1 class="text-center text-4xl font-bold text-azul my-8">Perfil de Empresa</h1>
 
-            <div id="empresaInfo" class="mx-auto w-full max-w-2xl p-6 bg-principal_2 rounded-xl drop-shadow-xl">
-                <!-- La información de la empresa se insertará aquí mediante JavaScript -->
+            <div id="empresaInfo" class="mx-auto w-full max-w-3xl p-8 bg-principal_2 rounded-xl drop-shadow-xl mb-8">
+                <!-- Información de la empresa se insertará aquí mediante JavaScript -->
             </div>
 
-            <div class="mt-8 flex flex-col gap-6">
-                <h2 class="text-center text-2xl font-semibold">Acciones Rápidas</h2>
-                <div class="flex justify-center gap-4">
-                    <a href="publicarEmpleo.html" class="rounded-xl bg-verde px-5 py-2 text-white hover:opacity-90">
+            <div class="flex flex-col items-center gap-6 mb-8">
+                <h2 class="text-2xl font-semibold text-azul">Gestionar mi Empresa</h2>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="publicarEmpleo.html" class="rounded-xl bg-verde px-6 py-2 text-white hover:opacity-90 transition duration-300">
+                        <ion-icon name="briefcase-outline" class="align-middle mr-2"></ion-icon>
                         Publicar Nueva Oferta
                     </a>
-                    <a href="candidatos.html"
-                        class="rounded-xl border border-verde bg-principal px-5 py-2 text-verde hover:opacity-90">
+                    <a href="candidatos.html" class="rounded-xl bg-verde px-6 py-2 text-white hover:opacity-90 transition duration-300">
+                        <ion-icon name="people-outline" class="align-middle mr-2"></ion-icon>
                         Ver Candidatos
                     </a>
                 </div>
@@ -86,14 +98,13 @@
         </div>
     </div>
 
-    <footer class="bg-gradient-to-b from-verde to-azul p-5 text-center text-white mt-8">
-        <div class="text-1xl">
+    <footer class="bg-gradient-to-b from-verde to-azul p-5 text-center text-white">
+        <div class="text-sm">
             © 2024 Copyright:
-            <a href="#" class="text-verde underline">KICR, IMO, MFLP, JELG, JUMJ</a>
+            <a href="#" class="text-white hover:underline">KICR, IMO, MFLP, JELG, JUMJ</a>
         </div>
     </footer>
 
-    <script type="module" src="./src/main.js"></script>
     <script>
         function confirmarCierreSesion() {
             if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
@@ -102,16 +113,34 @@
             }
         }
 
-        // Mostrar información del usuario
+        // Mostrar información de la empresa
         const userData = JSON.parse(localStorage.getItem('user'));
         if (userData) {
             document.getElementById('empresaInfo').innerHTML = `
-                <h2 class="text-2xl font-semibold mb-4">Información de la Empresa</h2>
-                <div class="grid grid-cols-1 gap-4">
-                    <p><strong>Nombre:</strong> ${userData.nombre_empresa}</p>
-                    <p><strong>Correo:</strong> ${userData.correo}</p>
-                    <p><strong>Sector:</strong> ${userData.sector || 'No especificado'}</p>
-                    <p><strong>Ubicación:</strong> ${userData.ubicacion || 'No especificada'}</p>
+                <div class="border-b-2 border-verde pb-6 mb-8">
+                    <h1 class="text-3xl font-bold text-azul mb-4">${userData.nombre_empresa}</h1>
+                    <div class="flex flex-col gap-2 text-gray-600">
+                        <p class="flex items-center">
+                            <ion-icon name="mail-outline" class="mr-2"></ion-icon>
+                            ${userData.correo}
+                        </p>
+                        <p class="flex items-center">
+                            <ion-icon name="call-outline" class="mr-2"></ion-icon>
+                            ${userData.telefono || 'No especificado'}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h2 class="text-xl font-semibold text-verde mb-4 flex items-center">
+                        <ion-icon name="business-outline" class="mr-2"></ion-icon>
+                        Información de la Empresa
+                    </h2>
+                    <div class="ml-6">
+                        <p class="text-gray-700">Sector: ${userData.area_trabajo || 'No especificado'}</p>
+                        <p class="text-gray-700">RFC: ${userData.rfc || 'No especificada'}</p>
+                        <p class="text-gray-700">Representante legal: ${userData.representante_legal || 'No especificada'}</p>
+                    </div>
                 </div>
             `;
         }

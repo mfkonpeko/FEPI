@@ -288,6 +288,42 @@ app.put("/api/usuario", (req, res) => {
     );
 });
 
+// Ruta para publicar una nueva vacante
+app.post("/api/vacantes", (req, res) => {
+    const {
+        vacante,
+        empresa,
+        modalidad,
+        salario,
+        descripcion
+    } = req.body;
+
+    const query = `
+        INSERT INTO empleos 
+        (vacante, empresa, modalidad, salario, descripcion) 
+        VALUES (?, ?, ?, ?, ?)
+    `;
+
+    conexion.query(
+        query,
+        [vacante, empresa, modalidad, salario, descripcion],
+        (err, results) => {
+            if (err) {
+                console.error("Error al ejecutar la consulta: ", err);
+                return res.status(500).json({ error: "Error al publicar la vacante" });
+            }
+
+            res.status(201).json({
+                message: "Vacante publicada correctamente",
+                id: results.insertId
+            });
+        }
+    );
+});
+
+
+
+
 // Iniciar el servidor
 app.listen(port, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);

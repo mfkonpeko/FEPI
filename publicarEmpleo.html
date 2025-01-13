@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Publicar Nueva Oferta - ESCO-NECTADOS</title>
+    <style>
+        .bg-principal {
+            background-color: #f8f9fa;
+        }
+        .bg-principal_2 {
+            background-color: #ffffff;
+        }
+        .text-verde {
+            color: #009a70;
+        }
+        .text-azul {
+            color: #0d213f;
+        }
+        .bg-verde {
+            background-color: #009a70;
+        }
+        .hover\:text-verde:hover {
+            color: #009a70;
+        }
+        .border-verde {
+            border-color: #009a70;
+        }
+    </style>
+</head>
+
+<body class="w-full bg-principal min-h-screen flex flex-col">
+    <script>
+        if (!localStorage.getItem('sessionToken') ||
+            !localStorage.getItem('user') ||
+            localStorage.getItem('userType') !== 'empresa') {
+            alert('Sesión no válida. Por favor, inicie sesión nuevamente.');
+            window.location.href = 'login.html';
+        }
+    </script>
+
+    <div class="flex-grow">
+        <header>
+            <nav class="m-auto bg-principal text-base font-bold text-azul drop-shadow-md">
+                <div class="relative flex items-center justify-between px-7">
+                    <!-- Logo -->
+                    <div class="flex items-center">
+                        <img src="/logo.png" alt="Logo" class="h-16 w-auto" />
+                        <span class="font-bold">ESCO-NECTADOS</span>
+                    </div>
+                    
+                    <!-- Lista de enlaces -->
+                    <ul id="menu" class="absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 md:relative md:top-0 md:flex md:w-auto md:flex-row md:items-center md:gap-6">
+                        <li><a href="index.html" class="hover:text-verde">INICIO</a></li>
+                        <li><a href="empleos.html" class="hover:text-verde">EMPLEOS</a></li>
+                        <li><a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a></li>
+                        <li><a href="certificaciones.html" class="hover:text-verde">CERTIFICACIONES</a></li>
+                        <li><a href="servicioSocial.html" class="hover:text-verde">SERVICIO SOCIAL</a></li>
+                        <li><a href="sobreNosotros.html" class="hover:text-verde">SOBRE NOSOTROS</a></li>
+                    </ul>
+
+                    <!-- Botón Cerrar Sesión e icono de menú -->
+                    <div class="flex items-center justify-end gap-4">
+                        <button onclick="confirmarCierreSesion()"
+                            class="rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde">
+                            CERRAR SESIÓN
+                        </button>
+                        <ion-icon class="cursor-pointer text-3xl md:hidden" id="menuToggle" name="menu"></ion-icon>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="container mx-auto px-4">
+            <h1 class="text-center text-4xl font-bold text-azul my-8">Publicar Nueva Oferta de Empleo</h1>
+
+            <form id="publicarOferta" class="mx-auto w-full max-w-3xl p-8 bg-principal_2 rounded-xl drop-shadow-xl mb-8">
+                <div class="mb-4">
+                    <label class="block text-gray-700" for="vacante">Nombre de la Vacante</label>
+                    <input type="text" id="vacante" name="vacante" class="mt-1 block w-full p-3 border border-gray-300 rounded-md" required />
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700" for="modalidad">Modalidad</label>
+                    <select id="modalidad" name="modalidad" class="mt-1 block w-full p-3 border border-gray-300 rounded-md" required>
+                        <option value="">Seleccione una modalidad</option>
+                        <option value="Presencial">Presencial</option>
+                        <option value="Remoto">Remoto</option>
+                        <option value="Híbrido">Híbrido</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700" for="salario">Salario</label>
+                    <input 
+                        type="text" 
+                        id="salario" 
+                        name="salario" 
+                        placeholder="Ejemplo: 35000"
+                        class="mt-1 block w-full p-3 border border-gray-300 rounded-md" 
+                        required 
+                    />
+                    <small class="text-gray-500">Solo ingresa números, nosotros le daremos formato</small>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700" for="descripcion">Descripción</label>
+                    <textarea id="descripcion" name="descripcion" rows="4" class="mt-1 block w-full p-3 border border-gray-300 rounded-md" required></textarea>
+                </div>
+                
+                <div class="flex justify-between mt-6">
+                    <button type="submit" class="rounded-xl bg-verde px-5 py-2 text-white hover:opacity-90 transition duration-300">
+                        Publicar Oferta
+                    </button>
+                    <a href="perfilEmpresa.html" class="rounded-xl bg-verde px-5 py-2 text-white hover:opacity-90 transition duration-300">
+                        Regresar a Perfil
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="bg-gradient-to-b from-verde to-azul p-5 text-center text-white">
+        <div class="text-sm">
+            © 2024 Copyright:
+            <a href="#" class="text-white hover:underline">KICR, IMO, MFLP, JELG, JUMJ</a>
+        </div>
+    </footer>
+
+    <script>
+        function confirmarCierreSesion() {
+            if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
+                localStorage.clear();
+                window.location.href = 'login.html';
+            }
+        }
+
+        document.getElementById('publicarOferta').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevenir el envío del formulario
+
+            const ofertaData = {
+                titulo: this.titulo.value,
+                descripcion: this.descripcion.value,
+                ubicacion: this.ubicacion.value,
+                salario: this.salario.value
+            };
+
+            // Aquí puedes agregar la lógica para enviar la oferta al servidor
+            console.log("Oferta publicada:", ofertaData);
+
+            alert('Oferta publicada con éxito!');
+
+            // Reiniciar el formulario
+            this.reset();
+        });
+
+        // Toggle menú móvil
+        document.getElementById('menuToggle').addEventListener('click', () => {
+            document.getElementById('menu').classList.toggle('hidden');
+        });
+    </script>
+    <script>
+        document.getElementById('publicarOferta').addEventListener('submit', async function (event) {
+            event.preventDefault();
+        
+            // Obtener los datos del usuario del localStorage
+            const user = JSON.parse(localStorage.getItem('user'));
+            
+            // Verificar si tenemos el nombre de la empresa
+            if (!user || !user.nombre_empresa) {
+                alert('Error: No se encontró el nombre de la empresa');
+                return;
+            }
+        
+            const ofertaData = {
+                vacante: this.vacante.value,
+                empresa: user.nombre_empresa, // Aquí usamos nombre_empresa que es como está en el perfil
+                modalidad: this.modalidad.value,
+                salario: this.salario.value,
+                descripcion: this.descripcion.value
+            };
+        
+            try {
+                const response = await fetch('http://localhost:3000/api/vacantes', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('sessionToken')}`
+                    },
+                    body: JSON.stringify(ofertaData)
+                });
+        
+                if (response.ok) {
+                    const data = await response.json();
+                    alert('Oferta publicada con éxito!');
+                    window.location.href = 'perfilEmpresa.html';
+                } else {
+                    const error = await response.json();
+                    alert('Error al publicar la oferta: ' + error.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al publicar la oferta. Por favor, intente nuevamente.');
+            }
+        });
+        
+        // Puedes agregar esto para verificar los datos que tienes almacenados
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            console.log('Datos del usuario:', user);
+            console.log('Nombre de la empresa:', user.nombre_empresa);
+        });
+        
+    </script>
+</body>
+
+</html>
