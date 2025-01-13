@@ -1,50 +1,123 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
     <title>ESCO-NECTADOS</title>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        principal: '#ffffff',
+                        verde: '#009a70',
+                        azul: '#0d213f',
+                    },
+                    screens: {
+                        custom: '900px',
+                    },
+                },
+            },
+        };
+    </script>
+
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        .swiper {
+            width: 100%;
+            height: 100%;
+            margin: 20px auto;
+        }
+        
+        .swiper-slide {
+            text-align: center;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: auto;
+        }
+        
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #38b000;
+        }
+        
+        .swiper-pagination-bullet-active {
+            background: #38b000;
+        }
+        
+        .swiper-container {
+            position: relative;
+            width: 100%;
+            padding: 20px 40px;
+        }
+    
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #38b000;
+            width: 40px;
+            height: 40px;
+        }
+    
+        .swiper-button-next:after,
+        .swiper-button-prev:after {
+            font-size: 24px;
+        }
+    
+        .swiper-button-prev {
+            left: 0;
+        }
+    
+        .swiper-button-next {
+            right: 0;
+        }
+    
+        .card-content {
+            width: 100%;
+            height: 100%;
+            margin: 0 10px;
+        }
+    </style>
 </head>
 
 <body class="w-full bg-principal">
     <header>
         <nav class="m-auto bg-principal text-base font-bold text-azul drop-shadow-md">
             <div class="relative flex items-center justify-between custom:mx-7">
-                <!-- Logo -->
                 <div class="flex items-center">
                     <img src="/logo.png" alt="Logo" class="h-16 w-auto" />
                     <span class="font-bold">ESCO-NECTADOS</span>
                 </div>
 
                 <ul id="menu"
-                    class=" absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 custom:relative custom:top-0 custom:flex custom:w-auto custom:flex-row custom:items-center custom:gap-6">
-                    <li>
-                        <a href="index.html" class="hover:text-verde">INICIO</a>
-                    </li>
-                    <li>
-                        <a href="empleos.html" class="hover:text-verde">EMPLEOS</a>
-                    </li>
-                    <li>
-                        <a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a>
-                    </li>
-                    <li>
-                        <a href="certificaciones.html" class="hover:text-verde">CERTIFICACIONES</a>
-                    </li>
-                    <li>
-                        <a href="servicioSocial.html" class="hover:text-verde">SERVICIO SOCIAL</a>
-                    </li>
-                    <li>
-                        <a href="sobreNosotros.html" class="hover:text-verde">SOBRE NOSOTROS</a>
-                    </li>
+                    class="absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 custom:relative custom:top-0 custom:flex custom:w-auto custom:flex-row custom:items-center custom:gap-6">
+                    <li><a href="index.html" class="hover:text-verde">INICIO</a></li>
+                    <li><a href="empleos.html" class="hover:text-verde">EMPLEOS</a></li>
+                    <li><a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a></li>
+                    <li><a href="certificaciones.html" class="hover:text-verde">CERTIFICACIONES</a></li>
+                    <li><a href="servicioSocial.html" class="hover:text-verde">SERVICIO SOCIAL</a></li>
+                    <li><a href="sobreNosotros.html" class="hover:text-verde">SOBRE NOSOTROS</a></li>
                 </ul>
 
-                <!-- Botón Iniciar Sesión e icono de menú -->
                 <div class="flex items-center justify-end gap-4">
-                    <a href="iniciarSesion.html"
-                        class="rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde">
+                    <a href="./iniciarSesion.html"
+                        class="sm:text-sm rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde">
                         INICIAR SESIÓN
                     </a>
                     <ion-icon class="cursor-pointer text-3xl custom:hidden" id="menuToggle" name="menu"></ion-icon>
@@ -52,145 +125,110 @@
             </div>
         </nav>
     </header>
-    <div class="space-y-16">
-        <div class="mt-8 flex flex-col justify-between gap-8 text-azul">
-            <h1 class="text-center text-5xl font-bold">
-                Empleos disponibles
-            </h1>
+
+    <main class="max-w-7xl mx-auto px-4 py-10 mb-20 bg-gray-100 mt-6">
+        <h1 class="text-3xl font-bold text-azul">Empleos</h1>
+        <p class="mt-2 text-lg text-gray-600">
+            El empleo es una oportunidad para que los profesionales apliquen sus habilidades y experiencia en organizaciones, contribuyendo al crecimiento personal y al desarrollo de la comunidad.
+        </p>
+
+        <h2 class="mt-8 text-2xl font-bold text-azul">Oportunidades Disponibles</h2>
+
+        <div class="swiper-container">
+            <div class="swiper">
+                <div class="swiper-wrapper" id="vacantes-wrapper">
+                    <!-- Las slides se cargarán aquí -->
+                </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
         </div>
 
-        <div
-            class="flex flex-col justify-between gap-4 text-center sm:flex sm:flex-row sm:justify-around sm:gap-4 sm:text-center">
-            <section
-                class="flex bg-gray-100 gap-8 mx-7 p-5 rounded-xl flex-wrap justify-around mb-20">
-                <div class="p-6 bg-principal_2 rounded-xl shadow-md w-[400px]">
-                    <h3 class="text-xl font-bold text-green-700">
-                      Prácticas en aplicaciones móviles
-                    </h3>
-                    <p class="mt-2 font-semibold">Empresa XYZ</p>
-                    <p class="mt-1 text-gray-800"><strong>Modalidad:</strong> Remoto</p>
-                    <p class="mt-1 text-gray-800"><strong>Salario:</strong> $12,000 MXN</p>
-                    <p class="mt-2 text-gray-600 text-sm">
-                      Descripción: Lorem ipsum dolor sit amet, consectetur adipiscing
-                      elit. Cras auctor dui in ipsum convallis, et fringilla arcu
-                      vehicula.
-                    </p>
-                    <a
-                      href="#"
-                      class="bg-verde dark:bg-dark-2 mt-4 border-dark dark:border-dark-2 border rounded-full inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-body-color hover:bg-white hover:border-verde hover:text-verde disabled:bg-gray-3 disabled:border-gray-3 disabled:text-dark-5"
-                    >
-                      Ver más
-                    </a>
-                </div>
-                <div class="p-6 bg-principal_2 rounded-xl shadow-md w-[400px]">
-                    <h3 class="text-xl font-bold text-green-700">
-                      Prácticas en aplicaciones móviles
-                    </h3>
-                    <p class="mt-2 font-semibold">Empresa XYZ</p>
-                    <p class="mt-1 text-gray-800"><strong>Modalidad:</strong> Remoto</p>
-                    <p class="mt-1 text-gray-800"><strong>Salario:</strong> $12,000 MXN</p>
-                    <p class="mt-2 text-gray-600 text-sm">
-                      Descripción: Lorem ipsum dolor sit amet, consectetur adipiscing
-                      elit. Cras auctor dui in ipsum convallis, et fringilla arcu
-                      vehicula.
-                    </p>
-                    <a
-                      href="#"
-                      class="bg-verde dark:bg-dark-2 mt-4 border-dark dark:border-dark-2 border rounded-full inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-body-color hover:bg-white hover:border-verde hover:text-verde disabled:bg-gray-3 disabled:border-gray-3 disabled:text-dark-5"
-                    >
-                      Ver más
-                    </a>
-                </div>
-                <div class="p-6 bg-principal_2 rounded-xl shadow-md w-[400px]">
-                    <h3 class="text-xl font-bold text-green-700">
-                      Prácticas en aplicaciones móviles
-                    </h3>
-                    <p class="mt-2 font-semibold">Empresa XYZ</p>
-                    <p class="mt-1 text-gray-800"><strong>Modalidad:</strong> Remoto</p>
-                    <p class="mt-1 text-gray-800"><strong>Salario:</strong> $12,000 MXN</p>
-                    <p class="mt-2 text-gray-600 text-sm">
-                      Descripción: Lorem ipsum dolor sit amet, consectetur adipiscing
-                      elit. Cras auctor dui in ipsum convallis, et fringilla arcu
-                      vehicula.
-                    </p>
-                    <a
-                      href="#"
-                      class="bg-verde dark:bg-dark-2 mt-4 border-dark dark:border-dark-2 border rounded-full inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-body-color hover:bg-white hover:border-verde hover:text-verde disabled:bg-gray-3 disabled:border-gray-3 disabled:text-dark-5"
-                    >
-                      Ver más
-                    </a>
-                </div>
-                <div class="p-6 bg-principal_2 rounded-xl shadow-md w-[400px]">
-                    <h3 class="text-xl font-bold text-green-700">
-                      Prácticas en aplicaciones móviles
-                    </h3>
-                    <p class="mt-2 font-semibold">Empresa XYZ</p>
-                    <p class="mt-1 text-gray-800"><strong>Modalidad:</strong> Remoto</p>
-                    <p class="mt-1 text-gray-800"><strong>Salario:</strong> $12,000 MXN</p>
-                    <p class="mt-2 text-gray-600 text-sm">
-                      Descripción: Lorem ipsum dolor sit amet, consectetur adipiscing
-                      elit. Cras auctor dui in ipsum convallis, et fringilla arcu
-                      vehicula.
-                    </p>
-                    <a
-                      href="#"
-                      class="bg-verde dark:bg-dark-2 mt-4 border-dark dark:border-dark-2 border rounded-full inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-body-color hover:bg-white hover:border-verde hover:text-verde disabled:bg-gray-3 disabled:border-gray-3 disabled:text-dark-5"
-                    >
-                      Ver más
-                    </a>
-                </div>
-                <div class="p-6 bg-principal_2 rounded-xl shadow-md w-[400px]">
-                    <h3 class="text-xl font-bold text-green-700">
-                      Prácticas en aplicaciones móviles
-                    </h3>
-                    <p class="mt-2 font-semibold">Empresa XYZ</p>
-                    <p class="mt-1 text-gray-800"><strong>Modalidad:</strong> Remoto</p>
-                    <p class="mt-1 text-gray-800"><strong>Salario:</strong> $12,000 MXN</p>
-                    <p class="mt-2 text-gray-600 text-sm">
-                      Descripción: Lorem ipsum dolor sit amet, consectetur adipiscing
-                      elit. Cras auctor dui in ipsum convallis, et fringilla arcu
-                      vehicula.
-                    </p>
-                    <a
-                      href="#"
-                      class="bg-verde dark:bg-dark-2 mt-4 border-dark dark:border-dark-2 border rounded-full inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-body-color hover:bg-white hover:border-verde hover:text-verde disabled:bg-gray-3 disabled:border-gray-3 disabled:text-dark-5"
-                    >
-                      Ver más
-                    </a>
-                </div>
-                <div class="p-6 bg-principal_2 rounded-xl shadow-md w-[400px]">
-                    <h3 class="text-xl font-bold text-green-700">
-                      Prácticas en aplicaciones móviles
-                    </h3>
-                    <p class="mt-2 font-semibold">Empresa XYZ</p>
-                    <p class="mt-1 text-gray-800"><strong>Modalidad:</strong> Remoto</p>
-                    <p class="mt-1 text-gray-800"><strong>Salario:</strong> $12,000 MXN</p>
-                    <p class="mt-2 text-gray-600 text-sm">
-                      Descripción: Lorem ipsum dolor sit amet, consectetur adipiscing
-                      elit. Cras auctor dui in ipsum convallis, et fringilla arcu
-                      vehicula.
-                    </p>
-                    <a
-                      href="#"
-                      class="bg-verde dark:bg-dark-2 mt-4 border-dark dark:border-dark-2 border rounded-full inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-body-color hover:bg-white hover:border-verde hover:text-verde disabled:bg-gray-3 disabled:border-gray-3 disabled:text-dark-5"
-                    >
-                      Ver más
-                    </a>
-                </div>
-            </section>
-
+        <div class="flex justify-center gap-4 mt-6">
+            <a href="registroEmpresa.html"
+                class="px-6 py-2 text-white bg-verde hover:bg-white hover:border-verde hover:text-verde border rounded-full">
+                Regístrate como Empresa
+            </a>
+            <a href="formUsuario.html"
+                class="px-6 py-2 text-white bg-verde hover:bg-white hover:border-verde hover:text-verde border rounded-full">
+                Regístrate como Estudiante
+            </a>
         </div>
+    </main>
 
-        <footer
-      class="mt-4 bg-gradient-to-b from-verde to-azul p-5 text-center text-white sm:relative sm:mt-8 lg:inset-x-0 lg:bottom-0"
-    >
-      <div class="text-1xl">
-        © 2024 Copyright:
-        <a href="#" class="text-verde underline">KICR, IMO, MFLP, JELG, JUMJ</a>
-      </div>
+    <footer class="mt-4 bg-gradient-to-b from-verde to-azul p-5 text-center text-white sm:relative sm:mt-8 lg:inset-x-0 lg:bottom-0">
+        <div class="text-1xl">
+            © 2024 Copyright:
+            <a href="#" class="text-verde underline">KICR, IMO, MFLP, JELG, JUMJ</a>
+        </div>
     </footer>
 
-        <script type="module" src="./src/main.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    <script>
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('menu').classList.toggle('hidden');
+        });
 
+        async function cargarEmpleos() {
+            try {
+                const response = await fetch('http://localhost:3000/api/empleos');
+                const empleos = await response.json();
+                
+                const wrapper = document.getElementById('vacantes-wrapper');
+                wrapper.innerHTML = '';
+                
+                empleos.forEach(empleo => {
+                    const slide = document.createElement('div');
+                    slide.className = 'swiper-slide';
+                    slide.innerHTML = `
+                        <div class="card-content p-6 bg-yellow-50 rounded-xl shadow-md">
+                            <h3 class="text-xl font-bold text-green-700">${empleo.vacante}</h3>
+                            <p class="mt-2 font-semibold">${empleo.empresa}</p>
+                            <p class="mt-1 text-gray-800"><strong>Modalidad:</strong> ${empleo.modalidad}</p>
+                            <p class="mt-1 text-gray-800"><strong>Salario:</strong> ${empleo.salario}</p>
+                            <p class="mt-2 text-gray-600 text-sm">${empleo.descripcion}</p>
+                            <a href="#" class="bg-verde mt-4 border rounded-full inline-block py-3 px-7 text-center text-base font-medium text-white hover:bg-white hover:border-verde hover:text-verde">
+                                Ver más
+                            </a>
+                        </div>
+                    `;
+                    wrapper.appendChild(slide);
+                });
+
+                initSwiper();
+            } catch (error) {
+                console.error('Error cargando empleos:', error);
+            }
+        }
+
+        function initSwiper() {
+            const swiper = new Swiper('.swiper', {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                loop: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 30,
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', cargarEmpleos);
+    </script>
+</body>
 </html>

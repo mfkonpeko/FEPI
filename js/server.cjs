@@ -1,4 +1,3 @@
-// server.cjs
 const express = require("express");
 const cors = require("cors");
 const conexion = require("./conexion.cjs");
@@ -10,7 +9,7 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
-// Ruta para obtener las vacantes
+// Ruta para obtener las vacantes de servicio social
 app.get("/api/vacantes", (req, res) => {
     const query = "SELECT * FROM servicio_social";
     
@@ -18,6 +17,20 @@ app.get("/api/vacantes", (req, res) => {
         if (err) {
             console.error("Error al ejecutar la consulta: ", err);
             res.status(500).json({ error: "Error al obtener las vacantes" });
+        } else {
+            res.json(results);
+        }
+    });
+});
+
+// Ruta para obtener empleos
+app.get("/api/empleos", (req, res) => {
+    const query = "SELECT * FROM empleos";
+    
+    conexion.query(query, (err, results) => {
+        if (err) {
+            console.error("Error al ejecutar la consulta: ", err);
+            res.status(500).json({ error: "Error al obtener los empleos" });
         } else {
             res.json(results);
         }
