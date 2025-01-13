@@ -67,12 +67,36 @@
         .swiper-container {
             position: relative;
             width: 100%;
-            padding: 20px;
+            padding: 20px 40px; /* Aumentamos el padding lateral */
         }
-        
+    
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #38b000;
+            /* Ajustamos la posición y tamaño de las flechas */
+            width: 40px;
+            height: 40px;
+        }
+    
+        .swiper-button-next:after,
+        .swiper-button-prev:after {
+            font-size: 24px; /* Reducimos el tamaño del ícono */
+        }
+    
+        /* Ajustamos la posición específica de cada flecha */
+        .swiper-button-prev {
+            left: 0;
+        }
+    
+        .swiper-button-next {
+            right: 0;
+        }
+    
+        /* Aseguramos que las tarjetas tengan margen adecuado */
         .card-content {
             width: 100%;
             height: 100%;
+            margin: 0 10px;
         }
     </style>
 </head>
@@ -128,7 +152,6 @@
                     <!-- Las slides se cargarán aquí -->
                 </div>
                 <!-- Controles de navegación -->
-                <div class="swiper-pagination"></div>
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-button-next"></div>
             </div>

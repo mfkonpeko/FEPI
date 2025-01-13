@@ -14,155 +14,160 @@
     <title>ESCO-NECTADOS</title>
   </head>
 
-  <body class="w-full bg-principal mb-20">
-    <header>
-      <nav
-        class="m-auto bg-principal text-base font-bold text-azul drop-shadow-md"
-      >
-        <div class="relative flex items-center justify-between custom:mx-7">
-          <!-- Logo -->
-          <div class="flex items-center">
-            <img src="/logo.png" alt="Logo" class="h-16 w-auto" />
-            <span class="font-bold">ESCO-NECTADOS</span>
+  <body class="w-full bg-principal min-h-screen flex flex-col">
+    <div class="flex-grow">
+      <header>
+        <nav
+          class="m-auto bg-principal text-base font-bold text-azul drop-shadow-md"
+        >
+          <div class="relative flex items-center justify-between custom:mx-7">
+            <!-- Logo -->
+            <div class="flex items-center">
+              <img src="/logo.png" alt="Logo" class="h-16 w-auto" />
+              <span class="font-bold">ESCO-NECTADOS</span>
+            </div>
+
+            <!-- Lista de enlaces -->
+            <ul
+              id="menu"
+              class="absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 custom:relative custom:top-0 custom:flex custom:w-auto custom:flex-row custom:items-center custom:gap-6"
+            >
+              <li>
+                <a href="index.html" class="hover:text-verde">INICIO</a>
+              </li>
+              <li>
+                <a href="empleos.html" class="hover:text-verde">EMPLEOS</a>
+              </li>
+              <li>
+                <a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a>
+              </li>
+              <li>
+                <a href="certificaciones.html" class="hover:text-verde"
+                  >CERTIFICACIONES</a
+                >
+              </li>
+              <li>
+                <a href="servicioSocial.html" class="hover:text-verde"
+                  >SERVICIO SOCIAL</a
+                >
+              </li>
+              <li>
+                <a href="sobreNosotros.html" class="hover:text-verde"
+                  >SOBRE NOSOTROS</a
+                >
+              </li>
+            </ul>
+
+            <!-- Botón Iniciar Sesión e icono de menú -->
+            <div class="flex items-center justify-end gap-4">
+              <a href="./iniciarSesion.html"
+                class="sm:text-sm rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde">
+                INICIAR SESIÓN
+              </a>
+              <ion-icon class="cursor-pointer text-3xl custom:hidden" id="menuToggle" name="menu"></ion-icon>
+            </div>
           </div>
+        </nav>
+      </header>
 
-          <!-- Lista de enlaces -->
-          <ul
-            id="menu"
-            class="absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 custom:relative custom:top-0 custom:flex custom:w-auto custom:flex-row custom:items-center custom:gap-6"
-          >
-            <li>
-              <a href="index.html" class="hover:text-verde">INICIO</a>
-            </li>
-            <li>
-              <a href="empleos.html" class="hover:text-verde">EMPLEOS</a>
-            </li>
-            <li>
-              <a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a>
-            </li>
-            <li>
-              <a href="certificaciones.html" class="hover:text-verde"
-                >CERTIFICACIONES</a
-              >
-            </li>
-            <li>
-              <a href="servicioSocial.html" class="hover:text-verde"
-                >SERVICIO SOCIAL</a
-              >
-            </li>
-            <li>
-              <a href="sobreNosotros.html" class="hover:text-verde"
-                >SOBRE NOSOTROS</a
-              >
-            </li>
-          </ul>
-
-        <!-- Botón Iniciar Sesión e icono de menú -->
-        <div class="flex items-center justify-end gap-4">
-          <a href="./iniciarSesion.html"
-            class="sm:text-sm rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde">
-            INICIAR SESIÓN
+      <div class="mt-8 flex flex-col justify-between gap-8 text-azul">
+        <h1 class="text-center text-4xl font-bold">
+          Donde los Sueños Profesionales y las Necesidades Empresariales se
+          Encuentran.
+        </h1>
+        <h2 class="text-center text-2xl font-semibold">
+          Regístrate como empresa o alumno y encuentra las oportunidades que
+          buscas.
+        </h2>
+        <div class="mx-auto flex w-full justify-center font-bold">
+          <a href="registroEmpresa.html"
+            class="mr-4 rounded-xl bg-verde px-5 py-1 text-white hover:border hover:opacity-90">
+            Registrate como empresa
           </a>
-          <ion-icon class="cursor-pointer text-3xl custom:hidden" id="menuToggle" name="menu"></ion-icon>
+          <a href="/formUsuario.html"
+            class="ml-4 rounded-xl border border-verde bg-principal px-5 py-1 text-verde hover:opacity-90">
+            Registrate como Egresado
+          </a>
+        </div>
+        <h2 class="text-center text-3xl font-semibold">¿Qué ofrecemos?</h2>
+        <div
+          class="flex flex-col justify-between gap-4 text-center sm:flex sm:flex-row sm:justify-around sm:gap-4 sm:text-center">
+          <section
+            class="m-auto flex flex-col justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2">
+            <h3 class="text-2xl font-semibold">Encuentra Talento</h3>
+            <p class="max-w-xs text-lg leading-relaxed">
+              Accede a estudiantes y egresados con habilidades frescas y
+              potencial.
+            </p>
+            <img src="./public/wok.png" class="m-auto w-16" />
+          </section>
+          <section
+            class="m-auto flex flex-col justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2">
+            <h3 class="text-2xl font-semibold">Accede a Oportunidades</h3>
+            <p class="max-w-xs text-lg leading-relaxed">
+              Encuentra propuestas de trabajo diseñadas para talentos emergentes.
+            </p>
+            <img src="./public/resume.png" class="m-auto w-16" />
+          </section>
+          <section
+            class="m-auto flex flex-col justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2">
+            <h3 class="text-2xl font-semibold">Servicio Social</h3>
+            <p class="max-w-xs text-lg leading-relaxed">
+              Conoce las posibles ofertas para realizar tu servicio social y
+              conoce tu estatus
+            </p>
+            <img src="./public/social.png" class="m-auto w-16" />
+          </section>
         </div>
       </div>
-    </nav>
-  </header>
-  <div class="mt-8 flex flex-col justify-between gap-8 text-azul">
-    <h1 class="text-center text-4xl font-bold">
-      Donde los Sueños Profesionales y las Necesidades Empresariales se
-      Encuentran.
-    </h1>
-    <h2 class="text-center text-2xl font-semibold">
-      Regístrate como empresa o alumno y encuentra las oportunidades que
-      buscas.
-    </h2>
-    <div class="mx-auto flex w-full justify-center font-bold">
-      <a href="registroEmpresa.html"
-        class="mr-4 rounded-xl bg-verde px-5 py-1 text-white hover:border hover:opacity-90">
-        Registrate como empresa
-      </a>
-      <a href="/formUsuario.html"
-        class="ml-4 rounded-xl border border-verde bg-principal px-5 py-1 text-verde hover:opacity-90">
-        Registrate como Egresado
-      </a>
-    </div>
-    <h2 class="text-center text-3xl font-semibold">¿Qué ofrecemos?</h2>
-    <div
-      class="flex flex-col justify-between gap-4 text-center sm:flex sm:flex-row sm:justify-around sm:gap-4 sm:text-center">
-      <section
-        class="m-auto flex flex-col justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2">
-        <h3 class="text-2xl font-semibold">Encuentra Talento</h3>
-        <p class="max-w-xs text-lg leading-relaxed">
-          Accede a estudiantes y egresados con habilidades frescas y
-          potencial.
-        </p>
-        <img src="./public/wok.png" class="m-auto w-16" />
-      </section>
-      <section
-        class="m-auto flex flex-col justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2">
-        <h3 class="text-2xl font-semibold">Accede a Oportunidades</h3>
-        <p class="max-w-xs text-lg leading-relaxed">
-          Encuentra propuestas de trabajo diseñadas para talentos emergentes.
-        </p>
-        <img src="./public/resume.png" class="m-auto w-16" />
-      </section>
-      <section
-        class="m-auto flex flex-col justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2">
-        <h3 class="text-2xl font-semibold">Servicio Social</h3>
-        <p class="max-w-xs text-lg leading-relaxed">
-          Conoce las posibles ofertas para realizar tu servicio social y
-          conoce tu estatus
-        </p>
-        <img src="./public/social.png" class="m-auto w-16" />
-      </section>
-    </div>
-  </div>
-  <div class="mt-4 flex flex-col justify-around gap-24 text-azul sm:mt-32">
-    <div
-      class="flex flex-col justify-between gap-4 text-center sm:flex sm:flex-row sm:justify-around sm:gap-4 sm:text-center">
-      <section
-        class="m-auto flex flex-col justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2">
-        <h3 class="text-2xl font-semibold">Tips y Consejos</h3>
-        <p class="max-w-xs text-lg leading-relaxed">
-          Aprende a mejorar tus habilidades blandas y destacarte
-          profesionalmente, por medio deexperiencia de otros usuarios.
-        </p>
-      </section>
-      <section
-        class="m-auto flex flex-col justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2">
-        <h3 class="text-2xl font-semibold">Propuestas Recientes</h3>
-        <div class="gap-3 sm:flex sm:flex-row sm:justify-around">
-          <div>
-            <h1 class="text-lg font-semibold">Desarrollador Fronted Jr.</h1>
+
+      <div class="mt-4 flex flex-col justify-around gap-24 text-azul sm:mt-32 mb-20">
+        <div
+          class="flex flex-col justify-between gap-4 text-center sm:flex sm:flex-row sm:justify-around sm:gap-4 sm:text-center">
+          <section
+            class="m-auto flex flex-col justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2">
+            <h3 class="text-2xl font-semibold">Tips y Consejos</h3>
             <p class="max-w-xs text-lg leading-relaxed">
-              Empresa XYZ - Remoto <br /><a class="italic text-verde underline" href="#">Ver Más</a>
+              Aprende a mejorar tus habilidades blandas y destacarte
+              profesionalmente, por medio deexperiencia de otros usuarios.
             </p>
-          </div>
-          <div>
-            <h1 class="text-lg font-semibold">Analista de Datos</h1>
+          </section>
+          <section
+            class="m-auto flex flex-col justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2">
+            <h3 class="text-2xl font-semibold">Propuestas Recientes</h3>
+            <div class="gap-3 sm:flex sm:flex-row sm:justify-around">
+              <div>
+                <h1 class="text-lg font-semibold">Desarrollador Fronted Jr.</h1>
+                <p class="max-w-xs text-lg leading-relaxed">
+                  Empresa XYZ - Remoto <br /><a class="italic text-verde underline" href="#">Ver Más</a>
+                </p>
+              </div>
+              <div>
+                <h1 class="text-lg font-semibold">Analista de Datos</h1>
+                <p class="max-w-xs text-lg leading-relaxed">
+                  PyME ABC - Presencial <br /><a class="italic text-verde underline" href="#">Ver Más</a>
+                </p>
+              </div>
+            </div>
+          </section>
+          <section
+            class="m-auto flex flex-col justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2">
+            <h3 class="text-2xl font-semibold">Certificaciones</h3>
             <p class="max-w-xs text-lg leading-relaxed">
-              PyME ABC - Presencial <br /><a class="italic text-verde underline" href="#">Ver Más</a>
+              Encuentra certificaciones que impulsarán tu carrera. Explorar
             </p>
-          </div>
+          </section>
         </div>
-      </section>
-      <section
-        class="m-auto flex flex-col justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2">
-        <h3 class="text-2xl font-semibold">Certificaciones</h3>
-        <p class="max-w-xs text-lg leading-relaxed">
-          Encuentra certificaciones que impulsarán tu carrera. Explorar
-        </p>
-      </section>
+      </div>
     </div>
-  </div>
-  <footer
-    class="mt-4 bg-gradient-to-b from-blue-400 to-azul p-5 text-center text-white sm:relative sm:mt-8 lg:fixed lg:inset-x-0 lg:bottom-0">
-    <div class="text-1xl">
-      © 2024 Copyright:
-      <a href="#" class="text-verde underline">KICR, IMO, MFLP, JELG, JUMJ</a>
-    </div>
-  </footer>
+
+    <footer
+      class="bg-gradient-to-b from-verde to-azul p-5 text-center text-white">
+      <div class="text-1xl">
+        © 2024 Copyright:
+        <a href="#" class="text-verde underline">KICR, IMO, MFLP, JELG, JUMJ</a>
+      </div>
+    </footer>
 
     <script type="module" src="./src/main.js"></script>
   </body>
