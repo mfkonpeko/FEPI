@@ -21,16 +21,12 @@ menuToggle.addEventListener("click", () => {
 //   },
 // });
 
-<<<<<<< HEAD
-// const dropzone = document.getElementById("dropzone");
-// const fileInput = document.getElementById("fileInput");
-// const fileList = document.getElementById("fileList");
-=======
+
 dropzone.addEventListener("dragover", (e) => {
   e.preventDefault();
   dropzone.classList.add("border-blue-500", "border-2");
 });
->>>>>>> 5113c1201952ee268008038d2330636aacc5f005
+
 
 dropzone.addEventListener("dragleave", () => {
   dropzone.classList.remove("border-blue-500", "border-2");
