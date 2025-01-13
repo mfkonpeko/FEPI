@@ -6,11 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <title>Perfil Egresado - ESCO-NECTADOS</title>
+    <style>
+        .bg-principal {
+            background-color: #f8f9fa;
+        }
+        .bg-principal_2 {
+            background-color: #ffffff;
+        }
+        .text-verde {
+            color: #009a70;
+        }
+        .text-azul {
+            color: #0d213f;
+        }
+        .bg-verde {
+            background-color: #009a70;
+        }
+        .hover\:text-verde:hover {
+            color: #009a70;
+        }
+        .border-verde {
+            border-color: #009a70;
+        }
+    </style>
 </head>
 
 <body class="w-full bg-principal min-h-screen flex flex-col">
-    <!-- Script de verificación -->
     <script>
         if (!localStorage.getItem('sessionToken') ||
             !localStorage.getItem('user') ||
@@ -23,7 +46,7 @@
     <div class="flex-grow">
         <header>
             <nav class="m-auto bg-principal text-base font-bold text-azul drop-shadow-md">
-                <div class="relative flex items-center justify-between custom:mx-7">
+                <div class="relative flex items-center justify-between px-7">
                     <!-- Logo -->
                     <div class="flex items-center">
                         <img src="/logo.png" alt="Logo" class="h-16 w-auto" />
@@ -31,88 +54,57 @@
                     </div>
 
                     <!-- Lista de enlaces -->
-                    <ul id="menu" class="absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 custom:relative custom:top-0 custom:flex custom:w-auto custom:flex-row custom:items-center custom:gap-6">
-                        <li>
-                            <a href="index.html" class="hover:text-verde">INICIO</a>
-                        </li>
-                        <li>
-                            <a href="empleos.html" class="hover:text-verde">EMPLEOS</a>
-                        </li>
-                        <li>
-                            <a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a>
-                        </li>
-                        <li>
-                            <a href="certificaciones.html" class="hover:text-verde">CERTIFICACIONES</a>
-                        </li>
-                        <li>
-                            <a href="servicioSocial.html" class="hover:text-verde">SERVICIO SOCIAL</a>
-                        </li>
-                        <li>
-                            <a href="sobreNosotros.html" class="hover:text-verde">SOBRE NOSOTROS</a>
-                        </li>
+                    <ul id="menu" class="absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 md:relative md:top-0 md:flex md:w-auto md:flex-row md:items-center md:gap-6">
+                        <li><a href="index.html" class="hover:text-verde">INICIO</a></li>
+                        <li><a href="empleos.html" class="hover:text-verde">EMPLEOS</a></li>
+                        <li><a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a></li>
+                        <li><a href="certificaciones.html" class="hover:text-verde">CERTIFICACIONES</a></li>
+                        <li><a href="servicioSocial.html" class="hover:text-verde">SERVICIO SOCIAL</a></li>
+                        <li><a href="sobreNosotros.html" class="hover:text-verde">SOBRE NOSOTROS</a></li>
                     </ul>
 
                     <!-- Botón Cerrar Sesión e icono de menú -->
                     <div class="flex items-center justify-end gap-4">
                         <button onclick="confirmarCierreSesion()"
-                            class="sm:text-sm rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde">
+                            class="rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde">
                             CERRAR SESIÓN
                         </button>
-                        <ion-icon class="cursor-pointer text-3xl custom:hidden" id="menuToggle" name="menu"></ion-icon>
+                        <ion-icon class="cursor-pointer text-3xl md:hidden" id="menuToggle" name="menu"></ion-icon>
                     </div>
                 </div>
             </nav>
         </header>
 
-        <div class="mt-8 flex flex-col justify-between gap-8 text-azul">
-            <h1 class="text-center text-4xl font-bold">Mi Perfil Profesional</h1>
+        <div class="container mx-auto px-4">
+            <h1 class="text-center text-4xl font-bold text-azul my-8">Curriculum Vitae Profesional</h1>
 
-            <div id="egresadoInfo" class="mx-auto w-full max-w-2xl p-6 bg-principal_2 rounded-xl drop-shadow-xl">
-                <!-- La información del egresado se insertará aquí mediante JavaScript -->
+            <div id="egresadoInfo" class="mx-auto w-full max-w-3xl p-8 bg-principal_2 rounded-xl drop-shadow-xl mb-8">
+                <!-- El CV se insertará aquí mediante JavaScript -->
             </div>
 
-            <div class="mt-8 flex flex-col gap-6">
-                <h2 class="text-center text-2xl font-semibold">Acciones Rápidas</h2>
+            <div class="flex flex-col items-center gap-6 mb-8">
+                <h2 class="text-2xl font-semibold text-azul">Gestionar mi Perfil</h2>
                 <div class="flex flex-wrap justify-center gap-4">
-                    <a href="buscarEmpleos.html" class="rounded-xl bg-verde px-5 py-2 text-white hover:opacity-90">
-                        Buscar Empleos
+                    <a href="buscarEmpleos.html" class="rounded-xl bg-verde px-6 py-2 text-white hover:opacity-90 transition duration-300">
+                        <ion-icon name="briefcase-outline" class="align-middle mr-2"></ion-icon>
+                        Ver mis postulaciones
                     </a>
-                    <a href="miCV.html"
-                        class="rounded-xl border border-verde bg-principal px-5 py-2 text-verde hover:opacity-90">
-                        Actualizar CV
+                    <a href="editarCV.html" class="rounded-xl bg-verde px-6 py-2 text-white hover:opacity-90 transition duration-300">
+                        <ion-icon name="create-outline" class="align-middle mr-2"></ion-icon>
+                        Editar CV
                     </a>
-                    <a href="certificaciones.html" class="rounded-xl bg-verde px-5 py-2 text-white hover:opacity-90">
-                        Ver Certificaciones
-                    </a>
-                </div>
-            </div>
-
-            <!-- Sección de Estadísticas -->
-            <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
-                <div class="bg-principal_2 p-4 rounded-xl text-center">
-                    <h3 class="font-semibold">Postulaciones Activas</h3>
-                    <p class="text-2xl font-bold text-verde">5</p>
-                </div>
-                <div class="bg-principal_2 p-4 rounded-xl text-center">
-                    <h3 class="font-semibold">Vistas del Perfil</h3>
-                    <p class="text-2xl font-bold text-verde">12</p>
-                </div>
-                <div class="bg-principal_2 p-4 rounded-xl text-center">
-                    <h3 class="font-semibold">Certificaciones</h3>
-                    <p class="text-2xl font-bold text-verde">3</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <footer class="bg-gradient-to-b from-verde to-azul p-5 text-center text-white mt-8">
-        <div class="text-1xl">
+    <footer class="bg-gradient-to-b from-verde to-azul p-5 text-center text-white">
+        <div class="text-sm">
             © 2024 Copyright:
-            <a href="#" class="text-verde underline">KICR, IMO, MFLP, JELG, JUMJ</a>
+            <a href="#" class="text-white hover:underline">KICR, IMO, MFLP, JELG, JUMJ</a>
         </div>
     </footer>
 
-    <script type="module" src="./src/main.js"></script>
     <script>
         function confirmarCierreSesion() {
             if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
@@ -121,24 +113,117 @@
             }
         }
 
-        // Mostrar información del usuario
+        // Mostrar información del usuario en formato CV
         const userData = JSON.parse(localStorage.getItem('user'));
         if (userData) {
             document.getElementById('egresadoInfo').innerHTML = `
-                <h2 class="text-2xl font-semibold mb-4">Información Personal</h2>
-                <div class="grid grid-cols-1 gap-4">
-                    <p><strong>Nombre:</strong> ${userData.nombre} ${userData.apellidos}</p>
-                    <p><strong>Correo:</strong> ${userData.correo}</p>
-                    <p><strong>Carrera:</strong> ${userData.carrera}</p>
-                    <p><strong>Generación:</strong> ${userData.generacion || 'No especificada'}</p>
-                    <p><strong>Especialidad:</strong> ${userData.especialidad || 'No especificada'}</p>
+                <div class="border-b-2 border-verde pb-6 mb-8">
+                    <h1 class="text-3xl font-bold text-azul mb-4">${userData.nombre} ${userData.apellidos}</h1>
+                    <div class="flex flex-col gap-2 text-gray-600">
+                        <p class="flex items-center">
+                            <ion-icon name="mail-outline" class="mr-2"></ion-icon>
+                            ${userData.correo}
+                        </p>
+                        <p class="flex items-center">
+                            <ion-icon name="call-outline" class="mr-2"></ion-icon>
+                            ${userData.telefono}
+                        </p>
+                    </div>
                 </div>
-                <div class="mt-4">
-                    <h3 class="text-xl font-semibold mb-2">Habilidades</h3>
-                    <div class="flex flex-wrap gap-2">
-                        ${(userData.habilidades || ['JavaScript', 'HTML', 'CSS']).map(hab =>
-                `<span class="bg-verde text-white px-3 py-1 rounded-full text-sm">${hab}</span>`
-            ).join('')}
+
+                <div class="mb-8">
+                    <h2 class="text-xl font-semibold text-verde mb-4 flex items-center">
+                        <ion-icon name="school-outline" class="mr-2"></ion-icon>
+                        Formación Académica
+                    </h2>
+                    <div class="ml-6">
+                        <p class="font-semibold text-lg">${userData.carrera}</p>
+                        <p class="text-gray-600">${userData.institucion_academica || 'No especificada'}</p>
+                        <p class="text-gray-600">Fecha de egreso: ${userData.fecha_egreso || 'No especificada'}</p>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h2 class="text-xl font-semibold text-verde mb-4 flex items-center">
+                        <ion-icon name="person-outline" class="mr-2"></ion-icon>
+                        Perfil Profesional
+                    </h2>
+                    <div class="ml-6">
+                        <p class="text-gray-700 leading-relaxed">
+                            Egresado de ${userData.carrera} con especialización en 
+                            ${userData.area_interes_profesional || 'áreas diversas'}. 
+                            Enfocado en el desarrollo profesional y la mejora continua.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h2 class="text-xl font-semibold text-verde mb-4 flex items-center">
+                        <ion-icon name="ribbon-outline" class="mr-2"></ion-icon>
+                        Habilidades Profesionales
+                    </h2>
+                    <div class="ml-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            ${userData.habilidades_clave ? 
+                                userData.habilidades_clave.split(',').map(habilidad => 
+                                    `<div class="flex items-center">
+                                        <ion-icon name="checkmark-circle-outline" class="text-verde mr-2"></ion-icon>
+                                        <span>${habilidad.trim()}</span>
+                                    </div>`
+                                ).join('') : 
+                                '<p class="text-gray-600">No especificadas</p>'
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h2 class="text-xl font-semibold text-verde mb-4 flex items-center">
+                        <ion-icon name="briefcase-outline" class="mr-2"></ion-icon>
+                        Intereses Profesionales
+                    </h2>
+                    <div class="ml-6">
+                        <p class="text-gray-700">${userData.area_interes_profesional || 'No especificados'}</p>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h2 class="text-xl font-semibold text-verde mb-4 flex items-center">
+                        <ion-icon name="alarm-outline" class="mr-2"></ion-icon>
+                        Experiencia Laboral
+                    </h2>
+                    <div class="ml-6">
+                        <p class="text-gray-700">${userData.experiencia_laboral || 'No especificados'}</p>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h2 class="text-xl font-semibold text-verde mb-4 flex items-center">
+                        <ion-icon name="desktop-outline" class="mr-2"></ion-icon>
+                        Certificaciones
+                    </h2>
+                    <div class="ml-6">
+                        <p class="text-gray-700">${userData.certificaciones || 'No especificados'}</p>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h2 class="text-xl font-semibold text-verde mb-4 flex items-center">
+                        <ion-icon name="language-outline" class="mr-2"></ion-icon>
+                        Idiomas
+                    </h2>
+                    <div class="ml-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            ${userData.idiomas ? 
+                                userData.idiomas.split(',').map(idioma => 
+                                    `<div class="flex items-center">
+                                        <ion-icon name="checkmark-circle-outline" class="text-verde mr-2"></ion-icon>
+                                        <span>${idioma.trim()}</span>
+                                    </div>`
+                                ).join('') : 
+                                '<p class="text-gray-600">No especificadas</p>'
+                            }
+                        </div>
                     </div>
                 </div>
             `;

@@ -143,6 +143,29 @@
                 placeholder="Habilidades Clave"></textarea>
             </div>
           </div>
+          <label for="" class="block text-xl text-verde font-semibold text-center">Extras</label>
+          <div class="grid grid-cols-6 gap-6 pt-3">
+            <div class="col-span-6 sm:col-span-3">
+              <label for="idiomas" class="text-sm font-medium block mb-2">Idiomas</label>
+              <input type="text" name="idiomas" id="idiomas"
+                class="shadow-sm bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                placeholder="Idiomas que habla el solicitante" required>
+            </div>
+            <div class="col-span-6 sm:col-span-3">
+              <label for="certificaciones" class="text-sm font-medium block mb-2">Certificaciones</label>
+              <input type="text" name="certificaciones" id="certificaciones"
+                class="shadow-sm bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                placeholder="Certificaciones con las que cuenta" required>
+            </div>
+            <div class="col-span-full">
+              <label for="experiencia_laboral" class="text-sm font-medium block mb-2">Experiencia laboral</label>
+              <textarea id="experiencia_laboral" name="experiencia_laboral" rows="6"
+                class="bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-4"
+                placeholder="Empresa, puesto, tiempo trabajando etc..."></textarea>
+            </div>
+          </div>
+
+          <!-- Botón de envío -->
           <button type="submit"
             class="rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde">
             Registrarse
@@ -190,7 +213,10 @@
         carrera: document.getElementById('carrera').value,
         fecha_egreso: document.getElementById('fecha_egreso').value,
         area_interes_profesional: document.getElementById('area_interes_profesional').value,
-        habilidades_clave: document.getElementById('habilidades_clave').value
+        habilidades_clave: document.getElementById('habilidades_clave').value,
+        experiencia_laboral: document.getElementById('experiencia_laboral').value,
+        idiomas: document.getElementById('idiomas').value,
+        certificaciones: document.getElementById('certificaciones').value
       };
 
       try {
@@ -204,7 +230,7 @@
 
         if (response.ok) {
           alert('Registro exitoso');
-          window.location.href = 'iniciarSesion.html'; // Redirigir después del registro exitoso
+          window.location.href = 'iniciarSesion.html';
         } else {
           const error = await response.json();
           alert('Error en el registro: ' + error.error);

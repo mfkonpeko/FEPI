@@ -96,12 +96,15 @@ app.post("/api/usuario", (req, res) => {
         apellidos,
         telefono,
         correo,
-        contraseña,
+        contraseña, // Ahora se almacenará sin encriptar
         institucion_academica,
         carrera,
         fecha_egreso,
         area_interes_profesional,
-        habilidades_clave
+        habilidades_clave,
+        experiencia_laboral,  // Este ya será un array de empresas
+        idiomas,               // Este ya será un array de idiomas
+        certificaciones        // Este ya será un array de certificaciones
     } = req.body;
 
     // Consulta para verificar si el correo ya existe
@@ -113,29 +116,44 @@ app.post("/api/usuario", (req, res) => {
             return res.status(500).json({ error: "Error al verificar el correo" });
         }
 
-        // Si el correo ya existe
         if (results.length > 0) {
             return res.status(400).json({ error: "El correo ya está registrado" });
         }
 
-        // Si el correo no existe, proceder a la inserción
         const query = `
             INSERT INTO datos_egresado 
-            (nombre, apellidos, telefono, correo, contraseña, institucion_academica, carrera, fecha_egreso, area_interes_profesional, habilidades_clave) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            (nombre, apellidos, telefono, correo, contraseña, 
+            institucion_academica, carrera, fecha_egreso, 
+            area_interes_profesional, habilidades_clave,
+            experiencia_laboral, idiomas, certificaciones) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
 
         conexion.query(
             query, 
-            [nombre, apellidos, telefono, correo, contraseña, institucion_academica, carrera, fecha_egreso, area_interes_profesional, habilidades_clave], 
+            [
+                nombre, 
+                apellidos, 
+                telefono, 
+                correo, 
+                contraseña,
+                institucion_academica, 
+                carrera, 
+                fecha_egreso, 
+                area_interes_profesional, 
+                habilidades_clave,
+                experiencia_laboral,
+                idiomas,
+                certificaciones
+            ], 
             (err, results) => {
                 if (err) {
                     console.error("Error al ejecutar la consulta: ", err);
-                    res.status(500).json({ error: "Error al insertar los datos" });
+                    return res.status(500).json({ error: "Error al insertar los datos" });
                 } else {
-                    res.status(201).json({ 
+                    return res.status(201).json({ 
                         message: "Datos del usuario insertados correctamente",
-                        id: results.insertId 
+                        id: results.insertId
                     });
                 }
             }
@@ -180,7 +198,6 @@ app.post("/api/login", (req, res) => {
         });
     });
 });
-
 
 // Iniciar el servidor
 app.listen(port, () => {
