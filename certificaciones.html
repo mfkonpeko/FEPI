@@ -1,157 +1,187 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
-    ></script>
-    <title>ESCO-NECTADOS</title>
-  </head>
 
-  <body class="w-full bg-principal">
-    <header>
-      <nav
-        class="m-auto bg-principal text-base font-bold text-azul drop-shadow-md"
-      >
-        <div class="relative flex items-center justify-between custom:mx-7">
-          <!-- Logo -->
-          <div class="flex items-center">
-            <img src="/logo.png" alt="Logo" class="h-16 w-auto" />
-            <span class="font-bold">ESCO-NECTADOS</span>
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <title>ESCO-NECTADOS</title>
+</head>
 
-          <!-- Lista de enlaces -->
-          <ul
-            id="menu"
-            class="absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 custom:relative custom:top-0 custom:flex custom:w-auto custom:flex-row custom:items-center custom:gap-6"
-          >
-            <li>
-              <a href="index.html" class="hover:text-verde">INICIO</a>
-            </li>
-            <li>
-              <a href="empleos.html" class="hover:text-verde">EMPLEOS</a>
-            </li>
-            <li>
-              <a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a>
-            </li>
-            <li>
-              <a href="certificaciones.html" class="hover:text-verde"
-                >CERTIFICACIONES</a
-              >
-            </li>
-            <li>
-              <a href="servicioSocial.html" class="hover:text-verde"
-                >SERVICIO SOCIAL</a
-              >
-            </li>
-            <li>
-              <a href="sobreNosotros.html" class="hover:text-verde"
-                >SOBRE NOSOTROS</a
-              >
-            </li>
-          </ul>
-
-          <!-- Botón Iniciar Sesión e icono de menú -->
-          <div class="flex items-center justify-end gap-4">
-            <a
-              href="./iniciarSesion.html"
-              class="sm:text-sm rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde"
-            >
-              INICIAR SESIÓN
-            </a>
-            <ion-icon
-              class="cursor-pointer text-3xl custom:hidden"
-              id="menuToggle"
-              name="menu"
-            ></ion-icon>
-          </div>
+<body class="w-full bg-principal">
+  <header>
+    <nav class="m-auto bg-principal text-base font-bold text-azul drop-shadow-md">
+      <div class="relative flex items-center justify-between custom:mx-7">
+        <!-- Logo -->
+        <div class="flex items-center">
+          <img src="/logo.png" alt="Logo" class="h-16 w-auto" />
+          <span class="font-bold">ESCO-NECTADOS</span>
         </div>
-      </nav>
-    </header>
-    <div class="mt-8 flex flex-col justify-between gap-8 text-azul">
-      <!-- Tips y consejos -->
-      <h1 class="text-center text-4xl font-bold">
-        Certificaciones Recomendadadas
-      </h1>
-      <h2 class="text-center text-2xl font-semibold">
-        Impulsa tu carrera con estas certificaciones reconocidas en el sector
-        tecnológico.
-      </h2>
-      <div class="flex justify-around mb-24">
-        <div class="flex flex-col gap-6">
-          <section
-            class="m-auto w-[500px] items-center items-center flex flex-col justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2"
-          >
-            <h3 class="text-2xl font-semibold text-verde">
-              Certificaciones AWS Cloud Practitioner
-            </h3>
-            <p class="max-w-xs text-sm leading-relaxed">
-              Plataforma: Amazon Web Services
-            </p>
-            <p class="max-w-[400px] text-lg leading-relaxed">
-              Aprende los fundamentos de la computación en la nube con AWS
-            </p>
-            <a
-              href="https://aws.amazon.com/es/certification/?gclid=CjwKCAiA7Y28BhAnEiwAAdOJUMofFhnQ1t2sRVmJb85nDO4gSTN9a52qSnoAEiZDiq0lpXKWshp7eBoC2_YQAvD_BwE&trk=11cee293-71de-4037-97f7-db874151766e&sc_channel=ps&ef_id=CjwKCAiA7Y28BhAnEiwAAdOJUMofFhnQ1t2sRVmJb85nDO4gSTN9a52qSnoAEiZDiq0lpXKWshp7eBoC2_YQAvD_BwE:G:s&s_kwcid=AL!4422!3!653513078348!p!!g!!get%20aws%20certified!19926462146!146423627646"
-              class="bg-verde dark:bg-dark-2 border-dark dark:border-dark-2 border rounded-full inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-body-color hover:bg-white hover:border-verde hover:text-verde disabled:bg-gray-3 disabled:border-gray-3 disabled:text-dark-5"
-            >
-              Ver más
-            </a>
-          </section>
-          <section
-            class="m-auto w-[500px] flex flex-col items-center justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2"
-          >
-            <h3 class="text-2xl font-semibold text-verde">
-              Google IT Support Professional
-            </h3>
-            <p class="max-w-xs text-sm leading-relaxed">Plataforma: Coursera</p>
-            <p class="max-w-[400px] text-lg leading-relaxed">
-              Obtén habilidades de soporte técnico y networking.
-            </p>
-            <a
-              href="https://www.coursera.org/google-career-certificates?utm_medium=sem&utm_source=gg&utm_campaign=B2C_LATAM__google_FTCOF_google-career-certificates_countrygroup-1&campaignid=21489985171&adgroupid=168694271727&device=c&keyword=&matchtype=&network=g&devicemodel=&adposition=&creativeid=706285721191&hide_mobile_promo&gad_source=1&gclid=CjwKCAiA7Y28BhAnEiwAAdOJUFbGoiHAvvaJ1kC68z9xiZWlw4gmGnhuRf5Dh1oGaKvblcpteaZWxRoCHpIQAvD_BwE"
-              class="bg-verde dark:bg-dark-2 border-dark dark:border-dark-2 border rounded-full inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-body-color hover:bg-white hover:border-verde hover:text-verde disabled:bg-gray-3 disabled:border-gray-3 disabled:text-dark-5"
-            >
-              Ver más
-            </a>
-          </section>
-          <section
-            class="m-auto w-[500px] flex flex-col items-center justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2"
-          >
-            <h3 class="text-2xl font-semibold text-verde">
-              Microsoft Azure Fundamentals
-            </h3>
-            <p class="max-w-xs text-sm leading-relaxed">
-              Plataforma: Microsoft Learn
-            </p>
-            <p class="max-w-[400px] text-lg leading-relaxed">
-              Introduce conceptos básicos de Azure y computación en la nube.
-            </p>
-            <a
-              href="https://learn.microsoft.com/en-us/training/organizations?OCID=AIDcmmcp111dbt_SEM_Learn_MSLO_Americas_Traffic_Google%20SEM_01.03.2025_Q3FY25&gad_source=1&gclid=CjwKCAiA7Y28BhAnEiwAAdOJULnsOlQCBuD68ePDJe5epgOBF3poZ8-Q5wnsht2cfLM7pxN3k1pNJxoC04cQAvD_BwE"
-              class="bg-verde dark:bg-dark-2 border-dark dark:border-dark-2 border rounded-full inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-body-color hover:bg-white hover:border-verde hover:text-verde disabled:bg-gray-3 disabled:border-gray-3 disabled:text-dark-5"
-            >
-              Ver más
-            </a>
-          </section>
+
+        <!-- Lista de enlaces -->
+        <ul id="menu"
+          class="absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 custom:relative custom:top-0 custom:flex custom:w-auto custom:flex-row custom:items-center custom:gap-6">
+          <li>
+            <a href="index.html" class="hover:text-verde">INICIO</a>
+          </li>
+          <li>
+            <a href="empleos.html" class="hover:text-verde">EMPLEOS</a>
+          </li>
+          <li>
+            <a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a>
+          </li>
+          <li>
+            <a href="certificaciones.html" class="hover:text-verde">CERTIFICACIONES</a>
+          </li>
+          <li>
+            <a href="servicioSocial.html" class="hover:text-verde">SERVICIO SOCIAL</a>
+          </li>
+          <li>
+            <a href="sobreNosotros.html" class="hover:text-verde">SOBRE NOSOTROS</a>
+          </li>
+        </ul>
+
+        <!-- Botón Iniciar Sesión e icono de menú -->
+        <div class="flex items-center justify-end gap-4">
+          <script>
+            const sessionToken = localStorage.getItem('sessionToken');
+            const userType = localStorage.getItem('userType');
+
+            if (sessionToken) {
+              document.write(`
+                          <div class="relative group">
+                              <button class="sm:text-sm rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde flex items-center gap-2">
+                                  <ion-icon name="person-circle-outline"></ion-icon>
+                                  MI PERFIL
+                              </button>
+                              <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-2">
+                                  <a href="${userType === 'empresa' ? 'perfilEmpresa.html' : 'perfilEgresado.html'}" 
+                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-verde hover:text-white">
+                                     Ver Perfil
+                                  </a>
+                                  <button onclick="confirmarCierreSesion()" 
+                                          class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-verde hover:text-white">
+                                          Cerrar Sesión
+                                  </button>
+                              </div>
+                          </div>
+                      `);
+            } else {
+              document.write(`
+                          <a href="./iniciarSesion.html" 
+                             class="sm:text-sm rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde">
+                             INICIAR SESIÓN
+                          </a>
+                      `);
+            }
+          </script>
+          <ion-icon class="cursor-pointer text-3xl custom:hidden" id="menuToggle" name="menu"></ion-icon>
         </div>
+
+      </div>
+    </nav>
+  </header>
+  <div class="mt-8 flex flex-col justify-between gap-8 text-azul">
+    <!-- Tips y consejos -->
+    <h1 class="text-center text-4xl font-bold">
+      Certificaciones Recomendadadas
+    </h1>
+    <h2 class="text-center text-2xl font-semibold">
+      Impulsa tu carrera con estas certificaciones reconocidas en el sector
+      tecnológico.
+    </h2>
+    <div class="flex justify-around mb-24">
+      <div class="flex flex-col gap-6">
+        <section
+          class="m-auto w-[500px] items-center items-center flex flex-col justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2">
+          <h3 class="text-2xl font-semibold text-verde">
+            Certificaciones AWS Cloud Practitioner
+          </h3>
+          <p class="max-w-xs text-sm leading-relaxed">
+            Plataforma: Amazon Web Services
+          </p>
+          <p class="max-w-[400px] text-lg leading-relaxed">
+            Aprende los fundamentos de la computación en la nube con AWS
+          </p>
+          <a href="https://aws.amazon.com/es/certification/?gclid=CjwKCAiA7Y28BhAnEiwAAdOJUMofFhnQ1t2sRVmJb85nDO4gSTN9a52qSnoAEiZDiq0lpXKWshp7eBoC2_YQAvD_BwE&trk=11cee293-71de-4037-97f7-db874151766e&sc_channel=ps&ef_id=CjwKCAiA7Y28BhAnEiwAAdOJUMofFhnQ1t2sRVmJb85nDO4gSTN9a52qSnoAEiZDiq0lpXKWshp7eBoC2_YQAvD_BwE:G:s&s_kwcid=AL!4422!3!653513078348!p!!g!!get%20aws%20certified!19926462146!146423627646"
+            class="bg-verde dark:bg-dark-2 border-dark dark:border-dark-2 border rounded-full inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-body-color hover:bg-white hover:border-verde hover:text-verde disabled:bg-gray-3 disabled:border-gray-3 disabled:text-dark-5">
+            Ver más
+          </a>
+        </section>
+        <section
+          class="m-auto w-[500px] flex flex-col items-center justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2">
+          <h3 class="text-2xl font-semibold text-verde">
+            Google IT Support Professional
+          </h3>
+          <p class="max-w-xs text-sm leading-relaxed">Plataforma: Coursera</p>
+          <p class="max-w-[400px] text-lg leading-relaxed">
+            Obtén habilidades de soporte técnico y networking.
+          </p>
+          <a href="https://www.coursera.org/google-career-certificates?utm_medium=sem&utm_source=gg&utm_campaign=B2C_LATAM__google_FTCOF_google-career-certificates_countrygroup-1&campaignid=21489985171&adgroupid=168694271727&device=c&keyword=&matchtype=&network=g&devicemodel=&adposition=&creativeid=706285721191&hide_mobile_promo&gad_source=1&gclid=CjwKCAiA7Y28BhAnEiwAAdOJUFbGoiHAvvaJ1kC68z9xiZWlw4gmGnhuRf5Dh1oGaKvblcpteaZWxRoCHpIQAvD_BwE"
+            class="bg-verde dark:bg-dark-2 border-dark dark:border-dark-2 border rounded-full inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-body-color hover:bg-white hover:border-verde hover:text-verde disabled:bg-gray-3 disabled:border-gray-3 disabled:text-dark-5">
+            Ver más
+          </a>
+        </section>
+        <section
+          class="m-auto w-[500px] flex flex-col items-center justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2">
+          <h3 class="text-2xl font-semibold text-verde">
+            Microsoft Azure Fundamentals
+          </h3>
+          <p class="max-w-xs text-sm leading-relaxed">
+            Plataforma: Microsoft Learn
+          </p>
+          <p class="max-w-[400px] text-lg leading-relaxed">
+            Introduce conceptos básicos de Azure y computación en la nube.
+          </p>
+          <a href="https://learn.microsoft.com/en-us/training/organizations?OCID=AIDcmmcp111dbt_SEM_Learn_MSLO_Americas_Traffic_Google%20SEM_01.03.2025_Q3FY25&gad_source=1&gclid=CjwKCAiA7Y28BhAnEiwAAdOJULnsOlQCBuD68ePDJe5epgOBF3poZ8-Q5wnsht2cfLM7pxN3k1pNJxoC04cQAvD_BwE"
+            class="bg-verde dark:bg-dark-2 border-dark dark:border-dark-2 border rounded-full inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-body-color hover:bg-white hover:border-verde hover:text-verde disabled:bg-gray-3 disabled:border-gray-3 disabled:text-dark-5">
+            Ver más
+          </a>
+        </section>
       </div>
     </div>
-    <footer
-      class="mt-4 bg-gradient-to-b from-verde to-azul p-5 text-center text-white sm:relative sm:mt-8  lg:inset-x-0 lg:bottom-0"
-    >
-      <div class="text-1xl">
-        © 2024 Copyright:
-        <a href="#" class="text-verde underline">KICR, IMO, MFLP, JELG, JUMJ</a>
-      </div>
-    </footer>
+  </div>
+  <footer
+    class="mt-4 bg-gradient-to-b from-verde to-azul p-5 text-center text-white sm:relative sm:mt-8  lg:inset-x-0 lg:bottom-0">
+    <div class="text-1xl">
+      © 2024 Copyright:
+      <a href="#" class="text-verde underline">KICR, IMO, MFLP, JELG, JUMJ</a>
+    </div>
+  </footer>
 
-    <script type="module" src="./src/main.js"></script>
-  </body>
+  <script type="module" src="./src/main.js"></script>
+
+  <script>
+    // Toggle para el menú móvil
+    document.getElementById('menuToggle').addEventListener('click', function () {
+      document.getElementById('menu').classList.toggle('hidden');
+    });
+
+    // Función para confirmar cierre de sesión
+    function confirmarCierreSesion() {
+      if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
+        localStorage.clear();
+        window.location.href = 'index.html';
+      }
+    }
+
+    // Función para toggle del menú de perfil
+    function toggleMenu() {
+      const menuDropdown = document.getElementById('menuDropdown');
+      menuDropdown.classList.toggle('hidden');
+    }
+
+    // Cerrar el menú cuando se hace clic fuera de él
+    document.addEventListener('click', function (event) {
+      const profileMenu = document.getElementById('profileMenu');
+      const menuDropdown = document.getElementById('menuDropdown');
+
+      if (profileMenu && !profileMenu.contains(event.target)) {
+        menuDropdown.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+
 </html>

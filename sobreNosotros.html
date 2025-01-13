@@ -58,17 +58,39 @@
 
           <!-- Botón Iniciar Sesión e icono de menú -->
           <div class="flex items-center justify-end gap-4">
-            <a
-              href="iniciarSesion.html"
-              class="rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde"
-            >
-              INICIAR SESIÓN
-            </a>
-            <ion-icon
-              class="cursor-pointer text-3xl custom:hidden"
-              id="menuToggle"
-              name="menu"
-            ></ion-icon>
+            <script>
+              const sessionToken = localStorage.getItem('sessionToken');
+              const userType = localStorage.getItem('userType');
+
+              if (sessionToken) {
+                document.write(`
+                          <div class="relative group">
+                              <button class="sm:text-sm rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde flex items-center gap-2">
+                                  <ion-icon name="person-circle-outline"></ion-icon>
+                                  MI PERFIL
+                              </button>
+                              <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-2">
+                                  <a href="${userType === 'empresa' ? 'perfilEmpresa.html' : 'perfilEgresado.html'}" 
+                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-verde hover:text-white">
+                                     Ver Perfil
+                                  </a>
+                                  <button onclick="confirmarCierreSesion()" 
+                                          class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-verde hover:text-white">
+                                          Cerrar Sesión
+                                  </button>
+                              </div>
+                          </div>
+                      `);
+              } else {
+                document.write(`
+                          <a href="./iniciarSesion.html" 
+                             class="sm:text-sm rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde">
+                             INICIAR SESIÓN
+                          </a>
+                      `);
+              }
+            </script>
+            <ion-icon class="cursor-pointer text-3xl custom:hidden" id="menuToggle" name="menu"></ion-icon>
           </div>
         </div>
       </nav>
@@ -184,5 +206,35 @@
     </footer>
 
     <script type="module" src="./src/main.js"></script>
+    <script>
+      // Toggle para el menú móvil
+      document.getElementById('menuToggle').addEventListener('click', function () {
+          document.getElementById('menu').classList.toggle('hidden');
+      });
+
+      // Función para confirmar cierre de sesión
+      function confirmarCierreSesion() {
+          if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
+              localStorage.clear();
+              window.location.href = 'index.html';
+          }
+      }
+
+      // Función para toggle del menú de perfil
+      function toggleMenu() {
+          const menuDropdown = document.getElementById('menuDropdown');
+          menuDropdown.classList.toggle('hidden');
+      }
+
+      // Cerrar el menú cuando se hace clic fuera de él
+      document.addEventListener('click', function (event) {
+          const profileMenu = document.getElementById('profileMenu');
+          const menuDropdown = document.getElementById('menuDropdown');
+
+          if (profileMenu && !profileMenu.contains(event.target)) {
+              menuDropdown.classList.add('hidden');
+          }
+      });
+  </script>
   </body>
 </html>

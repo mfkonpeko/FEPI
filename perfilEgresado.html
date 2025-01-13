@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <title>Perfil Egresado - ESCO-NECTADOS</title>
+</head>
+
+<body class="w-full bg-principal min-h-screen flex flex-col">
+    <!-- Script de verificación -->
+    <script>
+        if (!localStorage.getItem('sessionToken') ||
+            !localStorage.getItem('user') ||
+            localStorage.getItem('userType') !== 'egresado') {
+            alert('Sesión no válida. Por favor, inicie sesión nuevamente.');
+            window.location.href = 'login.html';
+        }
+    </script>
+
+    <div class="flex-grow">
+        <header>
+            <nav class="m-auto bg-principal text-base font-bold text-azul drop-shadow-md">
+                <div class="relative flex items-center justify-between custom:mx-7">
+                    <!-- Logo -->
+                    <div class="flex items-center">
+                        <img src="/logo.png" alt="Logo" class="h-16 w-auto" />
+                        <span class="font-bold">ESCO-NECTADOS</span>
+                    </div>
+
+                    <!-- Lista de enlaces -->
+                    <ul id="menu" class="absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 custom:relative custom:top-0 custom:flex custom:w-auto custom:flex-row custom:items-center custom:gap-6">
+                        <li>
+                            <a href="index.html" class="hover:text-verde">INICIO</a>
+                        </li>
+                        <li>
+                            <a href="empleos.html" class="hover:text-verde">EMPLEOS</a>
+                        </li>
+                        <li>
+                            <a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a>
+                        </li>
+                        <li>
+                            <a href="certificaciones.html" class="hover:text-verde">CERTIFICACIONES</a>
+                        </li>
+                        <li>
+                            <a href="servicioSocial.html" class="hover:text-verde">SERVICIO SOCIAL</a>
+                        </li>
+                        <li>
+                            <a href="sobreNosotros.html" class="hover:text-verde">SOBRE NOSOTROS</a>
+                        </li>
+                    </ul>
+
+                    <!-- Botón Cerrar Sesión e icono de menú -->
+                    <div class="flex items-center justify-end gap-4">
+                        <button onclick="confirmarCierreSesion()"
+                            class="sm:text-sm rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde">
+                            CERRAR SESIÓN
+                        </button>
+                        <ion-icon class="cursor-pointer text-3xl custom:hidden" id="menuToggle" name="menu"></ion-icon>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="mt-8 flex flex-col justify-between gap-8 text-azul">
+            <h1 class="text-center text-4xl font-bold">Mi Perfil Profesional</h1>
+
+            <div id="egresadoInfo" class="mx-auto w-full max-w-2xl p-6 bg-principal_2 rounded-xl drop-shadow-xl">
+                <!-- La información del egresado se insertará aquí mediante JavaScript -->
+            </div>
+
+            <div class="mt-8 flex flex-col gap-6">
+                <h2 class="text-center text-2xl font-semibold">Acciones Rápidas</h2>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="buscarEmpleos.html" class="rounded-xl bg-verde px-5 py-2 text-white hover:opacity-90">
+                        Buscar Empleos
+                    </a>
+                    <a href="miCV.html"
+                        class="rounded-xl border border-verde bg-principal px-5 py-2 text-verde hover:opacity-90">
+                        Actualizar CV
+                    </a>
+                    <a href="certificaciones.html" class="rounded-xl bg-verde px-5 py-2 text-white hover:opacity-90">
+                        Ver Certificaciones
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sección de Estadísticas -->
+            <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
+                <div class="bg-principal_2 p-4 rounded-xl text-center">
+                    <h3 class="font-semibold">Postulaciones Activas</h3>
+                    <p class="text-2xl font-bold text-verde">5</p>
+                </div>
+                <div class="bg-principal_2 p-4 rounded-xl text-center">
+                    <h3 class="font-semibold">Vistas del Perfil</h3>
+                    <p class="text-2xl font-bold text-verde">12</p>
+                </div>
+                <div class="bg-principal_2 p-4 rounded-xl text-center">
+                    <h3 class="font-semibold">Certificaciones</h3>
+                    <p class="text-2xl font-bold text-verde">3</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-gradient-to-b from-verde to-azul p-5 text-center text-white mt-8">
+        <div class="text-1xl">
+            © 2024 Copyright:
+            <a href="#" class="text-verde underline">KICR, IMO, MFLP, JELG, JUMJ</a>
+        </div>
+    </footer>
+
+    <script type="module" src="./src/main.js"></script>
+    <script>
+        function confirmarCierreSesion() {
+            if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
+                localStorage.clear();
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Mostrar información del usuario
+        const userData = JSON.parse(localStorage.getItem('user'));
+        if (userData) {
+            document.getElementById('egresadoInfo').innerHTML = `
+                <h2 class="text-2xl font-semibold mb-4">Información Personal</h2>
+                <div class="grid grid-cols-1 gap-4">
+                    <p><strong>Nombre:</strong> ${userData.nombre} ${userData.apellidos}</p>
+                    <p><strong>Correo:</strong> ${userData.correo}</p>
+                    <p><strong>Carrera:</strong> ${userData.carrera}</p>
+                    <p><strong>Generación:</strong> ${userData.generacion || 'No especificada'}</p>
+                    <p><strong>Especialidad:</strong> ${userData.especialidad || 'No especificada'}</p>
+                </div>
+                <div class="mt-4">
+                    <h3 class="text-xl font-semibold mb-2">Habilidades</h3>
+                    <div class="flex flex-wrap gap-2">
+                        ${(userData.habilidades || ['JavaScript', 'HTML', 'CSS']).map(hab =>
+                `<span class="bg-verde text-white px-3 py-1 rounded-full text-sm">${hab}</span>`
+            ).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Toggle menú móvil
+        document.getElementById('menuToggle').addEventListener('click', () => {
+            document.getElementById('menu').classList.toggle('hidden');
+        });
+    </script>
+</body>
+
+</html>
