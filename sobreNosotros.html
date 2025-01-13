@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <title>ESCO-NECTADOS</title>
+  </head>
+
+  <body class="w-full bg-principal">
+    <header>
+      <nav
+        class="m-auto bg-principal text-base font-bold text-azul drop-shadow-md"
+      >
+        <div class="relative flex items-center justify-between custom:mx-7">
+          <!-- Logo -->
+          <div class="flex items-center">
+            <img src="/logo.png" alt="Logo" class="h-16 w-auto" />
+            <span class="font-bold">ESCO-NECTADOS</span>
+          </div>
+
+          <ul
+            id="menu"
+            class="absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 custom:relative custom:top-0 custom:flex custom:w-auto custom:flex-row custom:items-center custom:gap-6"
+          >
+            <li>
+              <a href="index.html" class="hover:text-verde">INICIO</a>
+            </li>
+            <li>
+              <a href="empleos.html" class="hover:text-verde">EMPLEOS</a>
+            </li>
+            <li>
+              <a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a>
+            </li>
+            <li>
+              <a href="certificaciones.html" class="hover:text-verde"
+                >CERTIFICACIONES</a
+              >
+            </li>
+            <li>
+              <a href="servicioSocial.html" class="hover:text-verde"
+                >SERVICIO SOCIAL</a
+              >
+            </li>
+            <li>
+              <a href="sobreNosotros.html" class="hover:text-verde"
+                >SOBRE NOSOTROS</a
+              >
+            </li>
+          </ul>
+
+          <!-- Botón Iniciar Sesión e icono de menú -->
+          <div class="flex items-center justify-end gap-4">
+            <a
+              href="iniciarSesion.html"
+              class="rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde"
+            >
+              INICIAR SESIÓN
+            </a>
+            <ion-icon
+              class="cursor-pointer text-3xl custom:hidden"
+              id="menuToggle"
+              name="menu"
+            ></ion-icon>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="space-y-16">
+      <div class="mt-8 flex flex-col justify-between gap-8 text-azul">
+        <h1 class="text-center text-5xl font-bold">Nosotros</h1>
+      </div>
+
+      <div
+        class="flex flex-col justify-between gap-4 text-center sm:flex sm:flex-row sm:justify-around sm:gap-4 sm:text-center"
+      >
+        <section
+          class="flex bg-gray-100 gap-8 mx-7 p-5 rounded-xl flex-wrap justify-around mb-20"
+        >
+          <p class="text-lg">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
+            nemo deleniti architecto alias, provident exercitationem quasi
+            quaerat similique voluptatibus iusto itaque at, atque vero totam
+            ipsum repudiandae non excepturi laborum!
+          </p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem">
+            <div class="">
+              <div class="p-5 gap-8">
+                <h2 class="font-bold text-2xl">Misión</h2>
+                <p>
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Autem ex nisi aut aliquid nostrum, repellat quo, harum minima
+                  ut similique facere perspiciatis esse repellendus odit rem
+                  quia voluptas neque non.
+                </p>
+              </div>
+              <div class="p-5">
+                <h2 class="font-bold text-2xl">Visión</h2>
+                <p>
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Autem ex nisi aut aliquid nostrum, repellat quo, harum minima
+                  ut similique facere perspiciatis esse repellendus odit rem
+                  quia voluptas neque non.
+                </p>
+              </div>
+            </div>
+            <div class="bg-yellow-50 p-8 rounded-lg shadow">
+              <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">
+                Nuestro Equipo
+              </h2>
+              <div class="flex items-center space-x-4">
+                <!-- Botón de navegación izquierda -->
+                <button
+                  class="p-2 bg-gray-200 rounded-full hover:bg-gray-300 focus:outline-none"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    class="h-6 w-6 text-gray-700"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                </button>
+                <!-- Foto y descripción -->
+                <div class="flex flex-col items-center text-center">
+                  <img
+                    src="./public/logo.png"
+                    alt="Team Member"
+                    class="h-24 rounded-full mb-4"
+                    style="width: 250px"
+                  />
+                  <p class="text-gray-600">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Cras auctor dui in ipsum convallis, et fringilla arcu
+                    vehicula.
+                  </p>
+                </div>
+                <!-- Botón de navegación derecha -->
+                <button
+                  class="p-2 bg-gray-200 rounded-full hover:bg-gray-300 focus:outline-none"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    class="h-6 w-6 text-gray-700"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <footer
+      class="mt-4 bg-gradient-to-b from-blue-400 to-azul p-5 text-center text-white sm:relative sm:mt-8 lg:fixed lg:inset-x-0 lg:bottom-0"
+    >
+      <div class="text-1xl">
+        © 2024 Copyright:
+        <a href="#" class="text-verde underline">KICR, IMO, MFLP, JELG, JUMJ</a>
+      </div>
+    </footer>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
