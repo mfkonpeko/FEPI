@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <title>ESCO-NECTADOS</title>
+  </head>
+
+  <body class="w-full bg-principal">
+    <header>
+      <nav
+        class="m-auto bg-principal text-base font-bold text-azul drop-shadow-md"
+      >
+        <div class="relative flex items-center justify-between custom:mx-7">
+          <!-- Logo -->
+          <div class="flex items-center">
+            <img src="/logo.png" alt="Logo" class="h-16 w-auto" />
+            <span class="font-bold">ESCO-NECTADOS</span>
+          </div>
+
+          <!-- Lista de enlaces -->
+          <ul
+            id="menu"
+            class="absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 custom:relative custom:top-0 custom:flex custom:w-auto custom:flex-row custom:items-center custom:gap-6"
+          >
+            <li>
+              <a href="index.html" class="hover:text-verde">INICIO</a>
+            </li>
+            <li>
+              <a href="empleos.html" class="hover:text-verde">EMPLEOS</a>
+            </li>
+            <li>
+              <a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a>
+            </li>
+            <li>
+              <a href="certificaciones.html" class="hover:text-verde"
+                >CERTIFICACIONES</a
+              >
+            </li>
+            <li>
+              <a href="servicioSocial.html" class="hover:text-verde"
+                >SERVICIO SOCIAL</a
+              >
+            </li>
+            <li>
+              <a href="sobreNosotros.html" class="hover:text-verde"
+                >SOBRE NOSOTROS</a
+              >
+            </li>
+          </ul>
+
+          <!-- Botón Iniciar Sesión e icono de menú -->
+          <div class="flex items-center justify-end gap-4">
+            <a
+              href="./iniciarSesion.html"
+              class="sm:text-sm rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde"
+            >
+              INICIAR SESIÓN
+            </a>
+            <ion-icon
+              class="cursor-pointer text-3xl custom:hidden"
+              id="menuToggle"
+              name="menu"
+            ></ion-icon>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="max-w-7xl mx-auto px-4 py-10 mb-20 bg-gray-100 mt-6">
+      <!-- Título Principal -->
+      <h1 class="text-3xl font-bold text-azul">Servicio social</h1>
+      <p class="mt-2 text-lg text-gray-600">
+        El servicio social es una oportunidad para que los estudiantes apliquen
+        sus conocimientos en empresas, contribuyendo al desarrollo profesional y
+        social.
+      </p>
+
+      <!-- Subtítulo -->
+      <h2 class="mt-8 text-2xl font-bold text-azul">
+        Oportunidades Disponibles
+      </h2>
+
+      <!-- Cards -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+        <!-- Card 1 -->
+        <div class="p-6 bg-yellow-50 rounded-xl shadow-md">
+          <h3 class="text-xl font-bold text-green-700">
+            Prácticas en desarrollo web
+          </h3>
+          <p class="mt-2 font-semibold">Empresa XYZ</p>
+          <p class="mt-1 text-gray-800"><strong>Modalidad:</strong> Remoto</p>
+          <p class="mt-2 text-gray-600 text-sm">
+            Descripción: Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit. Cras auctor dui in ipsum convallis, et fringilla arcu
+            vehicula.
+          </p>
+          <a
+            href="#"
+            class="bg-verde dark:bg-dark-2 mt-4 border-dark dark:border-dark-2 border rounded-full inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-body-color hover:bg-white hover:border-verde hover:text-verde disabled:bg-gray-3 disabled:border-gray-3 disabled:text-dark-5"
+          >
+            Ver más
+          </a>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="p-6 bg-yellow-50 rounded-xl shadow-md">
+          <h3 class="text-xl font-bold text-green-700">
+            Prácticas en análisis de datos
+          </h3>
+          <p class="mt-2 font-semibold">Empresa XYZ</p>
+          <p class="mt-1 text-gray-800"><strong>Modalidad:</strong> Remoto</p>
+          <p class="mt-2 text-gray-600 text-sm">
+            Descripción: Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit. Cras auctor dui in ipsum convallis, et fringilla arcu
+            vehicula.
+          </p>
+          <a
+            href="#"
+            class="bg-verde dark:bg-dark-2 mt-4 border-dark dark:border-dark-2 border rounded-full inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-body-color hover:bg-white hover:border-verde hover:text-verde disabled:bg-gray-3 disabled:border-gray-3 disabled:text-dark-5"
+          >
+            Ver más
+          </a>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="p-6 bg-yellow-50 rounded-xl shadow-md">
+          <h3 class="text-xl font-bold text-green-700">
+            Prácticas en aplicaciones móviles
+          </h3>
+          <p class="mt-2 font-semibold">Empresa XYZ</p>
+          <p class="mt-1 text-gray-800"><strong>Modalidad:</strong> Remoto</p>
+          <p class="mt-2 text-gray-600 text-sm">
+            Descripción: Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit. Cras auctor dui in ipsum convallis, et fringilla arcu
+            vehicula.
+          </p>
+          <a
+            href="#"
+            class="bg-verde dark:bg-dark-2 mt-4 border-dark dark:border-dark-2 border rounded-full inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-body-color hover:bg-white hover:border-verde hover:text-verde disabled:bg-gray-3 disabled:border-gray-3 disabled:text-dark-5"
+          >
+            Ver más
+          </a>
+        </div>
+      </div>
+
+      <!-- Botones -->
+      <div class="flex justify-center gap-4 mt-6">
+        <a
+          href="registroEmpresa.html"
+          class="px-6 py-2 text-white bg-verde hover:bg-white hover:border-verde hover:text-verde border rounded-full hover:bg-green-700"
+        >
+          Regístrate como Empresa
+        </a>
+        <a
+          href="formUsuario.html"
+          class="px-6 py-2 text-white bg-verde hover:bg-white hover:border-verde hover:text-verde border rounded-full hover:bg-green-700"
+        >
+          Regístrate como Estudiante
+        </a>
+      </div>
+    </div>
+    <footer
+      class="mt-4 bg-gradient-to-b from-blue-400 to-azul p-5 text-center text-white sm:relative sm:mt-8 lg:fixed lg:inset-x-0 lg:bottom-0"
+    >
+      <div class="text-1xl">
+        © 2024 Copyright:
+        <a href="#" class="text-verde underline">KICR, IMO, MFLP, JELG, JUMJ</a>
+      </div>
+    </footer>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
