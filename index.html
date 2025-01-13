@@ -1,46 +1,61 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <title>ESCO-NECTADOS</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-  <title>ESCO-NECTADOS</title>
-</head>
+  <body class="w-full bg-principal mb-20">
+    <header>
+      <nav
+        class="m-auto bg-principal text-base font-bold text-azul drop-shadow-md"
+      >
+        <div class="relative flex items-center justify-between custom:mx-7">
+          <!-- Logo -->
+          <div class="flex items-center">
+            <img src="/logo.png" alt="Logo" class="h-16 w-auto" />
+            <span class="font-bold">ESCO-NECTADOS</span>
+          </div>
 
-<body class="w-full bg-principal">
-  <header>
-    <nav class="m-auto bg-principal text-base font-bold text-azul drop-shadow-md">
-      <div class="relative flex items-center justify-between custom:mx-7">
-        <!-- Logo -->
-        <div class="flex items-center">
-          <img src="/logo.png" alt="Logo" class="h-16 w-auto" />
-          <span class="font-bold">ESCO-NECTADOS</span>
-        </div>
-
-        <!-- Lista de enlaces -->
-        <ul id="menu"
-          class=" absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 custom:relative custom:top-0 custom:flex custom:w-auto custom:flex-row custom:items-center custom:gap-6">
-          <li>
-            <a href="index.html" class="hover:text-verde">INICIO</a>
-          </li>
-          <li>
-            <a href="empleos.html" class="hover:text-verde">EMPLEOS</a>
-          </li>
-          <li>
-            <a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a>
-          </li>
-          <li>
-            <a href="certificaciones.html" class="hover:text-verde">CERTIFICACIONES</a>
-          </li>
-          <li>
-            <a href="servicioSocial.html" class="hover:text-verde">SERVICIO SOCIAL</a>
-          </li>
-          <li>
-            <a href="sobreNosotros.html" class="hover:text-verde">SOBRE NOSOTROS</a>
-          </li>
-        </ul>
+          <!-- Lista de enlaces -->
+          <ul
+            id="menu"
+            class="absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 custom:relative custom:top-0 custom:flex custom:w-auto custom:flex-row custom:items-center custom:gap-6"
+          >
+            <li>
+              <a href="index.html" class="hover:text-verde">INICIO</a>
+            </li>
+            <li>
+              <a href="empleos.html" class="hover:text-verde">EMPLEOS</a>
+            </li>
+            <li>
+              <a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a>
+            </li>
+            <li>
+              <a href="certificaciones.html" class="hover:text-verde"
+                >CERTIFICACIONES</a
+              >
+            </li>
+            <li>
+              <a href="servicioSocial.html" class="hover:text-verde"
+                >SERVICIO SOCIAL</a
+              >
+            </li>
+            <li>
+              <a href="sobreNosotros.html" class="hover:text-verde"
+                >SOBRE NOSOTROS</a
+              >
+            </li>
+          </ul>
 
         <!-- Botón Iniciar Sesión e icono de menú -->
         <div class="flex items-center justify-end gap-4">
@@ -142,14 +157,13 @@
     </div>
   </div>
   <footer
-    class="mt-4 bg-gradient-to-b from-verde to-azul p-5 text-center text-white sm:relative sm:mt-8  lg:inset-x-0 lg:bottom-0">
+    class="mt-4 bg-gradient-to-b from-blue-400 to-azul p-5 text-center text-white sm:relative sm:mt-8 lg:fixed lg:inset-x-0 lg:bottom-0">
     <div class="text-1xl">
       © 2024 Copyright:
       <a href="#" class="text-verde underline">KICR, IMO, MFLP, JELG, JUMJ</a>
     </div>
   </footer>
 
-  <script type="module" src="./src/main.js"></script>
-</body>
-
+    <script type="module" src="./src/main.js"></script>
+  </body>
 </html>
