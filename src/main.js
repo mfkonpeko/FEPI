@@ -6,21 +6,21 @@ menuToggle.addEventListener("click", () => {
   menu.classList.toggle("hidden");
 });
 
-var swiper = new Swiper(".default-carousel", {
-  loop: true,
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
-  },
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
-});
+// var swiper = new Swiper(".default-carousel", {
+//   loop: true,
+//   pagination: {
+//     el: ".swiper-pagination",
+//     clickable: true,
+//   },
+//   navigation: {
+//     nextEl: ".swiper-button-next",
+//     prevEl: ".swiper-button-prev",
+//   },
+// });
 
-const dropzone = document.getElementById("dropzone");
-const fileInput = document.getElementById("fileInput");
-const fileList = document.getElementById("fileList");
+// const dropzone = document.getElementById("dropzone");
+// const fileInput = document.getElementById("fileInput");
+// const fileList = document.getElementById("fileList");
 
 // dropzone.addEventListener("dragover", (e) => {
 //   e.preventDefault();
@@ -54,12 +54,12 @@ const fileList = document.getElementById("fileList");
 //   }
 // }
 
-function formatBytes(bytes) {
-  if (bytes === 0) return "0 Bytes";
+// function formatBytes(bytes) {
+//   if (bytes === 0) return "0 Bytes";
 
-  const k = 1024;
-  const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
+//   const k = 1024;
+//   const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
+//   const i = Math.floor(Math.log(bytes) / Math.log(k));
 
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
-}
+//   return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+// }

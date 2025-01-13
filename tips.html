@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <title>ESCO-NECTADOS</title>
+  </head>
+
+  <body class="w-full bg-principal">
+    <header>
+      <nav
+        class="m-auto bg-principal text-base font-bold text-azul drop-shadow-md"
+      >
+        <div class="relative flex items-center justify-between custom:mx-7">
+          <!-- Logo -->
+          <div class="flex items-center">
+            <img src="/logo.png" alt="Logo" class="h-16 w-auto" />
+            <span class="font-bold">ESCO-NECTADOS</span>
+          </div>
+
+          <!-- Lista de enlaces -->
+          <ul
+            id="menu"
+            class="absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 custom:relative custom:top-0 custom:flex custom:w-auto custom:flex-row custom:items-center custom:gap-6"
+          >
+            <li>
+              <a href="index.html" class="hover:text-verde">INICIO</a>
+            </li>
+            <li>
+              <a href="empleos.html" class="hover:text-verde">EMPLEOS</a>
+            </li>
+            <li>
+              <a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a>
+            </li>
+            <li>
+              <a href="certificaciones.html" class="hover:text-verde"
+                >CERTIFICACIONES</a
+              >
+            </li>
+            <li>
+              <a href="servicioSocial.html" class="hover:text-verde"
+                >SERVICIO SOCIAL</a
+              >
+            </li>
+            <li>
+              <a href="sobreNosotros.html" class="hover:text-verde"
+                >SOBRE NOSOTROS</a
+              >
+            </li>
+          </ul>
+
+          <!-- Botón Iniciar Sesión e icono de menú -->
+          <div class="flex items-center justify-end gap-4">
+            <a
+              href="./iniciarSesion.html"
+              class="sm:text-sm rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde"
+            >
+              INICIAR SESIÓN
+            </a>
+            <ion-icon
+              class="cursor-pointer text-3xl custom:hidden"
+              id="menuToggle"
+              name="menu"
+            ></ion-icon>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="mt-8 flex flex-col justify-between gap-8 text-azul">
+      <!-- Tips y consejos -->
+      <h1 class="text-center text-4xl font-bold">Tips y Consejos</h1>
+      <div class="flex justify-around mb-24">
+        <div class="flex flex-col gap-6">
+          <section
+            class="m-auto flex flex-col justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2"
+          >
+            <h3 class="text-2xl font-semibold text-verde">
+              Consejo 1. Comunicación
+            </h3>
+            <p class="max-w-xs text-lg leading-relaxed">
+              La comunicación efectiva comienza con la escucha activa: presta
+              toda tu atención al interlocutor, evita interrumpir y demuestra
+              interés con tu lenguaje corporal (como asentir o mantener contacto
+              visual).
+            </p>
+          </section>
+          <section
+            class="m-auto flex flex-col justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2"
+          >
+            <h3 class="text-2xl font-semibold text-verde">
+              Consejo 2. Trabajo en equipo
+            </h3>
+            <p class="max-w-xs text-lg leading-relaxed">
+              Fomenta un ambiente donde las ideas se compartan libremente,
+              respetando siempre las perspectivas de los demás. Escucha
+              activamente y muestra empatía hacia tus compañeros, abordando los
+              conflictos con respeto y buscando soluciones constructivas.
+            </p>
+          </section>
+          <section
+            class="m-auto flex flex-col justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2"
+          >
+            <h3 class="text-2xl font-semibold text-verde">
+              Consejo 3. Gestión del tiempo
+            </h3>
+            <p class="max-w-xs text-lg leading-relaxed">
+              Identifica las tareas más importantes y urgentes, y organiza tu
+              día en torno a ellas. Divide grandes objetivos en pasos más
+              pequeños y alcanzables, asignando tiempo específico para cada uno.
+              Usa herramientas como calendarios o listas de tareas para
+              mantenerte enfocado y evitar olvidar compromisos.
+            </p>
+          </section>
+        </div>
+        <!-- Recuadro en blanco -->
+        <div class="p-[20%] bg-principal_2 drop-shadow-xl rounded-xl"></div>
+      </div>
+    </div>
+    <footer
+      class="mt-4 bg-gradient-to-b from-blue-400 to-azul p-5 text-center text-white sm:relative sm:mt-8 lg:fixed lg:inset-x-0 lg:bottom-0"
+    >
+      <div class="text-1xl">
+        © 2024 Copyright:
+        <a href="#" class="text-verde underline">KICR, IMO, MFLP, JELG, JUMJ</a>
+      </div>
+    </footer>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
