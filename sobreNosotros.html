@@ -1,240 +1,269 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
-    ></script>
-    <title>ESCO-NECTADOS</title>
-  </head>
 
-  <body class="w-full bg-principal">
-    <header>
-      <nav
-        class="m-auto bg-principal text-base font-bold text-azul drop-shadow-md"
-      >
-        <div class="relative flex items-center justify-between custom:mx-7">
-          <!-- Logo -->
-          <div class="flex items-center">
-            <img src="/logo.png" alt="Logo" class="h-16 w-auto" />
-            <span class="font-bold">ESCO-NECTADOS</span>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <title>ESCO-NECTADOS</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .bg-principal {
+      background-color: #f7f7f7;
+    }
+
+    .text-verde {
+      color: #4CAF50;
+    }
+
+    .text-azul {
+      color: #2196F3;
+    }
+
+    .content {
+      flex: 1;
+    }
+
+    footer {
+      margin-top: auto;
+    }
+
+    .carousel {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .carousel-inner {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-item {
+      min-width: 100%;
+    }
+
+    .carousel-control {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(255, 255, 255, 0.7);
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+  </style>
+</head>
+
+<body class="w-full bg-principal">
+  <header>
+    <nav class="m-auto bg-principal text-base font-bold text-azul drop-shadow-md">
+      <div class="relative flex items-center justify-between custom:mx-7">
+        <!-- Logo -->
+        <div class="flex items-center">
+          <img src="/logo.png" alt="Logo" class="h-16 w-auto" />
+          <span class="font-bold">ESCO-NECTADOS</span>
+        </div>
+
+        <ul id="menu"
+          class="absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 custom:relative custom:top-0 custom:flex custom:w-auto custom:flex-row custom:items-center custom:gap-6">
+          <li><a href="index.html" class="hover:text-verde">INICIO</a></li>
+          <li><a href="empleos.html" class="hover:text-verde">EMPLEOS</a></li>
+          <li><a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a></li>
+          <li><a href="certificaciones.html" class="hover:text-verde">CERTIFICACIONES</a></li>
+          <li><a href="servicioSocial.html" class="hover:text-verde">SERVICIO SOCIAL</a></li>
+          <li><a href="sobreNosotros.html" class="hover:text-verde">SOBRE NOSOTROS</a></li>
+        </ul>
+
+        <!-- Botón Iniciar Sesión e icono de menú -->
+        <div class="flex items-center justify-end gap-4">
+          <script>
+            const sessionToken = localStorage.getItem('sessionToken');
+            const userType = localStorage.getItem('userType');
+
+            if (sessionToken) {
+              document.write(`
+                                <div class="relative group">
+                                    <button class="sm:text-sm rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde flex items-center gap-2">
+                                        <ion-icon name="person-circle-outline"></ion-icon>
+                                        MI PERFIL
+                                    </button>
+                                    <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-2">
+                                        <a href="${userType === 'empresa' ? 'perfilEmpresa.html' : 'perfilEgresado.html'}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-verde hover:text-white">Ver Perfil</a>
+                                        <button onclick="confirmarCierreSesion()" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-verde hover:text-white">Cerrar Sesión</button>
+                                    </div>
+                                </div>
+                            `);
+            } else {
+              document.write(`
+                                <a href="./iniciarSesion.html" class="sm:text-sm rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde">INICIAR SESIÓN</a>
+                            `);
+            }
+          </script>
+          <ion-icon class="cursor-pointer text-3xl custom:hidden" id="menuToggle" name="menu"></ion-icon>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="content space-y-16">
+    <div class="mt-8 flex flex-col justify-between gap-8 text-azul">
+      <h1 class="text-center text-5xl font-bold">Nosotros</h1>
+    </div>
+
+    <div
+      class="flex flex-col justify-between gap-4 text-center sm:flex sm:flex-row sm:justify-around sm:gap-4 sm:text-center">
+      <section class="flex bg-gray-100 gap-8 mx-7 p-5 rounded-xl flex-wrap justify-around mb-20">
+        <p class="text-lg">
+          En ESCO-NECTADOS, creemos en la importancia del trabajo colaborativo y la innovación en la educación. Nuestro
+          objetivo es conectar a los estudiantes y empresas, facilitando el acceso a oportunidades laborales y recursos
+          valiosos para el desarrollo profesional.
+        </p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem">
+          <div>
+            <div class="p-5 gap-8">
+              <h2 class="font-bold text-2xl">Misión</h2>
+              <p>
+                Nuestra misión es brindar un espacio donde los estudiantes puedan acceder a oportunidades laborales y
+                orientaciones para su crecimiento profesional, contribuyendo al desarrollo de una fuerza laboral
+                capacitada y competitiva.
+              </p>
+            </div>
+            <div class="p-5">
+              <h2 class="font-bold text-2xl">Visión</h2>
+              <p>
+                Aspiramos a ser la plataforma líder en conectar talento joven con empresas de primer nivel, facilitando
+                un espacio de aprendizaje continuo y mejora constante para todos nuestros usuarios.
+              </p>
+            </div>
           </div>
-
-          <ul
-            id="menu"
-            class="absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 custom:relative custom:top-0 custom:flex custom:w-auto custom:flex-row custom:items-center custom:gap-6"
-          >
-            <li>
-              <a href="index.html" class="hover:text-verde">INICIO</a>
-            </li>
-            <li>
-              <a href="empleos.html" class="hover:text-verde">EMPLEOS</a>
-            </li>
-            <li>
-              <a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a>
-            </li>
-            <li>
-              <a href="certificaciones.html" class="hover:text-verde"
-                >CERTIFICACIONES</a
-              >
-            </li>
-            <li>
-              <a href="servicioSocial.html" class="hover:text-verde"
-                >SERVICIO SOCIAL</a
-              >
-            </li>
-            <li>
-              <a href="sobreNosotros.html" class="hover:text-verde"
-                >SOBRE NOSOTROS</a
-              >
-            </li>
-          </ul>
-
-          <!-- Botón Iniciar Sesión e icono de menú -->
-          <div class="flex items-center justify-end gap-4">
-            <script>
-              const sessionToken = localStorage.getItem('sessionToken');
-              const userType = localStorage.getItem('userType');
-
-              if (sessionToken) {
-                document.write(`
-                          <div class="relative group">
-                              <button class="sm:text-sm rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde flex items-center gap-2">
-                                  <ion-icon name="person-circle-outline"></ion-icon>
-                                  MI PERFIL
-                              </button>
-                              <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-2">
-                                  <a href="${userType === 'empresa' ? 'perfilEmpresa.html' : 'perfilEgresado.html'}" 
-                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-verde hover:text-white">
-                                     Ver Perfil
-                                  </a>
-                                  <button onclick="confirmarCierreSesion()" 
-                                          class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-verde hover:text-white">
-                                          Cerrar Sesión
-                                  </button>
-                              </div>
-                          </div>
-                      `);
-              } else {
-                document.write(`
-                          <a href="./iniciarSesion.html" 
-                             class="sm:text-sm rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde">
-                             INICIAR SESIÓN
-                          </a>
-                      `);
-              }
-            </script>
-            <ion-icon class="cursor-pointer text-3xl custom:hidden" id="menuToggle" name="menu"></ion-icon>
+          <div class="bg-yellow-50 p-8 rounded-lg shadow">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Nuestro Equipo</h2>
+            <div class="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <div class="flex flex-col items-center text-center">
+                    <img src="./public/logo.png" alt="Team Member" class="h-24 rounded-full mb-4"
+                      style="width: 100px" />
+                    <p class="text-gray-600">Kein Issac Carillo Rodrigez</p>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div class="flex flex-col items-center text-center">
+                    <img src="./public/logo.png" alt="Team Member 2" class="h-24 rounded-full mb-4"
+                      style="width: 100px" />
+                    <p class="text-gray-600">Jesus Uriel Melo Jimenez</p>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div class="flex flex-col items-center text-center">
+                    <img src="./public/logo.png" alt="Team Member 3" class="h-24 rounded-full mb-4"
+                      style="width: 100px" />
+                    <p class="text-gray-600">Maximiliano Fernando Leon Perez</p>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div class="flex flex-col items-center text-center">
+                    <img src="./public/logo.png" alt="Team Member 3" class="h-24 rounded-full mb-4"
+                      style="width: 100px" />
+                    <p class="text-gray-600">Ivan Maldonado Ortiz</p>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div class="flex flex-col items-center text-center">
+                    <img src="./public/logo.png" alt="Team Member 3" class="h-24 rounded-full mb-4"
+                      style="width: 100px" />
+                    <p class="text-gray-600">Jose Eduardo Lopez Garcia</p>
+                  </div>
+                </div>
+              </div>
+              <button class="carousel-control prev" onclick="prevSlide()">❮</button>
+              <button class="carousel-control next" onclick="nextSlide()">❯</button>
+            </div>
           </div>
         </div>
-      </nav>
-    </header>
-    <div class="space-y-16">
-      <div class="mt-8 flex flex-col justify-between gap-8 text-azul">
-        <h1 class="text-center text-5xl font-bold">Nosotros</h1>
-      </div>
-
-      <div
-        class="flex flex-col justify-between gap-4 text-center sm:flex sm:flex-row sm:justify-around sm:gap-4 sm:text-center"
-      >
-        <section
-          class="flex bg-gray-100 gap-8 mx-7 p-5 rounded-xl flex-wrap justify-around mb-20"
-        >
-          <p class="text-lg">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
-            nemo deleniti architecto alias, provident exercitationem quasi
-            quaerat similique voluptatibus iusto itaque at, atque vero totam
-            ipsum repudiandae non excepturi laborum!
-          </p>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem">
-            <div class="">
-              <div class="p-5 gap-8">
-                <h2 class="font-bold text-2xl">Misión</h2>
-                <p>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Autem ex nisi aut aliquid nostrum, repellat quo, harum minima
-                  ut similique facere perspiciatis esse repellendus odit rem
-                  quia voluptas neque non.
-                </p>
-              </div>
-              <div class="p-5">
-                <h2 class="font-bold text-2xl">Visión</h2>
-                <p>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Autem ex nisi aut aliquid nostrum, repellat quo, harum minima
-                  ut similique facere perspiciatis esse repellendus odit rem
-                  quia voluptas neque non.
-                </p>
-              </div>
-            </div>
-            <div class="bg-yellow-50 p-8 rounded-lg shadow">
-              <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">
-                Nuestro Equipo
-              </h2>
-              <div class="flex items-center space-x-4">
-                <!-- Botón de navegación izquierda -->
-                <button
-                  class="p-2 bg-gray-200 rounded-full hover:bg-gray-300 focus:outline-none"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    class="h-6 w-6 text-gray-700"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M15 19l-7-7 7-7"
-                    />
-                  </svg>
-                </button>
-                <!-- Foto y descripción -->
-                <div class="flex flex-col items-center text-center">
-                  <img
-                    src="./public/logo.png"
-                    alt="Team Member"
-                    class="h-24 rounded-full mb-4"
-                    style="width: 250px"
-                  />
-                  <p class="text-gray-600">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Cras auctor dui in ipsum convallis, et fringilla arcu
-                    vehicula.
-                  </p>
-                </div>
-                <!-- Botón de navegación derecha -->
-                <button
-                  class="p-2 bg-gray-200 rounded-full hover:bg-gray-300 focus:outline-none"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    class="h-6 w-6 text-gray-700"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
+      </section>
     </div>
-    <footer
-      class="mt-4 bg-gradient-to-b from-blue-400 to-azul p-5 text-center text-white sm:relative sm:mt-8 lg:fixed lg:inset-x-0 lg:bottom-0"
-    >
-      <div class="text-1xl">
-        © 2024 Copyright:
-        <a href="#" class="text-verde underline">KICR, IMO, MFLP, JELG, JUMJ</a>
-      </div>
-    </footer>
+  </div>
 
-    <script type="module" src="./src/main.js"></script>
-    <script>
-      // Toggle para el menú móvil
-      document.getElementById('menuToggle').addEventListener('click', function () {
-          document.getElementById('menu').classList.toggle('hidden');
-      });
+  <footer
+    class="mt-4 bg-gradient-to-b from-verde to-azul p-5 text-center text-white sm:relative sm:mt-8 lg:inset-x-0 lg:bottom-0">
+    <div class="text-1xl">
+      © 2024 Copyright:
+      <a href="#" class="text-verde underline">KICR, IMO, MFLP, JELG, JUMJ</a>
+    </div>
+  </footer>
 
-      // Función para confirmar cierre de sesión
-      function confirmarCierreSesion() {
-          if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
-              localStorage.clear();
-              window.location.href = 'index.html';
-          }
+  <script type="module" src="./src/main.js"></script>
+  <script>
+    // Toggle para el menú móvil
+    document.getElementById('menuToggle').addEventListener('click', function () {
+      document.getElementById('menu').classList.toggle('hidden');
+    });
+
+    // Función para confirmar cierre de sesión
+    function confirmarCierreSesion() {
+      if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
+        localStorage.clear();
+        window.location.href = 'index.html';
+      }
+    }
+
+    // Cerrar el menú cuando se hace clic fuera de él
+    document.addEventListener('click', function (event) {
+      const menu = document.getElementById('menu');
+      if (menu && !menu.contains(event.target) && !document.getElementById('menuToggle').contains(event.target)) {
+        menu.classList.add('hidden');
+      }
+    });
+
+    // Carrusel
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      const slides = document.querySelectorAll('.carousel-item');
+      const totalSlides = slides.length;
+
+      // Asegurarse de que el índice esté en el rango correcto
+      if (index >= totalSlides) {
+        currentSlide = 0;
+      } else if (index < 0) {
+        currentSlide = totalSlides - 1;
+      } else {
+        currentSlide = index;
       }
 
-      // Función para toggle del menú de perfil
-      function toggleMenu() {
-          const menuDropdown = document.getElementById('menuDropdown');
-          menuDropdown.classList.toggle('hidden');
-      }
+      const carouselInner = document.querySelector('.carousel-inner');
+      const offset = -currentSlide * 100; // Desplaza según el índice
+      carouselInner.style.transform = `translateX(${offset}%)`; // Cambia la posición
+    }
 
-      // Cerrar el menú cuando se hace clic fuera de él
-      document.addEventListener('click', function (event) {
-          const profileMenu = document.getElementById('profileMenu');
-          const menuDropdown = document.getElementById('menuDropdown');
+    function nextSlide() {
+      showSlide(currentSlide + 1);
+    }
 
-          if (profileMenu && !profileMenu.contains(event.target)) {
-              menuDropdown.classList.add('hidden');
-          }
-      });
+    function prevSlide() {
+      showSlide(currentSlide - 1);
+    }
+
+    // Inicializa el carrusel en el primer slide
+    showSlide(currentSlide);
   </script>
-  </body>
+</body>
+
 </html>
