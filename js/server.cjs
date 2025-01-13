@@ -143,6 +143,43 @@ app.post("/api/usuario", (req, res) => {
     });
 });
 
+// Ruta para el inicio de sesión
+app.post("/api/login", (req, res) => {
+    const { email, password, userType } = req.body;
+
+    // Determinar la tabla a consultar según el tipo de usuario
+    const table = userType === 'empresa' ? 'datos_empresa' : 'datos_egresado';
+    
+    // Consulta para verificar las credenciales
+    const query = `SELECT * FROM ${table} WHERE correo = ? AND contraseña = ?`;
+    
+    conexion.query(query, [email, password], (err, results) => {
+        if (err) {
+            console.error("Error al ejecutar la consulta: ", err);
+            return res.status(500).json({ error: "Error en el servidor" });
+        }
+
+        // Si no se encuentra el usuario
+        if (results.length === 0) {
+            return res.status(401).json({ 
+                error: "Credenciales incorrectas" 
+            });
+        }
+
+        // Usuario encontrado
+        const user = results[0];
+        
+        // Eliminar la contraseña del objeto de respuesta por seguridad
+        delete user.contraseña;
+
+        res.json({
+            success: true,
+            message: "Inicio de sesión exitoso",
+            user: user,
+            userType: userType
+        });
+    });
+});
 
 
 // Iniciar el servidor

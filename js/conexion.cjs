@@ -1,4 +1,3 @@
-// conexion.cjs
 let mysql = require("mysql2");
 
 let conexion = mysql.createConnection({

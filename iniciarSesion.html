@@ -54,86 +54,72 @@
     </header>
 
 
-    <div
-        class="flex flex-col justify-between gap-4 text-center sm:flex sm:flex-row sm:justify-around sm:gap-4 sm:text-center mt-20 mb-20">
-        <section
-            class="m-auto flex  flex-col justify-between gap-2 rounded-xl bg-principal px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between lg:w-1/2 sm:gap-2 sm:w-2/3 ">
-            <!-- <h3 class="text-2xl font-semibold">Ingresa tus datos para acceder</h3> -->
-            <!-- <p class="max-w-xs text-lg leading-relaxed">
-                  Accede a estudiantes y egresados con habilidades frescas y
-                  potencial.
-                </p> -->
-            <form class="space-y-4">
+    <div class="flex flex-col justify-between gap-4 text-center sm:flex sm:flex-row sm:justify-around sm:gap-4 sm:text-center mt-20 mb-20">
+        <section class="m-auto flex flex-col justify-between gap-2 rounded-xl bg-principal px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between lg:w-1/2 sm:gap-2 sm:w-2/3">
+            <!-- Agregar id="loginForm" al formulario y el evento onsubmit -->
+            <form id="loginForm" class="space-y-4" onsubmit="handleLogin(event)">
                 <div class="mb-8">
                     <h3 class="text-gray-800 text-3xl font-bold">Iniciar Sesión</h3>
                     <p class="text-gray-500 text-sm mt-4 leading-relaxed">Inicie sesión y explore un mundo
                         de posibilidades. Su viaje comienza aquí.</p>
                 </div>
-
+    
+                <!-- Agregar selector de tipo de usuario -->
+                <div>
+                    <label class="text-azul font-bold text-sm mb-2 block">Tipo de Usuario</label>
+                    <select name="userType" class="w-full text-sm text-azul pl-4 pr-10 py-3 outline-verde shadow-sm bg-gray-50 border border-gray-300 sm:text-sm rounded-lg">
+                        <option value="egresado">Egresado</option>
+                        <option value="empresa">Empresa</option>
+                    </select>
+                </div>
+    
                 <div>
                     <label class="text-azul font-bold text-sm mb-2 block">Correo</label>
                     <div class="relative flex items-center">
                         <input name="username" type="text" required
-                            class="w-full text-sm text-azul  pl-4 pr-10 py-3  outline-verde shadow-sm bg-gray-50 border border-gray-300  sm:text-sm rounded-lg"
-                            placeholder="ejemplo@ejmplo.com" />
+                            class="w-full text-sm text-azul pl-4 pr-10 py-3 outline-verde shadow-sm bg-gray-50 border border-gray-300 sm:text-sm rounded-lg"
+                            placeholder="ejemplo@ejemplo.com" />
                         <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb"
                             class="w-[18px] h-[18px] absolute right-4" viewBox="0 0 24 24">
                             <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
-                            <path
-                                d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
+                            <path d="M14 15H6a5 5 0 0 0-5 5 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 5 5 0 0 0-5-5zm8-4h-2.59l.3-.29a1 1 0 0 0-1.42-1.42l-2 2a1 1 0 0 0 0 1.42l2 2a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42l-.3-.29H22a1 1 0 0 0 0-2z"
                                 data-original="#000000"></path>
                         </svg>
                     </div>
                 </div>
+    
                 <div>
                     <label class="text-azul font-bold text-sm mb-2 block">Contraseña</label>
                     <div class="relative flex items-center">
                         <input name="password" type="password" required
-                            class="w-full text-sm text-azul  pl-4 pr-10 py-3  outline-verde shadow-sm bg-gray-50 border border-gray-300  sm:text-sm rounded-lg"
-                            placeholder="Contraseña " />
+                            class="w-full text-sm text-azul pl-4 pr-10 py-3 outline-verde shadow-sm bg-gray-50 border border-gray-300 sm:text-sm rounded-lg"
+                            placeholder="Contraseña" />
                         <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb"
                             class="w-[18px] h-[18px] absolute right-4 cursor-pointer" viewBox="0 0 128 128">
-                            <path
-                                d="M64 104C22.127 104 1.367 67.496.504 65.943a4 4 0 0 1 0-3.887C1.367 60.504 22.127 24 64 24s62.633 36.504 63.496 38.057a4 4 0 0 1 0 3.887C126.633 67.496 105.873 104 64 104zM8.707 63.994C13.465 71.205 32.146 96 64 96c31.955 0 50.553-24.775 55.293-31.994C114.535 56.795 95.854 32 64 32 32.045 32 13.447 56.775 8.707 63.994zM64 88c-13.234 0-24-10.766-24-24s10.766-24 24-24 24 10.766 24 24-10.766 24-24 24zm0-40c-8.822 0-16 7.178-16 16s7.178 16 16 16 16-7.178 16-16-7.178-16-16-16z"
+                            <path d="M64 104C22.127 104 1.367 67.496.504 65.943a4 4 0 0 1 0-3.887C1.367 60.504 22.127 24 64 24s62.633 36.504 63.496 38.057a4 4 0 0 1 0 3.887C126.633 67.496 105.873 104 64 104zM8.707 63.994C13.465 71.205 32.146 96 64 96c31.955 0 50.553-24.775 55.293-31.994C114.535 56.795 95.854 32 64 32 32.045 32 13.447 56.775 8.707 63.994zM64 88c-13.234 0-24-10.766-24-24s10.766-24 24-24 24 10.766 24 24-10.766 24-24 24zm0-40c-8.822 0-16 7.178-16 16s7.178 16 16 16 16-7.178 16-16-7.178-16-16-16z"
                                 data-original="#000000"></path>
                         </svg>
                     </div>
                 </div>
-
-                <div class="flex flex-wrap items-center justify-between gap-4">
-                    <div class="flex items-center">
-                        <input id="remember-me" name="remember-me" type="checkbox"
-                            class="h-4 w-4 shrink-0 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
-                        <label for="remember-me" class="ml-3 block text-sm text-gray-800">
-                            Recuerdame
-                        </label>
-                    </div>
-
-                    <div class="text-sm">
-                        <a href="jajvascript:void(0);" class="text-verde hover:underline font-bold">
-                            Olvide mi contaraseña
-                        </a>
-                    </div>
-                </div>
-
+    
                 <div class="!mt-8">
-                    <button type="button"
-                        class="w-1/6 shadow-xl py-2.5 px-4 text-sm tracking-widefocus:outline-none sm:text-sm rounded-xl bg-verde  text-white hover:border hover:border-verde hover:bg-principal hover:text-verde">
+                    <!-- Cambiar type="button" a type="submit" -->
+                    <button type="submit"
+                        class="w-1/6 shadow-xl py-2.5 px-4 text-sm tracking-widefocus:outline-none sm:text-sm rounded-xl bg-verde text-white hover:border hover:border-verde hover:bg-principal hover:text-verde">
                         Entrar
                     </button>
                 </div>
-
+    
                 <p class="text-sm !mt-8 text-center text-verde font-semibold">¿No tienes una cuenta de egresado? <a
                         href="formUsuario.html"
                         class="text-verde font-bold text-lg hover:underline ml-1 whitespace-nowrap">Regístrate como
-                        solicitante</a>
-                </p>
+                        solicitante</a></p>
                 <p class="text-sm !mt-3 text-center text-verde font-semibold">¿No tienes una cuenta de empresa? <a
                         href="registroEmpresa.html"
                         class="text-verde font-bold text-lg hover:underline ml-1 whitespace-nowrap">Realiza el
-                        registro</a>
-                </p>
+                        registro</a></p>
             </form>
+        </section>
     </div>
     <!-- <div class="p-6 border-t border-gray-200 rounded-b">
                     <button
@@ -151,6 +137,52 @@
         </div>
     </footer>
     <script type="module" src="./src/main.js"></script>
+    <!-- Al final del body, justo antes del cierre </body> -->
+    <script>
+        async function handleLogin(event) {
+            event.preventDefault();
+
+            const email = document.querySelector('input[name="username"]').value;
+            const password = document.querySelector('input[name="password"]').value;
+            const userType = 'egresado';
+
+            try {
+                const response = await fetch('http://localhost:3000/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email,
+                        password,
+                        userType
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    localStorage.setItem('userType', data.userType);
+
+                    if (data.userType === 'empresa') {
+                        window.location.href = 'dashboard-empresa.html';
+                    } else {
+                        window.location.href = 'dashboard-egresado.html';
+                    }
+                } else {
+                    alert(data.error || 'Error al iniciar sesión');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al conectar con el servidor');
+            }
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', handleLogin);
+    </script>
+</body>
+
 </body>
 
 </html>
