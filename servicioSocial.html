@@ -1,180 +1,230 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
-    ></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
     <title>ESCO-NECTADOS</title>
-  </head>
 
-  <body class="w-full bg-principal">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        principal: '#ffffff',
+                        verde: '#009a70',
+                        azul: '#0d213f',
+                    },
+                    screens: {
+                        custom: '900px',
+                    },
+                },
+            },
+        };
+    </script>
+
+    <style>
+        /* Estilos para el contenedor principal */
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        /* Estilos Swiper (mantener los mismos) */
+        .swiper {
+            width: 100%;
+            height: 100%;
+            margin: 20px auto;
+        }
+        
+        .swiper-slide {
+            text-align: center;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: auto;
+        }
+        
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #38b000;
+        }
+        
+        .swiper-pagination-bullet-active {
+            background: #38b000;
+        }
+        
+        .swiper-container {
+            position: relative;
+            width: 100%;
+            padding: 20px;
+        }
+        
+        .card-content {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body class="w-full bg-principal">
     <header>
-      <nav
-        class="m-auto bg-principal text-base font-bold text-azul drop-shadow-md"
-      >
-        <div class="relative flex items-center justify-between custom:mx-7">
-          <!-- Logo -->
-          <div class="flex items-center">
-            <img src="/logo.png" alt="Logo" class="h-16 w-auto" />
-            <span class="font-bold">ESCO-NECTADOS</span>
-          </div>
+        <nav class="m-auto bg-principal text-base font-bold text-azul drop-shadow-md">
+            <div class="relative flex items-center justify-between custom:mx-7">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <img src="/logo.png" alt="Logo" class="h-16 w-auto" />
+                    <span class="font-bold">ESCO-NECTADOS</span>
+                </div>
 
-          <!-- Lista de enlaces -->
-          <ul
-            id="menu"
-            class="absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 custom:relative custom:top-0 custom:flex custom:w-auto custom:flex-row custom:items-center custom:gap-6"
-          >
-            <li>
-              <a href="index.html" class="hover:text-verde">INICIO</a>
-            </li>
-            <li>
-              <a href="empleos.html" class="hover:text-verde">EMPLEOS</a>
-            </li>
-            <li>
-              <a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a>
-            </li>
-            <li>
-              <a href="certificaciones.html" class="hover:text-verde"
-                >CERTIFICACIONES</a
-              >
-            </li>
-            <li>
-              <a href="servicioSocial.html" class="hover:text-verde"
-                >SERVICIO SOCIAL</a
-              >
-            </li>
-            <li>
-              <a href="sobreNosotros.html" class="hover:text-verde"
-                >SOBRE NOSOTROS</a
-              >
-            </li>
-          </ul>
+                <!-- Lista de enlaces -->
+                <ul id="menu"
+                    class="absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 custom:relative custom:top-0 custom:flex custom:w-auto custom:flex-row custom:items-center custom:gap-6">
+                    <li><a href="index.html" class="hover:text-verde">INICIO</a></li>
+                    <li><a href="empleos.html" class="hover:text-verde">EMPLEOS</a></li>
+                    <li><a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a></li>
+                    <li><a href="certificaciones.html" class="hover:text-verde">CERTIFICACIONES</a></li>
+                    <li><a href="servicioSocial.html" class="hover:text-verde">SERVICIO SOCIAL</a></li>
+                    <li><a href="sobreNosotros.html" class="hover:text-verde">SOBRE NOSOTROS</a></li>
+                </ul>
 
-          <!-- Botón Iniciar Sesión e icono de menú -->
-          <div class="flex items-center justify-end gap-4">
-            <a
-              href="./iniciarSesion.html"
-              class="sm:text-sm rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde"
-            >
-              INICIAR SESIÓN
-            </a>
-            <ion-icon
-              class="cursor-pointer text-3xl custom:hidden"
-              id="menuToggle"
-              name="menu"
-            ></ion-icon>
-          </div>
-        </div>
-      </nav>
+                <!-- Botón Iniciar Sesión e icono de menú -->
+                <div class="flex items-center justify-end gap-4">
+                    <a href="./iniciarSesion.html"
+                        class="sm:text-sm rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde">
+                        INICIAR SESIÓN
+                    </a>
+                    <ion-icon class="cursor-pointer text-3xl custom:hidden" id="menuToggle" name="menu"></ion-icon>
+                </div>
+            </div>
+        </nav>
     </header>
-    <div class="max-w-7xl mx-auto px-4 py-10 mb-20 bg-gray-100 mt-6">
-      <!-- Título Principal -->
-      <h1 class="text-3xl font-bold text-azul">Servicio social</h1>
-      <p class="mt-2 text-lg text-gray-600">
-        El servicio social es una oportunidad para que los estudiantes apliquen
-        sus conocimientos en empresas, contribuyendo al desarrollo profesional y
-        social.
-      </p>
 
-      <!-- Subtítulo -->
-      <h2 class="mt-8 text-2xl font-bold text-azul">
-        Oportunidades Disponibles
-      </h2>
+    <main class="max-w-7xl mx-auto px-4 py-10 mb-20 bg-gray-100 mt-6">
+        <!-- Título Principal -->
+        <h1 class="text-3xl font-bold text-azul">Servicio social</h1>
+        <p class="mt-2 text-lg text-gray-600">
+            El servicio social es una oportunidad para que los estudiantes apliquen sus conocimientos en empresas,
+            contribuyendo al desarrollo profesional y social.
+        </p>
 
-      <!-- Cards -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
-        <!-- Card 1 -->
-        <div class="p-6 bg-yellow-50 rounded-xl shadow-md">
-          <h3 class="text-xl font-bold text-green-700">
-            Prácticas en desarrollo web
-          </h3>
-          <p class="mt-2 font-semibold">Empresa XYZ</p>
-          <p class="mt-1 text-gray-800"><strong>Modalidad:</strong> Remoto</p>
-          <p class="mt-2 text-gray-600 text-sm">
-            Descripción: Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Cras auctor dui in ipsum convallis, et fringilla arcu
-            vehicula.
-          </p>
-          <a
-            href="#"
-            class="bg-verde dark:bg-dark-2 mt-4 border-dark dark:border-dark-2 border rounded-full inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-body-color hover:bg-white hover:border-verde hover:text-verde disabled:bg-gray-3 disabled:border-gray-3 disabled:text-dark-5"
-          >
-            Ver más
-          </a>
+        <!-- Subtítulo -->
+        <h2 class="mt-8 text-2xl font-bold text-azul">Oportunidades Disponibles</h2>
+
+        <!-- Swiper Container -->
+        <div class="swiper-container">
+            <div class="swiper">
+                <div class="swiper-wrapper" id="vacantes-wrapper">
+                    <!-- Las slides se cargarán aquí -->
+                </div>
+                <!-- Controles de navegación -->
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
         </div>
 
-        <!-- Card 2 -->
-        <div class="p-6 bg-yellow-50 rounded-xl shadow-md">
-          <h3 class="text-xl font-bold text-green-700">
-            Prácticas en análisis de datos
-          </h3>
-          <p class="mt-2 font-semibold">Empresa XYZ</p>
-          <p class="mt-1 text-gray-800"><strong>Modalidad:</strong> Remoto</p>
-          <p class="mt-2 text-gray-600 text-sm">
-            Descripción: Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Cras auctor dui in ipsum convallis, et fringilla arcu
-            vehicula.
-          </p>
-          <a
-            href="#"
-            class="bg-verde dark:bg-dark-2 mt-4 border-dark dark:border-dark-2 border rounded-full inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-body-color hover:bg-white hover:border-verde hover:text-verde disabled:bg-gray-3 disabled:border-gray-3 disabled:text-dark-5"
-          >
-            Ver más
-          </a>
+        <!-- Botones -->
+        <div class="flex justify-center gap-4 mt-6">
+            <a href="registroEmpresa.html"
+                class="px-6 py-2 text-white bg-verde hover:bg-white hover:border-verde hover:text-verde border rounded-full">
+                Regístrate como Empresa
+            </a>
+            <a href="formUsuario.html"
+                class="px-6 py-2 text-white bg-verde hover:bg-white hover:border-verde hover:text-verde border rounded-full">
+                Regístrate como Estudiante
+            </a>
         </div>
+    </main>
 
-        <!-- Card 3 -->
-        <div class="p-6 bg-yellow-50 rounded-xl shadow-md">
-          <h3 class="text-xl font-bold text-green-700">
-            Prácticas en aplicaciones móviles
-          </h3>
-          <p class="mt-2 font-semibold">Empresa XYZ</p>
-          <p class="mt-1 text-gray-800"><strong>Modalidad:</strong> Remoto</p>
-          <p class="mt-2 text-gray-600 text-sm">
-            Descripción: Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Cras auctor dui in ipsum convallis, et fringilla arcu
-            vehicula.
-          </p>
-          <a
-            href="#"
-            class="bg-verde dark:bg-dark-2 mt-4 border-dark dark:border-dark-2 border rounded-full inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-body-color hover:bg-white hover:border-verde hover:text-verde disabled:bg-gray-3 disabled:border-gray-3 disabled:text-dark-5"
-          >
-            Ver más
-          </a>
-        </div>
-      </div>
-
-      <!-- Botones -->
-      <div class="flex justify-center gap-4 mt-6">
-        <a
-          href="registroEmpresa.html"
-          class="px-6 py-2 text-white bg-verde hover:bg-white hover:border-verde hover:text-verde border rounded-full hover:bg-green-700"
-        >
-          Regístrate como Empresa
-        </a>
-        <a
-          href="formUsuario.html"
-          class="px-6 py-2 text-white bg-verde hover:bg-white hover:border-verde hover:text-verde border rounded-full hover:bg-green-700"
-        >
-          Regístrate como Estudiante
-        </a>
-      </div>
-    </div>
     <footer
-      class="mt-4 bg-gradient-to-b from-blue-400 to-azul p-5 text-center text-white sm:relative sm:mt-8 lg:fixed lg:inset-x-0 lg:bottom-0"
-    >
-      <div class="text-1xl">
-        © 2024 Copyright:
-        <a href="#" class="text-verde underline">KICR, IMO, MFLP, JELG, JUMJ</a>
-      </div>
+        class="mt-4 bg-gradient-to-b from-verde to-azul p-5 text-center text-white sm:relative sm:mt-8 lg:inset-x-0 lg:bottom-0">
+        <div class="text-1xl">
+            © 2024 Copyright:
+            <a href="#" class="text-verde underline">KICR, IMO, MFLP, JELG, JUMJ</a>
+        </div>
     </footer>
-    <script type="module" src="./src/main.js"></script>
-  </body>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    <script>
+        // Función para manejar el menú móvil
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('menu').classList.toggle('hidden');
+        });
+
+        // Función para cargar vacantes
+        async function cargarVacantes() {
+            try {
+                const response = await fetch('http://localhost:3000/api/vacantes');
+                const vacantes = await response.json();
+                
+                const wrapper = document.getElementById('vacantes-wrapper');
+                wrapper.innerHTML = ''; // Limpia el contenedor
+                
+                vacantes.forEach(vacante => {
+                    const slide = document.createElement('div');
+                    slide.className = 'swiper-slide';
+                    slide.innerHTML = `
+                        <div class="card-content p-6 bg-yellow-50 rounded-xl shadow-md">
+                            <h3 class="text-xl font-bold text-green-700">${vacante.vacante}</h3>
+                            <p class="mt-2 font-semibold">${vacante.nombre_empresa}</p>
+                            <p class="mt-1 text-gray-800"><strong>Modalidad:</strong> ${vacante.modalidad}</p>
+                            <p class="mt-2 text-gray-600 text-sm">${vacante.descripcion}</p>
+                            <a href="#" class="bg-verde mt-4 border rounded-full inline-block py-3 px-7 text-center text-base font-medium text-white hover:bg-white hover:border-verde hover:text-verde">
+                                Ver más
+                            </a>
+                        </div>
+                    `;
+                    wrapper.appendChild(slide);
+                });
+
+                initSwiper();
+            } catch (error) {
+                console.error('Error cargando vacantes:', error);
+            }
+        }
+
+        // Función para inicializar Swiper
+        function initSwiper() {
+            const swiper = new Swiper('.swiper', {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                loop: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 30,
+                    }
+                }
+            });
+        }
+
+        // Iniciar la carga cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', cargarVacantes);
+    </script>
+</body>
 </html>
