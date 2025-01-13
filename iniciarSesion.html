@@ -177,7 +177,9 @@
                     localStorage.setItem('sessionToken', data.token); // Guardamos el token
 
                     // Redirigir según el tipo de usuario
-                    if (data.userType === 'empresa') {
+                    if (email === 'admin@gmail.com' && password === 'admin') {
+                        window.location.href = 'administracion.html'; // Redirige a la pantalla de administración
+                    } else if (data.userType === 'empresa') {
                         window.location.href = 'perfilEmpresa.html';
                     } else if (data.userType === 'egresado') {
                         window.location.href = 'perfilEgresado.html';

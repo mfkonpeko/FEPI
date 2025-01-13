@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Administración - ESCO-NECTADOS</title>
+    <style>
+        .bg-principal {
+            background-color: #f8f9fa;
+        }
+
+        .bg-principal_2 {
+            background-color: #ffffff;
+        }
+
+        .text-verde {
+            color: #009a70;
+        }
+
+        .text-azul {
+            color: #0d213f;
+        }
+
+        .bg-verde {
+            background-color: #009a70;
+        }
+
+        .hover\:text-verde:hover {
+            color: #009a70;
+        }
+
+        .border-verde {
+            border-color: #009a70;
+        }
+    </style>
+</head>
+
+<body class="w-full bg-principal min-h-screen flex flex-col">
+    <script>
+        // Verificar si el usuario está autenticado y es Esconectados
+        const userData = JSON.parse(localStorage.getItem('user'));
+        if (!localStorage.getItem('sessionToken') ||
+            !localStorage.getItem('user') ||
+            localStorage.getItem('userType') !== 'empresa' ||
+            userData.nombre_empresa !== 'Esconectados') {
+            alert('Acceso no autorizado');
+            window.location.href = 'login.html';
+        }
+    </script>
+
+    <div class="flex-grow">
+        <header>
+            <nav class="m-auto bg-principal text-base font-bold text-azul drop-shadow-md">
+                <div class="relative flex items-center justify-between px-7">
+                    <!-- Logo -->
+                    <div class="flex items-center">
+                        <img src="/logo.png" alt="Logo" class="h-16 w-auto" />
+                        <span class="font-bold">ESCO-NECTADOS</span>
+                    </div>
+
+                    <!-- Lista de enlaces -->
+                    <ul id="menu"
+                        class="absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 md:relative md:top-0 md:flex md:w-auto md:flex-row md:items-center md:gap-6">
+                        <li><a href="index.html" class="hover:text-verde">INICIO</a></li>
+                        <li><a href="empleos.html" class="hover:text-verde">EMPLEOS</a></li>
+                        <li><a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a></li>
+                        <li><a href="certificaciones.html" class="hover:text-verde">CERTIFICACIONES</a></li>
+                        <li><a href="servicioSocial.html" class="hover:text-verde">SERVICIO SOCIAL</a></li>
+                        <li><a href="sobreNosotros.html" class="hover:text-verde">SOBRE NOSOTROS</a></li>
+                    </ul>
+
+                    <!-- Botón Cerrar Sesión e icono de menú -->
+                    <div class="flex items-center justify-end gap-4">
+                        <button onclick="confirmarCierreSesion()"
+                            class="rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde">
+                            CERRAR SESIÓN
+                        </button>
+                        <ion-icon class="cursor-pointer text-3xl md:hidden" id="menuToggle" name="menu"></ion-icon>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="flex flex-col items-center justify-center gap-6 mb-8 w-full">
+            <!-- Título -->
+            <h2 class="text-2xl font-bold text-azul mb-4">Gestión de Base de Datos</h2>
+
+            <!-- Contenedor de botones -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
+
+                <!-- Botón Acceder a usuarios -->
+                <button onclick="window.location.href='gestionUsuarios.html'"
+                    class="rounded-xl bg-verde px-8 py-3 text-white hover:opacity-90 flex items-center justify-center w-full">
+                    <ion-icon name="people-outline" class="mr-2 text-xl"></ion-icon>
+                    Acceder a usuarios
+                </button>
+
+                <!-- Botón Acceder a empresas -->
+                <button onclick="window.location.href='gestionEmpresas.html'"
+                    class="rounded-xl bg-verde px-8 py-3 text-white hover:opacity-90 flex items-center justify-center w-full">
+                    <ion-icon name="business-outline" class="mr-2 text-xl"></ion-icon>
+                    Acceder a empresas
+                </button>
+
+                <!-- Botón Acceder a empleos -->
+                <button onclick="window.location.href='gestionEmpleos.html'"
+                    class="rounded-xl bg-verde px-8 py-3 text-white hover:opacity-90 flex items-center justify-center w-full">
+                    <ion-icon name="briefcase-outline" class="mr-2 text-xl"></ion-icon>
+                    Acceder a empleos
+                </button>
+
+                <!-- Botón Acceder a servicio social -->
+                <button onclick="window.location.href='gestionServicioSocial.html'"
+                    class="rounded-xl bg-verde px-8 py-3 text-white hover:opacity-90 flex items-center justify-center w-full">
+                    <ion-icon name="school-outline" class="mr-2 text-xl"></ion-icon>
+                    Acceder a servicio social
+                </button>
+
+                <!-- Botón Regresar a perfil -->
+                <button onclick="window.location.href='perfilEmpresa.html'"
+                    class="rounded-xl bg-verde px-8 py-3 text-white hover:opacity-90 flex items-center justify-center w-full">
+                    <ion-icon name="arrow-back-outline" class="mr-2 text-xl"></ion-icon>
+                    Regresar a perfil
+                </button>
+            </div>
+
+            <!-- Línea separadora -->
+            <div class="w-full max-w-4xl border-t border-gray-300 my-6"></div>
+
+            <!-- Área de contenido dinámico -->
+            <div id="contenidoDinamico" class="w-full max-w-4xl bg-principal_2 p-6 rounded-xl drop-shadow-xl">
+                <p class="text-center text-gray-600">Seleccione una opción para ver el contenido</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

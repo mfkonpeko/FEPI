@@ -12,21 +12,27 @@
         .bg-principal {
             background-color: #f8f9fa;
         }
+
         .bg-principal_2 {
             background-color: #ffffff;
         }
+
         .text-verde {
             color: #009a70;
         }
+
         .text-azul {
             color: #0d213f;
         }
+
         .bg-verde {
             background-color: #009a70;
         }
+
         .hover\:text-verde:hover {
             color: #009a70;
         }
+
         .border-verde {
             border-color: #009a70;
         }
@@ -54,7 +60,8 @@
                     </div>
 
                     <!-- Lista de enlaces -->
-                    <ul id="menu" class="absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 md:relative md:top-0 md:flex md:w-auto md:flex-row md:items-center md:gap-6">
+                    <ul id="menu"
+                        class="absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 md:relative md:top-0 md:flex md:w-auto md:flex-row md:items-center md:gap-6">
                         <li><a href="index.html" class="hover:text-verde">INICIO</a></li>
                         <li><a href="empleos.html" class="hover:text-verde">EMPLEOS</a></li>
                         <li><a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a></li>
@@ -82,19 +89,24 @@
                 <!-- Información de la empresa se insertará aquí mediante JavaScript -->
             </div>
 
-            <div class="flex flex-col items-center gap-6 mb-8">
-                <h2 class="text-2xl font-semibold text-azul">Gestionar mi Empresa</h2>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <a href="publicarEmpleo.html" class="rounded-xl bg-verde px-6 py-2 text-white hover:opacity-90 transition duration-300">
-                        <ion-icon name="briefcase-outline" class="align-middle mr-2"></ion-icon>
-                        Publicar Nueva Oferta
-                    </a>
-                    <a href="candidatos.html" class="rounded-xl bg-verde px-6 py-2 text-white hover:opacity-90 transition duration-300">
-                        <ion-icon name="people-outline" class="align-middle mr-2"></ion-icon>
-                        Ver Candidatos
-                    </a>
-                </div>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="publicarEmpleo.html"
+                    class="rounded-xl bg-verde px-6 py-2 text-white hover:opacity-90 transition duration-300">
+                    <ion-icon name="briefcase-outline" class="align-middle mr-2"></ion-icon>
+                    Publicar Nueva Oferta
+                </a>
+                <a href="candidatos.html"
+                    class="rounded-xl bg-verde px-6 py-2 text-white hover:opacity-90 transition duration-300">
+                    <ion-icon name="people-outline" class="align-middle mr-2"></ion-icon>
+                    Ver Candidatos
+                </a>
+                <a href="administracion.html" id="adminButton"
+                    class="hidden rounded-xl bg-verde px-6 py-2 text-white hover:opacity-90 transition duration-300">
+                    <ion-icon name="people-outline" class="align-middle mr-2"></ion-icon>
+                    Admin
+                </a>
             </div>
+
         </div>
     </div>
 
@@ -149,6 +161,10 @@
         document.getElementById('menuToggle').addEventListener('click', () => {
             document.getElementById('menu').classList.toggle('hidden');
         });
+
+        if (userData && userData.nombre_empresa === "Esconectados") {
+            document.getElementById('adminButton').classList.remove('hidden');
+        }
     </script>
 </body>
 

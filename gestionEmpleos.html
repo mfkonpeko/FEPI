@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Gestión de Empleos - ESCO-NECTADOS</title>
+    <style>
+        .bg-principal {
+            background-color: #f8f9fa;
+        }
+
+        .bg-principal_2 {
+            background-color: #ffffff;
+        }
+
+        .text-verde {
+            color: #009a70;
+        }
+
+        .text-azul {
+            color: #0d213f;
+        }
+
+        .bg-verde {
+            background-color: #009a70;
+        }
+
+        .hover\:text-verde:hover {
+            color: #009a70;
+        }
+
+        .border-verde {
+            border-color: #009a70;
+        }
+    </style>
+</head>
+
+<body class="w-full bg-principal min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <div class="mb-6">
+            <button onclick="window.location.href='administracion.html'" 
+                    class="flex items-center gap-2 bg-verde text-white px-4 py-2 rounded-xl hover:opacity-90">
+                <ion-icon name="arrow-back-outline"></ion-icon>
+                Regresar
+            </button>
+        </div>
+
+        <h2 class="text-2xl font-bold text-azul mb-6">Gestión de Empleos</h2>
+
+        <div class="bg-principal_2 rounded-xl drop-shadow-xl p-6">
+            <div class="overflow-x-auto">
+                <table class="min-w-full table-auto">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vacante</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Empresa</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Modalidad</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Salario</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Descripción</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaEmpleos" class="bg-white divide-y divide-gray-200">
+                        <!-- Los datos se cargarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Función para cargar todos los empleos
+        function cargarEmpleos() {
+            fetch('http://localhost:3000/api/empleos')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al obtener los empleos');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const tablaEmpleos = document.getElementById('tablaEmpleos');
+                    tablaEmpleos.innerHTML = ''; // Limpiar tabla antes de agregar nuevos datos
+
+                    // Insertar cada registro en la tabla
+                    data.forEach(empleo => {
+                        const fila = document.createElement('tr');
+                        fila.innerHTML = `
+                            <td class="px-6 py-4 whitespace-nowrap">${empleo.vacante}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">${empleo.empresa}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">${empleo.modalidad}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">${empleo.salario}</td>
+                            <td class="px-6 py-4 whitespace-normal">${empleo.descripcion}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <button class="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600" 
+                                        onclick="eliminarEmpleo('${empleo.vacante}', '${empleo.empresa}')">
+                                    Eliminar
+                                </button>
+                            </td>
+                        `;
+                        tablaEmpleos.appendChild(fila);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        // Función para eliminar un empleo
+        function eliminarEmpleo(vacante, empresa) {
+            if (confirm('¿Estás seguro de que deseas eliminar este empleo?')) {
+                fetch(`http://localhost:3000/api/empleo/${encodeURIComponent(vacante)}/${encodeURIComponent(empresa)}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al eliminar el empleo');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    alert(data.message);
+                    cargarEmpleos(); // Recargar la tabla después de eliminar
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('No se pudo eliminar el empleo');
+                });
+            }
+        }
+
+        // Llamada inicial para cargar los empleos al cargar la página
+        document.addEventListener('DOMContentLoaded', cargarEmpleos);
+    </script>
+</body>
+
+</html>
