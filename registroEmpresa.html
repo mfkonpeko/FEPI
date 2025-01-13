@@ -63,87 +63,89 @@
             class="flex flex-col justify-between gap-4 text-center sm:flex sm:flex-row sm:justify-around sm:gap-4 sm:text-center ">
             <section
                 class="m-auto flex w-11/12 flex-col justify-between gap-2 rounded-xl bg-principal px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between lg:w-[50] sm:gap-2 sm:w-2/3  ">
-                <!-- <h3 class="text-2xl font-semibold">Ingresa tus datos para acceder</h3> -->
-                <!-- <p class="max-w-xs text-lg leading-relaxed">
-              Accede a estudiantes y egresados con habilidades frescas y
-              potencial.
-            </p> -->
 
-                <form action="#" class="p-6 space-y-6 text-azul">
-                    <label for="" class="text-verde font-semibold text-xl">Información de la empresa</label>
-                    <div class="grid grid-cols-6 gap-6 ">
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="product-name" class="text-sm font-medium  block mb-2">Nombre de la
-                                empresa</label>
-                            <input type="text" name="product-name" id="product-name"
-                                class="shadow-sm bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
-                                placeholder="Nombre de la empresa" required="">
-                        </div>
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="category" class="text-sm font-medium  block mb-2">Representante Legal</label>
-                            <input type="text" name="category" id="category"
-                                class="shadow-sm bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
-                                placeholder="Representante Legal" required="">
-                        </div>
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="brand" class="text-sm font-medium  block mb-2">Teléfono Corporativo</label>
-                            <input type="text" name="brand" id="brand"
-                                class="shadow-sm bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
-                                placeholder="Teléfono Corporativo" required="">
-                        </div>
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="price" class="text-sm font-medium  block mb-2">Correo corporativo</label>
-                            <input type="Correo corporativo " name="price" id="price"
-                                class="shadow-sm bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
-                                placeholder="Correo corporativo " required="">
-                        </div>
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="brand" class="text-sm font-medium  block mb-2">Contraseña</label>
-                            <input type="password" name="brand" id="brand"
-                                class="shadow-sm bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
-                                placeholder="Contraseña" required="">
-                        </div>
-                        <div class=" col-span-6 sm:col-span-3">
-                            <label for="price" class="text-sm font-medium  block mb-2">Confirmar contraseña</label>
-                            <input type="password" name="price" id="price"
-                                class="shadow-sm bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
-                                placeholder="Confirmar contraseña" required="">
-                        </div>
+            <form id="registroEmpresa" action="#" class="p-6 space-y-6 text-azul">
+                <label for="" class="text-verde font-semibold text-xl">Información de la empresa</label>
+                <div class="grid grid-cols-6 gap-6 ">
+                    <div class="col-span-6 sm:col-span-3">
+                        <label for="nombre_empresa" class="text-sm font-medium block mb-2">Nombre de la empresa</label>
+                        <input type="text" 
+                            name="nombre_empresa" 
+                            id="nombre_empresa"
+                            class="shadow-sm bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                            placeholder="Nombre de la empresa" 
+                            required>
                     </div>
-                    <div class=" grid grid-cols-6 gap-6 pt-3 ">
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="product-name" class="text-sm font-medium  block mb-2">Area de trabajo</label>
-                            <input type="text" name="product-name" id="product-name"
-                                class="shadow-sm bg-gray-50 border border-gray-300  outline-verde sm:text-sm rounded-lg focus:ring-verde focus:border-verde block w-full p-2.5"
-                                placeholder="Area" required="">
-                        </div>
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="product-name" class="text-sm font-medium  block mb-2">RFC</label>
-                            <input type="text" name="product-name" id="product-name"
-                                class="shadow-sm bg-gray-50 border border-gray-300  outline-verde sm:text-sm rounded-lg focus:ring-verde focus:border-verde block w-full p-2.5"
-                                placeholder="RFC" required="">
-                        </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <label for="representante_legal" class="text-sm font-medium block mb-2">Representante Legal</label>
+                        <input type="text" 
+                            name="representante_legal" 
+                            id="representante_legal"
+                            class="shadow-sm bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                            placeholder="Representante Legal" 
+                            required>
                     </div>
-                    <div class=" grid sm:grid-cols-2 gap-6 pt-3 grid-rows-1 items-center ">
-
-                        <label class="mt-8 flex content-start justify-center"><input type="checkbox" name="remember"
-                                class="mr-2 form-checkbox rounded-none ring-0 focus:border-tan-500 border-tan-300 border-2 w-5 h-5 text-highlight">
-                            <span class="text-sm text-verde font-bold">Aceptación de Términos y Condiciones</span>
-                        </label>
-                        <label class="mt-8 flex content-start justify-center"><input type="checkbox" name="remember"
-                                class="mr-2 form-checkbox rounded-none ring-0 focus:border-tan-500 border-tan-300 border-2 w-5 h-5 text-highlight">
-                            <span class="text-sm font-bold text-verde">Política de Privacidad</span>
-                        </label>
+                    <div class="col-span-6 sm:col-span-3">
+                        <label for="telefono" class="text-sm font-medium block mb-2">Teléfono Corporativo</label>
+                        <input type="tel" 
+                            name="telefono" 
+                            id="telefono"
+                            class="shadow-sm bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                            placeholder="Teléfono Corporativo" 
+                            required>
                     </div>
-                </form>
-
-
-                <div class="p-6 border-t border-gray-200 rounded-b">
-                    <a href="./iniciarSesion.html"
-                        class="rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde">
-                        Registrarse
-                    </a>
+                    <div class="col-span-6 sm:col-span-3">
+                        <label for="correo" class="text-sm font-medium block mb-2">Correo corporativo</label>
+                        <input type="email" 
+                            name="correo" 
+                            id="correo"
+                            class="shadow-sm bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                            placeholder="Correo corporativo" 
+                            required>
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <label for="contraseña" class="text-sm font-medium block mb-2">Contraseña</label>
+                        <input type="password" 
+                            name="contraseña" 
+                            id="contraseña"
+                            class="shadow-sm bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                            placeholder="Contraseña" 
+                            required>
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <label for="confirmar_contraseña" class="text-sm font-medium block mb-2">Confirmar contraseña</label>
+                        <input type="password" 
+                            name="confirmar_contraseña" 
+                            id="confirmar_contraseña"
+                            class="shadow-sm bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                            placeholder="Confirmar contraseña" 
+                            required>
+                    </div>
                 </div>
+                <div class="grid grid-cols-6 gap-6 pt-3">
+                    <div class="col-span-6 sm:col-span-3">
+                        <label for="area_trabajo" class="text-sm font-medium block mb-2">Area de trabajo</label>
+                        <input type="text" 
+                            name="area_trabajo" 
+                            id="area_trabajo"
+                            class="shadow-sm bg-gray-50 border border-gray-300 outline-verde sm:text-sm rounded-lg focus:ring-verde focus:border-verde block w-full p-2.5"
+                            placeholder="Area" 
+                            required>
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <label for="rfc" class="text-sm font-medium block mb-2">RFC</label>
+                        <input type="text" 
+                            name="rfc" 
+                            id="rfc"
+                            class="shadow-sm bg-gray-50 border border-gray-300 outline-verde sm:text-sm rounded-lg focus:ring-verde focus:border-verde block w-full p-2.5"
+                            placeholder="RFC" 
+                            required>
+                    </div>
+                </div>
+                <button type="submit" class="rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde">
+                    Registrarse
+                </button>
+            </form>
         </div>
 
     </div>
@@ -161,6 +163,53 @@
     </footer>
 
     <script type="module" src="./src/main.js"></script>
+    <script>
+        document.getElementById('registroEmpresa').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            // Validar que las contraseñas coincidan
+            const password = document.getElementById('contraseña').value;
+            const confirmPassword = document.getElementById('confirmar_contraseña').value;
+
+            if (password !== confirmPassword) {
+                alert('Las contraseñas no coinciden');
+                return;
+            }
+
+            // Crear objeto con los datos del formulario
+            const formData = {
+                nombre_empresa: document.getElementById('nombre_empresa').value,
+                representante_legal: document.getElementById('representante_legal').value,
+                telefono: document.getElementById('telefono').value,
+                correo: document.getElementById('correo').value,
+                contraseña: password,
+                area_trabajo: document.getElementById('area_trabajo').value,
+                rfc: document.getElementById('rfc').value
+            };
+
+            try {
+                const response = await fetch('http://localhost:3000/api/empresa', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    alert('Registro exitoso');
+                    window.location.href = 'iniciarSesion.html'; // Redirigir después del registro exitoso
+                } else {
+                    const error = await response.json();
+                    alert('Error en el registro: ' + error.error);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al conectar con el servidor' + error.message);
+            }
+        });
+
+    </script>
 </body>
 
 </html>

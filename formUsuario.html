@@ -71,99 +71,84 @@
 
         <form action="#" class="p-6 space-y-6 text-azul">
           <label for="" class="text-verde font-semibold text-xl">Información personal</label>
-          <div class="grid grid-cols-6 gap-6 ">
+          <div class="grid grid-cols-6 gap-6">
             <div class="col-span-6 sm:col-span-3">
-              <label for="product-name" class="text-sm font-medium  block mb-2">Nombre</label>
-              <input type="text" name="product-name" id="product-name"
-                class="shadow-sm bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
-                placeholder="Nombre" required="">
-            </div>
-            <div class="col-span-6 sm:col-span-3">
-              <label for="category" class="text-sm font-medium  block mb-2">Apellidos</label>
-              <input type="text" name="category" id="category"
-                class="shadow-sm bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
-                placeholder="Apellidos" required="">
+              <label for="nombre" class="text-sm font-medium block mb-2">Nombre</label>
+              <input type="text" name="nombre" id="nombre"
+                class="shadow-sm bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                placeholder="Nombre" required>
             </div>
             <div class="col-span-6 sm:col-span-3">
-              <label for="brand" class="text-sm font-medium  block mb-2">Telefono</label>
-              <input type="text" name="brand" id="brand"
-                class="shadow-sm bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
-                placeholder="Telefono" required="">
+              <label for="apellidos" class="text-sm font-medium block mb-2">Apellidos</label>
+              <input type="text" name="apellidos" id="apellidos"
+                class="shadow-sm bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                placeholder="Apellidos" required>
             </div>
             <div class="col-span-6 sm:col-span-3">
-              <label for="price" class="text-sm font-medium  block mb-2">Correo electrónico</label>
-              <input type="correo" name="price" id="price"
-                class="shadow-sm bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
-                placeholder="Correo" required="">
+              <label for="telefono" class="text-sm font-medium block mb-2">Teléfono</label>
+              <input type="tel" name="telefono" id="telefono"
+                class="shadow-sm bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                placeholder="Teléfono" required>
             </div>
             <div class="col-span-6 sm:col-span-3">
-              <label for="brand" class="text-sm font-medium  block mb-2">Contraseña</label>
-              <input type="password" name="brand" id="brand"
-                class="shadow-sm bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
-                placeholder="Contraseña" required="">
+              <label for="correo" class="text-sm font-medium block mb-2">Correo electrónico</label>
+              <input type="email" name="correo" id="correo"
+                class="shadow-sm bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                placeholder="Correo" required>
             </div>
-            <div class=" col-span-6 sm:col-span-3">
-              <label for="price" class="text-sm font-medium  block mb-2">Confirmar contraseña</label>
-              <input type="password" name="price" id="price"
-                class="shadow-sm bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
-                placeholder="Confirmar contraseña" required="">
+            <div class="col-span-6 sm:col-span-3">
+              <label for="contraseña" class="text-sm font-medium block mb-2">Contraseña</label>
+              <input type="password" name="contraseña" id="contraseña"
+                class="shadow-sm bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                placeholder="Contraseña" required>
             </div>
-
+            <div class="col-span-6 sm:col-span-3">
+              <label for="confirmar_contraseña" class="text-sm font-medium block mb-2">Confirmar contraseña</label>
+              <input type="password" name="confirmar_contraseña" id="confirmar_contraseña"
+                class="shadow-sm bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                placeholder="Confirmar contraseña" required>
+            </div>
           </div>
-          <label for="" class="block  text-xl  text-verde font-semibold">Información académica y laboral</label>
-
-          <div class=" grid grid-cols-6 gap-6 pt-3 ">
+          <label for="" class="block text-xl text-verde font-semibold">Información académica y laboral</label>
+          <div class="grid grid-cols-6 gap-6 pt-3">
             <div class="col-span-6 sm:col-span-3">
-              <label for="product-name" class="text-sm font-medium  block mb-2">Institucion
-                Académica</label>
-              <input type="text" name="product-name" id="product-name"
-                class="shadow-sm bg-gray-50 border border-gray-300  outline-verde sm:text-sm rounded-lg focus:ring-verde focus:border-verde block w-full p-2.5"
-                placeholder="Institucion Académica" required="">
+              <label for="institucion_academica" class="text-sm font-medium block mb-2">Institución Académica</label>
+              <input type="text" name="institucion_academica" id="institucion_academica"
+                class="shadow-sm bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                placeholder="Institución Académica" required>
             </div>
             <div class="col-span-6 sm:col-span-3">
-              <label for="product-name" class="text-sm font-medium  block mb-2">Carrera o especialidad*:</label>
-              <input type="text" name="product-name" id="product-name"
-                class="shadow-sm bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
-                placeholder="Carrera o Especialidad" required="">
+              <label for="carrera" class="text-sm font-medium block mb-2">Carrera o Especialidad</label>
+              <input type="text" name="carrera" id="carrera"
+                class="shadow-sm bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                placeholder="Carrera o Especialidad" required>
             </div>
             <div class="col-span-6 sm:col-span-3">
-              <label for="product-name" class="text-sm font-medium  block mb-2">Fecha de egreso</label>
-              <input type="date" name="product-name" id="product-name"
-                class="shadow-sm bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
-                placeholder="”" required="">
+              <label for="fecha_egreso" class="text-sm font-medium block mb-2">Fecha de Egreso</label>
+              <input type="date" name="fecha_egreso" id="fecha_egreso"
+                class="shadow-sm bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                required>
             </div>
             <div class="col-span-6 sm:col-span-3">
-              <label for="product-name" class="text-sm font-medium  block mb-2">Área de interés profesional:</label>
-              <input type="text" name="product-name" id="product-name"
-                class="shadow-sm bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
-                placeholder="Área de interes" required="">
+              <label for="area_interes_profesional" class="text-sm font-medium block mb-2">Área de Interés
+                Profesional</label>
+              <input type="text" name="area_interes_profesional" id="area_interes_profesional"
+                class="shadow-sm bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-2.5"
+                placeholder="Área de Interés" required>
             </div>
-
             <div class="col-span-full">
-              <label for="product-details" class="text-sm font-medium  block mb-2">Habilidades
-                clave</label>
-              <textarea id="product-details" rows="6"
-                class="bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-4"
+              <label for="habilidades_clave" class="text-sm font-medium block mb-2">Habilidades Clave</label>
+              <textarea id="habilidades_clave" name="habilidades_clave" rows="6"
+                class="bg-gray-50 border border-gray-300 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 outline-verde block w-full p-4"
                 placeholder="Habilidades Clave"></textarea>
             </div>
           </div>
-          <label class="mt-8 flex content-start"><input type="checkbox" name="remember"
-              class="mr-2 form-checkbox rounded-none ring-0 focus:border-tan-500 border-tan-300 border-2 w-5 h-5 text-highlight">
-            <span class="text-sm text-verde font-bold">Aceptación de Términos y Condiciones</span>
-          </label>
-          <label class="mt-8 flex content-start"><input type="checkbox" name="remember"
-              class="mr-2 form-checkbox rounded-none ring-0 focus:border-tan-500 border-tan-300 border-2 w-5 h-5 text-highlight">
-            <span class="text-sm font-bold text-verde">Suscripción a Boletines y Alertas de empleo</span>
-          </label>
-        </form>
-
-
-        <div class="p-6 border-t border-gray-200 rounded-b">
-          <a href="./iniciarSesion.html"
+          <button type="submit"
             class="rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde">
             Registrarse
-          </a>
-        </div>
+          </button>
+        </form>
+
     </div>
 
   </div>
@@ -181,6 +166,55 @@
   </footer>
 
   <script type="module" src="./src/main.js"></script>
+  <script>
+    document.querySelector('form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      // Validar que las contraseñas coincidan
+      const password = document.getElementById('contraseña').value;
+      const confirmPassword = document.getElementById('confirmar_contraseña').value;
+
+      if (password !== confirmPassword) {
+        alert('Las contraseñas no coinciden');
+        return;
+      }
+
+      // Crear objeto con los datos del formulario
+      const formData = {
+        nombre: document.getElementById('nombre').value,
+        apellidos: document.getElementById('apellidos').value,
+        telefono: document.getElementById('telefono').value,
+        correo: document.getElementById('correo').value,
+        contraseña: password,
+        institucion_academica: document.getElementById('institucion_academica').value,
+        carrera: document.getElementById('carrera').value,
+        fecha_egreso: document.getElementById('fecha_egreso').value,
+        area_interes_profesional: document.getElementById('area_interes_profesional').value,
+        habilidades_clave: document.getElementById('habilidades_clave').value
+      };
+
+      try {
+        const response = await fetch('http://localhost:3000/api/usuario', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+          alert('Registro exitoso');
+          window.location.href = 'iniciarSesion.html'; // Redirigir después del registro exitoso
+        } else {
+          const error = await response.json();
+          alert('Error en el registro: ' + error.error);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Error al conectar con el servidor: ' + error.message);
+      }
+    });
+  </script>
 </body>
 
 </html>
