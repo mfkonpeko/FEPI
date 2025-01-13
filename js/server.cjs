@@ -49,27 +49,43 @@ app.post("/api/empresa", (req, res) => {
         rfc
     } = req.body;
 
-    const query = `
-        INSERT INTO datos_empresa 
-        (nombre_empresa, representante_legal, telefono, correo, contraseña, area_trabajo, rfc) 
-        VALUES (?, ?, ?, ?, ?, ?, ?)
-    `;
-
-    conexion.query(
-        query, 
-        [nombre_empresa, representante_legal, telefono, correo, contraseña, area_trabajo, rfc], 
-        (err, results) => {
-            if (err) {
-                console.error("Error al ejecutar la consulta: ", err);
-                res.status(500).json({ error: "Error al insertar los datos" });
-            } else {
-                res.status(201).json({ 
-                    message: "Datos de la empresa insertados correctamente",
-                    id: results.insertId 
-                });
-            }
+    // Consulta para verificar si el correo ya existe
+    const checkQuery = "SELECT * FROM datos_empresa WHERE correo = ?";
+    
+    conexion.query(checkQuery, [correo], (err, results) => {
+        if (err) {
+            console.error("Error al ejecutar la consulta: ", err);
+            return res.status(500).json({ error: "Error al verificar el correo" });
         }
-    );
+
+        // Si el correo ya existe
+        if (results.length > 0) {
+            return res.status(400).json({ error: "El correo ya está registrado" });
+        }
+
+        // Si el correo no existe, proceder a la inserción de los datos
+        const query = `
+            INSERT INTO datos_empresa 
+            (nombre_empresa, representante_legal, telefono, correo, contraseña, area_trabajo, rfc) 
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        `;
+
+        conexion.query(
+            query, 
+            [nombre_empresa, representante_legal, telefono, correo, contraseña, area_trabajo, rfc], 
+            (err, results) => {
+                if (err) {
+                    console.error("Error al ejecutar la consulta: ", err);
+                    res.status(500).json({ error: "Error al insertar los datos" });
+                } else {
+                    res.status(201).json({ 
+                        message: "Datos de la empresa insertados correctamente",
+                        id: results.insertId 
+                    });
+                }
+            }
+        );
+    });
 });
 
 
@@ -88,28 +104,46 @@ app.post("/api/usuario", (req, res) => {
         habilidades_clave
     } = req.body;
 
-    const query = `
-        INSERT INTO datos_egresado 
-        (nombre, apellidos, telefono, correo, contraseña, institucion_academica, carrera, fecha_egreso, area_interes_profesional, habilidades_clave) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `;
-
-    conexion.query(
-        query, 
-        [nombre, apellidos, telefono, correo, contraseña, institucion_academica, carrera, fecha_egreso, area_interes_profesional, habilidades_clave], 
-        (err, results) => {
-            if (err) {
-                console.error("Error al ejecutar la consulta: ", err);
-                res.status(500).json({ error: "Error al insertar los datos" });
-            } else {
-                res.status(201).json({ 
-                    message: "Datos del usuario insertados correctamente",
-                    id: results.insertId 
-                });
-            }
+    // Consulta para verificar si el correo ya existe
+    const checkQuery = "SELECT * FROM datos_egresado WHERE correo = ?";
+    
+    conexion.query(checkQuery, [correo], (err, results) => {
+        if (err) {
+            console.error("Error al ejecutar la consulta: ", err);
+            return res.status(500).json({ error: "Error al verificar el correo" });
         }
-    );
+
+        // Si el correo ya existe
+        if (results.length > 0) {
+            return res.status(400).json({ error: "El correo ya está registrado" });
+        }
+
+        // Si el correo no existe, proceder a la inserción
+        const query = `
+            INSERT INTO datos_egresado 
+            (nombre, apellidos, telefono, correo, contraseña, institucion_academica, carrera, fecha_egreso, area_interes_profesional, habilidades_clave) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `;
+
+        conexion.query(
+            query, 
+            [nombre, apellidos, telefono, correo, contraseña, institucion_academica, carrera, fecha_egreso, area_interes_profesional, habilidades_clave], 
+            (err, results) => {
+                if (err) {
+                    console.error("Error al ejecutar la consulta: ", err);
+                    res.status(500).json({ error: "Error al insertar los datos" });
+                } else {
+                    res.status(201).json({ 
+                        message: "Datos del usuario insertados correctamente",
+                        id: results.insertId 
+                    });
+                }
+            }
+        );
+    });
 });
+
+
 
 // Iniciar el servidor
 app.listen(port, () => {
