@@ -203,36 +203,43 @@
     });
 
     async function cargarEmpleos() {
-      try {
-        const response = await fetch('http://localhost:3000/api/empleos');
-        const empleos = await response.json();
+  try {
+    const response = await fetch('http://localhost:3000/api/empleos');
+    const empleos = await response.json();
+    const userType = localStorage.getItem('userType'); // Obtener el tipo de usuario
 
-        const wrapper = document.getElementById('vacantes-wrapper');
-        wrapper.innerHTML = '';
+    const wrapper = document.getElementById('vacantes-wrapper');
+    wrapper.innerHTML = '';
 
-        empleos.forEach(empleo => {
-          const slide = document.createElement('div');
-          slide.className = 'swiper-slide';
-          slide.innerHTML = `
-                        <div class="card-content p-6 bg-yellow-50 rounded-xl shadow-md">
-                            <h3 class="text-xl font-bold text-green-700">${empleo.vacante}</h3>
-                            <p class="mt-2 font-semibold">${empleo.empresa}</p>
-                            <p class="mt-1 text-gray-800"><strong>Modalidad:</strong> ${empleo.modalidad}</p>
-                            <p class="mt-1 text-gray-800"><strong>Salario:</strong> ${empleo.salario}</p>
-                            <p class="mt-2 text-gray-600 text-sm">${empleo.descripcion}</p>
-                            <a href="#" class="bg-verde mt-4 border rounded-full inline-block py-3 px-7 text-center text-base font-medium text-white hover:bg-white hover:border-verde hover:text-verde">
-                                Postularse
-                            </a>
-                        </div>
-                    `;
-          wrapper.appendChild(slide);
-        });
+    empleos.forEach(empleo => {
+      const slide = document.createElement('div');
+      slide.className = 'swiper-slide';
+      
+      // Crear el botón de postularse solo si el usuario NO es una empresa
+      const postularseButton = userType !== 'empresa' ? `
+        <a href="#" class="bg-verde mt-4 border rounded-full inline-block py-3 px-7 text-center text-base font-medium text-white hover:bg-white hover:border-verde hover:text-verde">
+          Postularse
+        </a>
+      ` : '';
 
-        initSwiper();
-      } catch (error) {
-        console.error('Error cargando empleos:', error);
-      }
-    }
+      slide.innerHTML = `
+        <div class="card-content p-6 bg-yellow-50 rounded-xl shadow-md">
+          <h3 class="text-xl font-bold text-green-700">${empleo.vacante}</h3>
+          <p class="mt-2 font-semibold">${empleo.empresa}</p>
+          <p class="mt-1 text-gray-800"><strong>Modalidad:</strong> ${empleo.modalidad}</p>
+          <p class="mt-1 text-gray-800"><strong>Salario:</strong> ${empleo.salario}</p>
+          <p class="mt-2 text-gray-600 text-sm">${empleo.descripcion}</p>
+          ${postularseButton}
+        </div>
+      `;
+      wrapper.appendChild(slide);
+    });
+
+    initSwiper();
+  } catch (error) {
+    console.error('Error cargando empleos:', error);
+  }
+}
 
     function initSwiper() {
       const swiper = new Swiper('.swiper', {

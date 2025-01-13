@@ -93,14 +93,21 @@
         buscas.
       </h2>
       <div class="mx-auto flex w-full justify-center font-bold">
-        <a href="registroEmpresa.html"
-          class="mr-4 rounded-xl bg-verde px-5 py-1 text-white hover:border hover:opacity-90">
-          Registrate como empresa
-        </a>
-        <a href="/formUsuario.html"
-          class="ml-4 rounded-xl border border-verde bg-principal px-5 py-1 text-verde hover:opacity-90">
-          Registrate como Egresado
-        </a>
+        <script>
+          // Si no hay un token de sesión, mostramos los botones de registro
+          if (!sessionToken) {
+            document.write(`
+              <a href="registroEmpresa.html"
+                class="mr-4 rounded-xl bg-verde px-5 py-1 text-white hover:border hover:opacity-90">
+                Registrate como empresa
+              </a>
+              <a href="/formUsuario.html"
+                class="ml-4 rounded-xl border border-verde bg-principal px-5 py-1 text-verde hover:opacity-90">
+                Registrate como Egresado
+              </a>
+            `);
+          }
+        </script>
       </div>
       <h2 class="text-center text-3xl font-semibold">¿Qué ofrecemos?</h2>
       <div
@@ -144,24 +151,6 @@
             Aprende a mejorar tus habilidades blandas y destacarte
             profesionalmente, por medio deexperiencia de otros usuarios.
           </p>
-        </section>
-        <section
-          class="m-auto flex flex-col justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2">
-          <h3 class="text-2xl font-semibold">Propuestas Recientes</h3>
-          <div class="gap-3 sm:flex sm:flex-row sm:justify-around">
-            <div>
-              <h1 class="text-lg font-semibold">Desarrollador Fronted Jr.</h1>
-              <p class="max-w-xs text-lg leading-relaxed">
-                Empresa XYZ - Remoto <br /><a class="italic text-verde underline" href="#">Ver Más</a>
-              </p>
-            </div>
-            <div>
-              <h1 class="text-lg font-semibold">Analista de Datos</h1>
-              <p class="max-w-xs text-lg leading-relaxed">
-                PyME ABC - Presencial <br /><a class="italic text-verde underline" href="#">Ver Más</a>
-              </p>
-            </div>
-          </div>
         </section>
         <section
           class="m-auto flex flex-col justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2">
