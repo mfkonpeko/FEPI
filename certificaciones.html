@@ -91,6 +91,20 @@
       Impulsa tu carrera con estas certificaciones reconocidas en el sector
       tecnológico.
     </h2>
+
+    <!-- Barra de búsqueda -->
+    <div class="mx-auto w-full max-w-2xl px-4">
+      <div class="relative">
+        <input type="text" id="searchCertifications"
+          class="w-full rounded-full border border-verde bg-white px-4 py-2 pl-10 pr-4 focus:border-verde focus:outline-none"
+          placeholder="Buscar certificaciones..." />
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+          <ion-icon name="search-outline" class="text-verde"></ion-icon>
+        </div>
+      </div>
+    </div>
+
+
     <div class="flex justify-around mb-24">
       <div class="flex flex-col gap-6">
         <section
@@ -139,6 +153,75 @@
             Ver más
           </a>
         </section>
+        <section
+        class="m-auto w-[500px] flex flex-col items-center justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2">
+        <h3 class="text-2xl font-semibold text-verde">
+          Certificación SCRUM Master
+        </h3>
+        <p class="max-w-xs text-sm leading-relaxed">
+          Plataforma: Scrum.org
+        </p>
+        <p class="max-w-[400px] text-lg leading-relaxed">
+          Aprende a liderar equipos ágiles y gestionar proyectos con Scrum.
+        </p>
+        <a href="https://www.scrum.org/professional-scrum-certifications"
+          class="bg-verde dark:bg-dark-2 border-dark dark:border-dark-2 border rounded-full inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-body-color hover:bg-white hover:border-verde hover:text-verde">
+          Ver más
+        </a>
+      </section>
+  
+      <section
+        class="m-auto w-[500px] flex flex-col items-center justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2">
+        <h3 class="text-2xl font-semibold text-verde">
+          Certificación en Ciberseguridad CompTIA Security+
+        </h3>
+        <p class="max-w-xs text-sm leading-relaxed">
+          Plataforma: CompTIA
+        </p>
+        <p class="max-w-[400px] text-lg leading-relaxed">
+          Certifícate en fundamentos de seguridad informática y protección de datos.
+        </p>
+        <a href="https://www.comptia.org/certifications/security"
+          class="bg-verde dark:bg-dark-2 border-dark dark:border-dark-2 border rounded-full inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-body-color hover:bg-white hover:border-verde hover:text-verde">
+          Ver más
+        </a>
+      </section>
+  
+      <section
+        class="m-auto w-[500px] flex flex-col items-center justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2">
+        <h3 class="text-2xl font-semibold text-verde">
+          Oracle Certified Professional Java SE
+        </h3>
+        <p class="max-w-xs text-sm leading-relaxed">
+          Plataforma: Oracle University
+        </p>
+        <p class="max-w-[400px] text-lg leading-relaxed">
+          Certifícate como desarrollador profesional en Java SE.
+        </p>
+        <a href="https://education.oracle.com/java-certification-path"
+          class="bg-verde dark:bg-dark-2 border-dark dark:border-dark-2 border rounded-full inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-body-color hover:bg-white hover:border-verde hover:text-verde">
+          Ver más
+        </a>
+      </section>
+  
+      <section
+        class="m-auto w-[500px] flex flex-col items-center justify-between gap-2 rounded-xl bg-principal_2 px-4 py-2 drop-shadow-xl sm:flex sm:flex-col sm:justify-between sm:gap-2">
+        <h3 class="text-2xl font-semibold text-verde">
+          Certificación en Data Science de IBM
+        </h3>
+        <p class="max-w-xs text-sm leading-relaxed">
+          Plataforma: IBM
+        </p>
+        <p class="max-w-[400px] text-lg leading-relaxed">
+          Especialízate en ciencia de datos y análisis predictivo.
+        </p>
+        <a href="https://www.ibm.com/training/certification"
+          class="bg-verde dark:bg-dark-2 border-dark dark:border-dark-2 border rounded-full inline-flex items-center justify-center py-3 px-7 text-center text-base font-medium text-white hover:bg-body-color hover:bg-white hover:border-verde hover:text-verde">
+          Ver más
+        </a>
+      </section>
+    </div>
+  </div>
       </div>
     </div>
   </div>
@@ -180,6 +263,23 @@
       if (profileMenu && !profileMenu.contains(event.target)) {
         menuDropdown.classList.add('hidden');
       }
+    });
+
+    // Funcionalidad de búsqueda
+    document.getElementById('searchCertifications').addEventListener('input', function (e) {
+      const searchTerm = e.target.value.toLowerCase();
+      const certifications = document.querySelectorAll('.flex.flex-col.gap-6 section');
+
+      certifications.forEach(cert => {
+        const title = cert.querySelector('h3').textContent.toLowerCase();
+        const description = cert.querySelector('p:nth-of-type(2)').textContent.toLowerCase();
+
+        if (title.includes(searchTerm) || description.includes(searchTerm)) {
+          cert.style.display = 'flex';
+        } else {
+          cert.style.display = 'none';
+        }
+      });
     });
   </script>
 </body>
