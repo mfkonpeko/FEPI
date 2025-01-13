@@ -203,43 +203,97 @@
     });
 
     async function cargarEmpleos() {
-  try {
-    const response = await fetch('http://localhost:3000/api/empleos');
-    const empleos = await response.json();
-    const userType = localStorage.getItem('userType'); // Obtener el tipo de usuario
+      try {
+        const response = await fetch('http://localhost:3000/api/empleos');
+        const empleos = await response.json();
 
-    const wrapper = document.getElementById('vacantes-wrapper');
-    wrapper.innerHTML = '';
+        // Obtener tanto el tipo de usuario como el token de sesión y el correo
+        const userType = localStorage.getItem('userType');
+        const sessionToken = localStorage.getItem('sessionToken');
+        const userEmail = localStorage.getItem('userEmail');
 
-    empleos.forEach(empleo => {
-      const slide = document.createElement('div');
-      slide.className = 'swiper-slide';
-      
-      // Crear el botón de postularse solo si el usuario NO es una empresa
-      const postularseButton = userType !== 'empresa' ? `
-        <a href="#" class="bg-verde mt-4 border rounded-full inline-block py-3 px-7 text-center text-base font-medium text-white hover:bg-white hover:border-verde hover:text-verde">
-          Postularse
-        </a>
-      ` : '';
+        const wrapper = document.getElementById('vacantes-wrapper');
+        wrapper.innerHTML = '';
 
-      slide.innerHTML = `
-        <div class="card-content p-6 bg-yellow-50 rounded-xl shadow-md">
-          <h3 class="text-xl font-bold text-green-700">${empleo.vacante}</h3>
-          <p class="mt-2 font-semibold">${empleo.empresa}</p>
-          <p class="mt-1 text-gray-800"><strong>Modalidad:</strong> ${empleo.modalidad}</p>
-          <p class="mt-1 text-gray-800"><strong>Salario:</strong> ${empleo.salario}</p>
-          <p class="mt-2 text-gray-600 text-sm">${empleo.descripcion}</p>
-          ${postularseButton}
-        </div>
-      `;
-      wrapper.appendChild(slide);
-    });
+        empleos.forEach(empleo => {
+          const slide = document.createElement('div');
+          slide.className = 'swiper-slide';
 
-    initSwiper();
-  } catch (error) {
-    console.error('Error cargando empleos:', error);
-  }
-}
+          // Crear el botón de postularse solo si hay una sesión activa y si no es una empresa
+          const postularseButton = sessionToken && userType !== 'empresa' ? `
+                  <button onclick="postular('${empleo.empresa}', '${empleo.vacante}')" 
+                      class="bg-verde mt-4 border rounded-full inline-block py-3 px-7 text-center text-base font-medium text-white hover:bg-white hover:border-verde hover:text-verde">
+                      Postularse
+                  </button>
+              ` : '';
+
+          slide.innerHTML = `
+                  <div class="card-content p-6 bg-yellow-50 rounded-xl shadow-md">
+                      <h3 class="text-xl font-bold text-green-700">${empleo.vacante}</h3>
+                      <p class="mt-2 font-semibold">${empleo.empresa}</p>
+                      <p class="mt-1 text-gray-800"><strong>Modalidad:</strong> ${empleo.modalidad}</p>
+                      <p class="mt-1 text-gray-800"><strong>Salario:</strong> ${empleo.salario}</p>
+                      <p class="mt-2 text-gray-600 text-sm">${empleo.descripcion}</p>
+                      ${postularseButton}
+                  </div>
+              `;
+          wrapper.appendChild(slide);
+        });
+
+        // Función para manejar las postulaciones
+        // Función para manejar las postulaciones
+        window.postular = async function (empresa, nombreVacante) {
+          // Obtén el correo del usuario desde localStorage
+          const correoPostulado = localStorage.getItem('userEmail');
+
+          // Registro en consola para depuración
+          console.log('Email en postular:', correoPostulado);
+          console.log('Session Token:', localStorage.getItem('sessionToken'));
+
+          // Verificar si el usuario está autenticado
+          if (!correoPostulado) {
+            alert('Debes iniciar sesión para postularte');
+            return;
+          }
+
+          try {
+            // Realizar la petición POST a la API de postulaciones
+            const response = await fetch('http://localhost:3000/api/postulaciones', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                // Asumiendo que el token de sesión se guarda correctamente
+                'Authorization': `Bearer ${localStorage.getItem('sessionToken')}`
+              },
+              body: JSON.stringify({
+                correo_postulado: correoPostulado,
+                tipo_vacante: 'empleo', // Asegúrate de que este valor sea el esperado por tu API
+                empresa: empresa, // nombre de la empresa postular
+                nombre_vacante: nombreVacante // nombre de la vacante
+              })
+            });
+
+            if (response.ok) {
+              alert('¡Postulación exitosa!');
+              // Aquí puedes agregar más lógica, como redirigir o actualizar la UI
+            } else {
+              const error = await response.json();
+              alert(error.message || 'Error al realizar la postulación');
+            }
+          } catch (error) {
+            console.error('Error:', error);
+            alert('Error al procesar la postulación');
+          }
+        };
+
+
+        initSwiper();
+      } catch (error) {
+        console.error('Error cargando empleos:', error);
+      }
+    }
+
+
 
     function initSwiper() {
       const swiper = new Swiper('.swiper', {

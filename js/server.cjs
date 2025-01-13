@@ -12,7 +12,7 @@ app.use(express.json());
 // Ruta para obtener las vacantes de servicio social
 app.get("/api/vacantes", (req, res) => {
     const query = "SELECT * FROM servicio_social";
-    
+
     conexion.query(query, (err, results) => {
         if (err) {
             console.error("Error al ejecutar la consulta: ", err);
@@ -26,7 +26,7 @@ app.get("/api/vacantes", (req, res) => {
 // Ruta para obtener empleos
 app.get("/api/empleos", (req, res) => {
     const query = "SELECT * FROM empleos";
-    
+
     conexion.query(query, (err, results) => {
         if (err) {
             console.error("Error al ejecutar la consulta: ", err);
@@ -51,7 +51,7 @@ app.post("/api/empresa", (req, res) => {
 
     // Consulta para verificar si el correo ya existe
     const checkQuery = "SELECT * FROM datos_empresa WHERE correo = ?";
-    
+
     conexion.query(checkQuery, [correo], (err, results) => {
         if (err) {
             console.error("Error al ejecutar la consulta: ", err);
@@ -71,16 +71,16 @@ app.post("/api/empresa", (req, res) => {
         `;
 
         conexion.query(
-            query, 
-            [nombre_empresa, representante_legal, telefono, correo, contraseña, area_trabajo, rfc], 
+            query,
+            [nombre_empresa, representante_legal, telefono, correo, contraseña, area_trabajo, rfc],
             (err, results) => {
                 if (err) {
                     console.error("Error al ejecutar la consulta: ", err);
                     res.status(500).json({ error: "Error al insertar los datos" });
                 } else {
-                    res.status(201).json({ 
+                    res.status(201).json({
                         message: "Datos de la empresa insertados correctamente",
-                        id: results.insertId 
+                        id: results.insertId
                     });
                 }
             }
@@ -109,7 +109,7 @@ app.post("/api/usuario", (req, res) => {
 
     // Consulta para verificar si el correo ya existe
     const checkQuery = "SELECT * FROM datos_egresado WHERE correo = ?";
-    
+
     conexion.query(checkQuery, [correo], (err, results) => {
         if (err) {
             console.error("Error al ejecutar la consulta: ", err);
@@ -130,28 +130,28 @@ app.post("/api/usuario", (req, res) => {
         `;
 
         conexion.query(
-            query, 
+            query,
             [
-                nombre, 
-                apellidos, 
-                telefono, 
-                correo, 
+                nombre,
+                apellidos,
+                telefono,
+                correo,
                 contraseña,
-                institucion_academica, 
-                carrera, 
-                fecha_egreso, 
-                area_interes_profesional, 
+                institucion_academica,
+                carrera,
+                fecha_egreso,
+                area_interes_profesional,
                 habilidades_clave,
                 experiencia_laboral,
                 idiomas,
                 certificaciones
-            ], 
+            ],
             (err, results) => {
                 if (err) {
                     console.error("Error al ejecutar la consulta: ", err);
                     return res.status(500).json({ error: "Error al insertar los datos" });
                 } else {
-                    return res.status(201).json({ 
+                    return res.status(201).json({
                         message: "Datos del usuario insertados correctamente",
                         id: results.insertId
                     });
@@ -167,10 +167,10 @@ app.post("/api/login", (req, res) => {
 
     // Determinar la tabla a consultar según el tipo de usuario
     const table = userType === 'empresa' ? 'datos_empresa' : 'datos_egresado';
-    
+
     // Consulta para verificar las credenciales
     const query = `SELECT * FROM ${table} WHERE correo = ? AND contraseña = ?`;
-    
+
     conexion.query(query, [email, password], (err, results) => {
         if (err) {
             console.error("Error al ejecutar la consulta: ", err);
@@ -179,14 +179,14 @@ app.post("/api/login", (req, res) => {
 
         // Si no se encuentra el usuario
         if (results.length === 0) {
-            return res.status(401).json({ 
-                error: "Credenciales incorrectas" 
+            return res.status(401).json({
+                error: "Credenciales incorrectas"
             });
         }
 
         // Usuario encontrado
         const user = results[0];
-        
+
         // Eliminar la contraseña del objeto de respuesta por seguridad
         delete user.contraseña;
 
@@ -194,14 +194,15 @@ app.post("/api/login", (req, res) => {
             success: true,
             message: "Inicio de sesión exitoso",
             user: user,
-            userType: userType
+            userType: userType,
+            userEmail: email  // Añadido explícitamente el email
         });
     });
 });
 
 // Ruta para actualizar datos del egresado
 app.put("/api/usuario", (req, res) => {
-    const { 
+    const {
         contraseña, // Se espera que la contraseña se envíe en el cuerpo de la petición
         nombre,
         apellidos,
@@ -321,10 +322,43 @@ app.post("/api/vacantes", (req, res) => {
     );
 });
 
+// Ruta para publicar una nuevo servicio
+app.post("/api/servicio_social", (req, res) => {
+    const {
+        vacante,
+        nombre_empresa,
+        modalidad,
+        descripcion
+    } = req.body;
+
+    const query = `
+        INSERT INTO servicio_social 
+        (vacante, nombre_empresa, modalidad, descripcion) 
+        VALUES (?, ?, ?, ?)
+    `;
+
+    conexion.query(
+        query,
+        [vacante, nombre_empresa, modalidad, descripcion],
+        (err, results) => {
+            if (err) {
+                console.error("Error al ejecutar la consulta: ", err);
+                return res.status(500).json({ error: "Error al publicar el servicio social" });
+            }
+
+            res.status(201).json({
+                message: "Servicio social publicado correctamente",
+                id: results.insertId
+            });
+        }
+    );
+});
+
+
 // Ruta para obtener todos los egresados
 app.get("/api/egresados", (req, res) => {
     const query = "SELECT * FROM datos_egresado";
-    
+
     conexion.query(query, (err, results) => {
         if (err) {
             console.error("Error al ejecutar la consulta: ", err);
@@ -338,9 +372,9 @@ app.get("/api/egresados", (req, res) => {
 // Ruta para eliminar un usuario
 app.delete("/api/usuario/:correo", (req, res) => {
     const { correo } = req.params; // Obtiene el correo del usuario a eliminar desde la URL
-    
+
     const query = "DELETE FROM datos_egresado WHERE correo = ?";
-    
+
     conexion.query(query, [correo], (err, results) => {
         if (err) {
             console.error("Error al ejecutar la consulta: ", err);
@@ -358,7 +392,7 @@ app.delete("/api/usuario/:correo", (req, res) => {
 // Ruta para obtener todas las empresas
 app.get("/api/empresas", (req, res) => {
     const query = "SELECT * FROM datos_empresa";
-    
+
     conexion.query(query, (err, results) => {
         if (err) {
             console.error("Error al ejecutar la consulta: ", err);
@@ -371,9 +405,9 @@ app.get("/api/empresas", (req, res) => {
 // Ruta para eliminar una empresa
 app.delete("/api/empresa/:correo", (req, res) => {
     const { correo } = req.params;
-    
+
     const query = "DELETE FROM datos_empresa WHERE correo = ?";
-    
+
     conexion.query(query, [correo], (err, results) => {
         if (err) {
             console.error("Error al ejecutar la consulta: ", err);
@@ -391,7 +425,7 @@ app.delete("/api/empresa/:correo", (req, res) => {
 // Ruta para obtener todos los empleos
 app.get("/api/empleos", (req, res) => {
     const query = "SELECT * FROM empleos";
-    
+
     conexion.query(query, (err, results) => {
         if (err) {
             console.error("Error al ejecutar la consulta: ", err);
@@ -404,9 +438,9 @@ app.get("/api/empleos", (req, res) => {
 // Ruta para eliminar un empleo
 app.delete("/api/empleo/:vacante/:empresa", (req, res) => {
     const { vacante, empresa } = req.params;
-    
+
     const query = "DELETE FROM empleos WHERE vacante = ? AND empresa = ?";
-    
+
     conexion.query(query, [vacante, empresa], (err, results) => {
         if (err) {
             console.error("Error al ejecutar la consulta: ", err);
@@ -418,6 +452,85 @@ app.delete("/api/empleo/:vacante/:empresa", (req, res) => {
         }
 
         res.json({ message: "Empleo eliminado correctamente" });
+    });
+});
+
+// Ruta para obtener todos los servicios sociales
+app.get("/api/servicios-sociales", (req, res) => {
+    const query = "SELECT * FROM servicio_social";
+
+    conexion.query(query, (err, results) => {
+        if (err) {
+            console.error("Error al ejecutar la consulta: ", err);
+            return res.status(500).json({ error: "Error al obtener los servicios sociales" });
+        }
+        res.json(results);
+    });
+});
+
+// Ruta para eliminar un servicio social
+app.delete("/api/servicio-social/:vacante/:nombreEmpresa", (req, res) => {
+    const { vacante, nombreEmpresa } = req.params;
+
+    const query = "DELETE FROM servicio_social WHERE vacante = ? AND nombre_empresa = ?";
+
+    conexion.query(query, [vacante, nombreEmpresa], (err, results) => {
+        if (err) {
+            console.error("Error al ejecutar la consulta: ", err);
+            return res.status(500).json({ error: "Error al eliminar el servicio social" });
+        }
+
+        if (results.affectedRows === 0) {
+            return res.status(404).json({ error: "Servicio social no encontrado" });
+        }
+
+        res.json({ message: "Servicio social eliminado correctamente" });
+    });
+});
+
+// Ruta para manejar postulaciones
+app.post("/api/postulaciones", (req, res) => {
+    const { correo_postulado, tipo_vacante, empresa, nombre_vacante } = req.body;
+
+    // Primero verificar si ya existe una postulación similar
+    const checkQuery = `
+        SELECT * FROM postulaciones 
+        WHERE correo_postulado = ? 
+        AND nombre_vacante = ? 
+        AND empresa = ?`;
+
+    conexion.query(checkQuery, [correo_postulado, nombre_vacante, empresa], (err, results) => {
+        if (err) {
+            console.error("Error al verificar postulación existente:", err);
+            return res.status(500).json({ error: "Error al verificar postulación" });
+        }
+
+        // Si ya existe una postulación similar
+        if (results.length > 0) {
+            return res.status(400).json({ message: "Ya te has postulado a esta vacante" });
+        }
+
+        // Si no existe, proceder a insertar la nueva postulación
+        const insertQuery = `
+            INSERT INTO postulaciones 
+            (correo_postulado, tipo_vacante, empresa, nombre_vacante) 
+            VALUES (?, ?, ?, ?)`;
+
+        conexion.query(
+            insertQuery,
+            [correo_postulado, tipo_vacante, empresa, nombre_vacante],
+            (err, results) => {
+                if (err) {
+                    console.error("Error al insertar postulación:", err);
+                    return res.status(500).json({ error: "Error al procesar la postulación" });
+                }
+
+                res.status(201).json({
+                    message: "Postulación realizada con éxito",
+                    id: results.insertId
+                });
+            }
+        );
     });
 });
 

@@ -223,10 +223,14 @@
             try {
                 const response = await fetch('http://localhost:3000/api/vacantes');
                 const vacantes = await response.json();
-
+        
                 const wrapper = document.getElementById('vacantes-wrapper');
                 wrapper.innerHTML = ''; // Limpia el contenedor
-
+        
+                // Obtener el tipo de usuario y el token de sesión del localStorage
+                const userType = localStorage.getItem('userType');
+                const sessionToken = localStorage.getItem('sessionToken'); // Añadir esta línea para obtener el token.
+        
                 vacantes.forEach(vacante => {
                     const slide = document.createElement('div');
                     slide.className = 'swiper-slide';
@@ -236,14 +240,16 @@
                             <p class="mt-2 font-semibold">${vacante.nombre_empresa}</p>
                             <p class="mt-1 text-gray-800"><strong>Modalidad:</strong> ${vacante.modalidad}</p>
                             <p class="mt-2 text-gray-600 text-sm">${vacante.descripcion}</p>
-                            <a href="#" class="bg-verde mt-4 border rounded-full inline-block py-3 px-7 text-center text-base font-medium text-white hover:bg-white hover:border-verde hover:text-verde">
-                                Ver más
-                            </a>
+                            ${
+                                sessionToken && userType !== 'empresa' 
+                                ? `<a href="#" class="bg-verde mt-4 border rounded-full inline-block py-3 px-7 text-center text-base font-medium text-white hover:bg-white hover:border-verde hover:text-verde">Postularse</a>`
+                                : ''
+                            }
                         </div>
                     `;
                     wrapper.appendChild(slide);
                 });
-
+        
                 initSwiper();
             } catch (error) {
                 console.error('Error cargando vacantes:', error);

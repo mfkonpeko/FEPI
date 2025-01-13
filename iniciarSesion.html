@@ -171,10 +171,12 @@
                 const data = await response.json();
 
                 if (response.ok) {
+                
                     // Guardar la información del usuario y el token en localStorage
                     localStorage.setItem('user', JSON.stringify(data.user));
                     localStorage.setItem('userType', data.userType);
-                    localStorage.setItem('sessionToken', data.token); // Guardamos el token
+                    localStorage.setItem('sessionToken', data.token);
+                    localStorage.setItem('userEmail', data.email);
 
                     // Redirigir según el tipo de usuario
                     if (email === 'admin@gmail.com' && password === 'admin') {

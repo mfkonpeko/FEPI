@@ -7,7 +7,7 @@
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <title>Publicar Nueva Oferta - ESCO-NECTADOS</title>
+    <title>Publicar Nuevo Servicio Social - ESCO-NECTADOS</title>
     <style>
         .bg-principal {
             background-color: #f8f9fa;
@@ -76,9 +76,9 @@
         </header>
 
         <div class="container mx-auto px-4">
-            <h1 class="text-center text-4xl font-bold text-azul my-8">Publicar Nueva Oferta de Empleo</h1>
+            <h1 class="text-center text-4xl font-bold text-azul my-8">Publicar Nuevo Servicio Social</h1>
 
-            <form id="publicarOferta" class="mx-auto w-full max-w-3xl p-8 bg-principal_2 rounded-xl drop-shadow-xl mb-8">
+            <form id="publicarServicioSocial" class="mx-auto w-full max-w-3xl p-8 bg-principal_2 rounded-xl drop-shadow-xl mb-8">
                 <div class="mb-4">
                     <label class="block text-gray-700" for="vacante">Nombre de la Vacante</label>
                     <input type="text" id="vacante" name="vacante" class="mt-1 block w-full p-3 border border-gray-300 rounded-md" required />
@@ -93,25 +93,13 @@
                     </select>
                 </div>
                 <div class="mb-4">
-                    <label class="block text-gray-700" for="salario">Salario</label>
-                    <input 
-                        type="text" 
-                        id="salario" 
-                        name="salario" 
-                        placeholder="Ejemplo: 35000"
-                        class="mt-1 block w-full p-3 border border-gray-300 rounded-md" 
-                        required 
-                    />
-                    <small class="text-gray-500">Solo ingresa números, nosotros le daremos formato</small>
-                </div>
-                <div class="mb-4">
                     <label class="block text-gray-700" for="descripcion">Descripción</label>
                     <textarea id="descripcion" name="descripcion" rows="4" class="mt-1 block w-full p-3 border border-gray-300 rounded-md" required></textarea>
                 </div>
                 
                 <div class="flex justify-between mt-6">
                     <button type="submit" class="rounded-xl bg-verde px-5 py-2 text-white hover:opacity-90 transition duration-300">
-                        Publicar Oferta
+                        Publicar Servicio
                     </button>
                     <a href="perfilEmpresa.html" class="rounded-xl bg-verde px-5 py-2 text-white hover:opacity-90 transition duration-300">
                         Regresar a Perfil
@@ -127,35 +115,34 @@
             <a href="#" class="text-white hover:underline">KICR, IMO, MFLP, JELG, JUMJ</a>
         </div>
     </footer>
+
     <script>
-        // Función para confirmar el cierre de sesión
         function confirmarCierreSesion() {
             if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
                 localStorage.clear();
                 window.location.href = 'login.html';
             }
         }
-    
-        // Manejo del envío del formulario
+
         document.getElementById('publicarServicioSocial').addEventListener('submit', async function (event) {
-            event.preventDefault(); // Prevenir el envío del formulario
-    
+            event.preventDefault();
+        
             // Obtener los datos del usuario del localStorage
             const user = JSON.parse(localStorage.getItem('user'));
-    
+            
             // Verificar si tenemos el nombre de la empresa
             if (!user || !user.nombre_empresa) {
                 alert('Error: No se encontró el nombre de la empresa');
                 return;
             }
-    
+        
             const servicioData = {
                 vacante: this.vacante.value,
-                nombre_empresa: user.nombre_empresa, // nombre de la empresa desde el localStorage
+                nombre_empresa: user.nombre_empresa, // Aquí usamos nombre_empresa que es como está en el perfil
                 modalidad: this.modalidad.value,
                 descripcion: this.descripcion.value
             };
-    
+        
             try {
                 const response = await fetch('http://localhost:3000/api/servicio_social', {
                     method: 'POST',
@@ -163,37 +150,36 @@
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${localStorage.getItem('sessionToken')}`
                     },
-                    body: JSON.stringify(servicioData) // Enviamos los datos como un JSON
+                    body: JSON.stringify(servicioData)
                 });
-    
-                // Manejo de la respuesta del servidor
+        
                 if (response.ok) {
                     const data = await response.json();
-                    alert('Servicio social publicado con éxito! ID: ' + data.id); // Alertar éxito
-                    window.location.href = 'perfilEmpresa.html'; // Redirigir al perfil de la empresa
+                    alert('Servicio social publicado con éxito!');
+                    window.location.href = 'perfilEmpresa.html';
                 } else {
                     const error = await response.json();
-                    alert('Error al publicar el servicio social: ' + error.message); // Informar error
+                    alert('Error al publicar el servicio social: ' + error.message);
                 }
             } catch (error) {
                 console.error('Error:', error);
                 alert('Error al publicar el servicio social. Por favor, intente nuevamente.');
             }
         });
-    
-        // Toggle para el menú móvil
+        
+        // Toggle menú móvil
         document.getElementById('menuToggle').addEventListener('click', () => {
             document.getElementById('menu').classList.toggle('hidden');
         });
-    
-        // Comprobar los datos del usuario al cargar la página
+        
+        // Puedes agregar esto para verificar los datos que tienes almacenados
         document.addEventListener('DOMContentLoaded', function() {
             const user = JSON.parse(localStorage.getItem('user'));
             console.log('Datos del usuario:', user);
-            console.log('Nombre de la empresa:', user ? user.nombre_empresa : 'No disponible');
+            console.log('Nombre de la empresa:', user.nombre_empresa);
         });
+        
     </script>
-    
 </body>
 
 </html>
