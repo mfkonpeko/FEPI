@@ -199,6 +199,95 @@ app.post("/api/login", (req, res) => {
     });
 });
 
+// Ruta para actualizar datos del egresado
+app.put("/api/usuario", (req, res) => {
+    const { 
+        contraseña, // Se espera que la contraseña se envíe en el cuerpo de la petición
+        nombre,
+        apellidos,
+        telefono,
+        correo,
+        institucion_academica,
+        carrera,
+        fecha_egreso,
+        area_interes_profesional,
+        habilidades_clave,
+        experiencia_laboral,
+        idiomas,
+        certificaciones
+    } = req.body;
+
+    // Comprobación de que se proporcionó una contraseña
+    if (!contraseña) {
+        return res.status(400).json({ error: "Se requiere la contraseña" });
+    }
+
+    // La consulta SQL se modifica para usar contraseña en la cláusula WHERE
+    const query = `
+        UPDATE datos_egresado 
+        SET 
+            nombre = ?,
+            apellidos = ?,
+            telefono = ?,
+            correo = ?,
+            institucion_academica = ?,
+            carrera = ?,
+            fecha_egreso = ?,
+            area_interes_profesional = ?,
+            habilidades_clave = ?,
+            experiencia_laboral = ?,
+            idiomas = ?,
+            certificaciones = ?
+        WHERE contraseña = ?
+    `;
+
+    conexion.query(
+        query,
+        [
+            nombre,
+            apellidos,
+            telefono,
+            correo,
+            institucion_academica,
+            carrera,
+            fecha_egreso,
+            area_interes_profesional,
+            habilidades_clave,
+            experiencia_laboral,
+            idiomas,
+            certificaciones,
+            contraseña // Aquí se usa la contraseña como identificador
+        ],
+        (err, results) => {
+            if (err) {
+                console.error("Error al ejecutar la consulta: ", err);
+                return res.status(500).json({ error: "Error al actualizar los datos" });
+            }
+
+            if (results.affectedRows === 0) {
+                return res.status(404).json({ error: "Usuario no encontrado o contraseña incorrecta" });
+            }
+
+            // Consulta para obtener los datos actualizados
+            const selectQuery = "SELECT * FROM datos_egresado WHERE contraseña = ?";
+            conexion.query(selectQuery, [contraseña], (err, results) => {
+                if (err) {
+                    console.error("Error al obtener datos actualizados: ", err);
+                    return res.status(500).json({ error: "Error al obtener datos actualizados" });
+                }
+
+                const updatedUser = results[0];
+                delete updatedUser.contraseña; // Eliminar la contraseña por seguridad
+
+                res.json({
+                    message: "Datos actualizados correctamente",
+                    user: updatedUser
+                });
+            });
+        }
+    );
+});
+
 // Iniciar el servidor
 app.listen(port, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);

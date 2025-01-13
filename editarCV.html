@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <title>ESCO-NECTADOS - Editar CV</title>
+</head>
+
+<body class="w-full bg-principal min-h-screen flex flex-col">
+    <div class="flex-grow">
+        <header>
+            <nav class="m-auto bg-principal text-base font-bold text-azul drop-shadow-md">
+                <div class="relative flex items-center justify-between custom:mx-7">
+                    <!-- Logo -->
+                    <div class="flex items-center">
+                        <img src="/logo.png" alt="Logo" class="h-16 w-auto" />
+                        <span class="font-bold">ESCO-NECTADOS</span>
+                    </div>
+
+                    <!-- Lista de enlaces -->
+                    <ul id="menu"
+                        class="absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 custom:relative custom:top-0 custom:flex custom:w-auto custom:flex-row custom:items-center custom:gap-6">
+                        <li><a href="index.html" class="hover:text-verde">INICIO</a></li>
+                        <li><a href="empleos.html" class="hover:text-verde">EMPLEOS</a></li>
+                        <li><a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a></li>
+                        <li><a href="certificaciones.html" class="hover:text-verde">CERTIFICACIONES</a></li>
+                        <li><a href="servicioSocial.html" class="hover:text-verde">SERVICIO SOCIAL</a></li>
+                        <li><a href="sobreNosotros.html" class="hover:text-verde">SOBRE NOSOTROS</a></li>
+                    </ul>
+
+                    <!-- Botón de perfil -->
+                    <div class="flex items-center justify-end gap-4">
+                        <div class="relative group">
+                            <button
+                                class="sm:text-sm rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde flex items-center gap-2">
+                                <ion-icon name="person-circle-outline"></ion-icon>
+                                MI PERFIL
+                            </button>
+                            <div
+                                class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-2">
+                                <a href="perfilEgresado.html"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-verde hover:text-white">
+                                    Ver Perfil
+                                </a>
+                                <button onclick="confirmarCierreSesion()"
+                                    class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-verde hover:text-white">
+                                    Cerrar Sesión
+                                </button>
+                            </div>
+                        </div>
+                        <ion-icon class="cursor-pointer text-3xl custom:hidden" id="menuToggle" name="menu"></ion-icon>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="container mx-auto px-4 py-8 max-w-4xl">
+            <h1 class="text-3xl font-bold text-center text-azul mb-8">Editar CV</h1>
+
+            <form id="editarCVForm" class="bg-principal_2 shadow-md rounded-lg p-6 space-y-6">
+                <!-- Información Personal -->
+                <div class="space-y-4">
+                    <h2 class="text-xl font-semibold text-azul">Información Personal</h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-azul mb-2" for="nombre">Nombre</label>
+                            <input type="text" id="nombre" name="nombre"
+                                class="w-full p-2 border rounded-lg focus:border-verde">
+                        </div>
+                        <div>
+                            <label class="block text-azul mb-2" for="apellidos">Apellidos</label>
+                            <input type="text" id="apellidos" name="apellidos"
+                                class="w-full p-2 border rounded-lg focus:border-verde">
+                        </div>
+                        <div>
+                            <label class="block text-azul mb-2" for="telefono">Teléfono</label>
+                            <input type="tel" id="telefono" name="telefono"
+                                class="w-full p-2 border rounded-lg focus:border-verde">
+                        </div>
+                        <div>
+                            <label class="block text-azul mb-2" for="correo">Correo</label>
+                            <input type="email" id="correo" name="correo"
+                                class="w-full p-2 border rounded-lg focus:border-verde">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formación Académica -->
+                <div class="space-y-4">
+                    <h2 class="text-xl font-semibold text-azul">Formación Académica</h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-azul mb-2" for="institucion">Institución Académica</label>
+                            <input type="text" id="institucion" name="institucion_academica"
+                                class="w-full p-2 border rounded-lg focus:border-verde">
+                        </div>
+                        <div>
+                            <label class="block text-azul mb-2" for="carrera">Carrera</label>
+                            <input type="text" id="carrera" name="carrera"
+                                class="w-full p-2 border rounded-lg focus:border-verde">
+                        </div>
+                        <div>
+                            <label class="block text-azul mb-2" for="fecha_egreso">Fecha de Egreso</label>
+                            <input type="date" id="fecha_egreso" name="fecha_egreso"
+                                class="w-full p-2 border rounded-lg focus:border-verde">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Información Profesional -->
+                <div class="space-y-4">
+                    <h2 class="text-xl font-semibold text-azul">Información Profesional</h2>
+
+                    <div>
+                        <label class="block text-azul mb-2" for="area_interes">Área de Interés Profesional</label>
+                        <input type="text" id="area_interes" name="area_interes_profesional"
+                            class="w-full p-2 border rounded-lg focus:border-verde">
+                    </div>
+
+                    <div>
+                        <label class="block text-azul mb-2" for="habilidades">Habilidades Clave (separadas por
+                            comas)</label>
+                        <input type="text" id="habilidades" name="habilidades_clave"
+                            class="w-full p-2 border rounded-lg focus:border-verde">
+                    </div>
+
+                    <div>
+                        <label class="block text-azul mb-2" for="experiencia">Experiencia Laboral</label>
+                        <textarea id="experiencia" name="experiencia_laboral" rows="4"
+                            class="w-full p-2 border rounded-lg focus:border-verde"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-azul mb-2" for="certificaciones">Certificaciones</label>
+                        <textarea id="certificaciones" name="certificaciones" rows="4"
+                            class="w-full p-2 border rounded-lg focus:border-verde"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-azul mb-2" for="idiomas">Idiomas (separados por comas)</label>
+                        <input type="text" id="idiomas" name="idiomas"
+                            class="w-full p-2 border rounded-lg focus:border-verde">
+                    </div>
+
+                    <!-- Campo para la contraseña (para identificarse) -->
+                    <div>
+                        <label class="block text-azul mb-2" for="contrasena">Contraseña</label>
+                        <input type="password" id="contrasena" name="contrasena"
+                            class="w-full p-2 border rounded-lg focus:border-verde" required>
+                    </div>
+                </div>
+
+                <div class="flex justify-end space-x-4">
+                    <a href="cv.html" class="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600">Cancelar</a>
+                    <button type="button" onclick="editarCV()"
+                        class="px-6 py-2 bg-verde text-white rounded-lg hover:opacity-90">
+                        Guardar Cambios
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="bg-gradient-to-b from-verde to-azul p-5 text-center text-white">
+        <div class="text-1xl">
+            © 2024 Copyright:
+            <a href="#" class="text-verde underline">KICR, IMO, MFLP, JELG, JUMJ</a>
+        </div>
+    </footer>
+
+    <script type="module" src="./src/main.js"></script>
+    <script>
+        // Script para cargar y editar datos del CV
+        window.onload = function () {
+            const userData = JSON.parse(localStorage.getItem('user'));
+            if (userData) {
+                document.getElementById('nombre').value = userData.nombre || '';
+                document.getElementById('apellidos').value = userData.apellidos || '';
+                document.getElementById('telefono').value = userData.telefono || '';
+                document.getElementById('correo').value = userData.correo || '';
+                document.getElementById('institucion').value = userData.institucion_academica || '';
+                document.getElementById('carrera').value = userData.carrera || '';
+                document.getElementById('fecha_egreso').value = userData.fecha_egreso || '';
+                document.getElementById('area_interes').value = userData.area_interes_profesional || '';
+                document.getElementById('habilidades').value = userData.habilidades_clave || '';
+                document.getElementById('experiencia').value = userData.experiencia_laboral || '';
+                document.getElementById('certificaciones').value = userData.certificaciones || '';
+                document.getElementById('idiomas').value = userData.idiomas || '';
+            }
+        };
+
+        function editarCV() {
+            const userData = JSON.parse(localStorage.getItem('user'));
+            const contrasena = document.getElementById('contrasena').value;
+
+            const datosActualizados = {
+                nombre: document.getElementById('nombre').value,
+                apellidos: document.getElementById('apellidos').value,
+                telefono: document.getElementById('telefono').value,
+                correo: document.getElementById('correo').value,
+                institucion_academica: document.getElementById('institucion').value,
+                carrera: document.getElementById('carrera').value,
+                fecha_egreso: document.getElementById('fecha_egreso').value,
+                area_interes_profesional: document.getElementById('area_interes').value,
+                habilidades_clave: document.getElementById('habilidades').value,
+                experiencia_laboral: document.getElementById('experiencia').value,
+                certificaciones: document.getElementById('certificaciones').value,
+                idiomas: document.getElementById('idiomas').value,
+                contraseña: contrasena // Se agrega la contraseña para la identificación
+            };
+
+            fetch(`http://localhost:3000/api/usuario`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(datosActualizados)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.user) {
+                        localStorage.setItem('user', JSON.stringify(data.user));
+                        alert('CV actualizado correctamente');
+                        window.location.href = 'cv.html';
+                    } else {
+                        alert('Error al actualizar el CV: ' + (data.error || 'Error desconocido'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al actualizar el CV');
+                });
+        }
+    </script>
+
+    <script>
+        // Toggle para el menú móvil
+        document.getElementById('menuToggle').addEventListener('click', function () {
+            document.getElementById('menu').classList.toggle('hidden');
+        });
+
+        // Función para confirmar cierre de sesión
+        function confirmarCierreSesion() {
+            if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
+                localStorage.clear();
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Función para toggle del menú de perfil
+        function toggleMenu() {
+            const menuDropdown = document.getElementById('menuDropdown');
+            menuDropdown.classList.toggle('hidden');
+        }
+
+        // Cerrar el menú cuando se hace clic fuera de él
+        document.addEventListener('click', function (event) {
+            const profileMenu = document.getElementById('profileMenu');
+            const menuDropdown = document.getElementById('menuDropdown');
+
+            if (profileMenu && !profileMenu.contains(event.target)) {
+                menuDropdown.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+
+</html>
