@@ -307,8 +307,31 @@
                 if (confirm(`¿Está seguro de elegir a ${correoPostulado} para la vacante ${nombreVacante}?`)) {
                     const user = JSON.parse(localStorage.getItem('user'));
                     
-                    // Aquí deberías agregar la llamada a tu API para actualizar el estado del postulado
-                    // Por ahora solo mostraremos un mensaje
+                    // Obtener todos los candidatos para esta vacante
+                    const response = await fetch(`http://localhost:3000/api/candidatos/${user.nombre_empresa}`);
+                    const candidatos = await response.json();
+                    
+                    // Filtrar los candidatos que NO fueron elegidos para esta vacante específica
+                    const candidatosAEliminar = candidatos.filter(candidato => 
+                        candidato.nombre_vacante === nombreVacante && 
+                        candidato.correo_postulado !== correoPostulado
+                    );
+        
+                    // Eliminar cada postulación no elegida
+                    for (const candidato of candidatosAEliminar) {
+                        await fetch('http://localhost:3000/api/postulaciones', {
+                            method: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                correo_postulado: candidato.correo_postulado,
+                                empresa: user.nombre_empresa,
+                                nombre_vacante: nombreVacante
+                            })
+                        });
+                    }
+        
                     alert(`Postulado ${correoPostulado} elegido para la vacante ${nombreVacante}`);
                     
                     // Actualizar la lista de candidatos
@@ -318,7 +341,8 @@
                 console.error('Error al elegir postulado:', error);
                 alert('Error al elegir el postulado');
             }
-        }
+        }        
+        
     
         function cerrarModal() {
             document.getElementById('modalCandidatos').classList.add('hidden');

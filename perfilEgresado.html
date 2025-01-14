@@ -12,21 +12,27 @@
         .bg-principal {
             background-color: #f8f9fa;
         }
+
         .bg-principal_2 {
             background-color: #ffffff;
         }
+
         .text-verde {
             color: #009a70;
         }
+
         .text-azul {
             color: #0d213f;
         }
+
         .bg-verde {
             background-color: #009a70;
         }
+
         .hover\:text-verde:hover {
             color: #009a70;
         }
+
         .border-verde {
             border-color: #009a70;
         }
@@ -54,7 +60,8 @@
                     </div>
 
                     <!-- Lista de enlaces -->
-                    <ul id="menu" class="absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 md:relative md:top-0 md:flex md:w-auto md:flex-row md:items-center md:gap-6">
+                    <ul id="menu"
+                        class="absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 md:relative md:top-0 md:flex md:w-auto md:flex-row md:items-center md:gap-6">
                         <li><a href="index.html" class="hover:text-verde">INICIO</a></li>
                         <li><a href="empleos.html" class="hover:text-verde">EMPLEOS</a></li>
                         <li><a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a></li>
@@ -85,15 +92,29 @@
             <div class="flex flex-col items-center gap-6 mb-8">
                 <h2 class="text-2xl font-semibold text-azul">Gestionar mi Perfil</h2>
                 <div class="flex flex-wrap justify-center gap-4">
-                    <a href="buscarEmpleos.html" class="rounded-xl bg-verde px-6 py-2 text-white hover:opacity-90 transition duration-300">
-                        <ion-icon name="briefcase-outline" class="align-middle mr-2"></ion-icon>
-                        Ver mis postulaciones
-                    </a>
-                    <a href="editarCV.html" class="rounded-xl bg-verde px-6 py-2 text-white hover:opacity-90 transition duration-300">
+                    <button onclick="verPostulaciones()" class="rounded-xl bg-verde px-6 py-2 text-white hover:opacity-90 transition duration-300">
+                        Ver Mis Postulaciones
+                    </button>
+                    <a href="editarCV.html"
+                        class="rounded-xl bg-verde px-6 py-2 text-white hover:opacity-90 transition duration-300">
                         <ion-icon name="create-outline" class="align-middle mr-2"></ion-icon>
                         Editar CV
                     </a>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalPostulaciones" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white p-8 rounded-lg w-full max-w-4xl max-h-[80vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-azul">Mis Postulaciones</h2>
+                <button onclick="cerrarModalPostulaciones()" class="text-gray-600 hover:text-gray-800">
+                    <ion-icon name="close-outline" class="text-2xl"></ion-icon>
+                </button>
+            </div>
+            <div id="listaPostulaciones" class="space-y-4">
+                <!-- Aquí se cargarán las postulaciones dinámicamente -->
             </div>
         </div>
     </div>
@@ -164,15 +185,15 @@
                     </h2>
                     <div class="ml-6">
                         <div class="grid grid-cols-2 gap-4">
-                            ${userData.habilidades_clave ? 
-                                userData.habilidades_clave.split(',').map(habilidad => 
-                                    `<div class="flex items-center">
+                            ${userData.habilidades_clave ?
+                    userData.habilidades_clave.split(',').map(habilidad =>
+                        `<div class="flex items-center">
                                         <ion-icon name="checkmark-circle-outline" class="text-verde mr-2"></ion-icon>
                                         <span>${habilidad.trim()}</span>
                                     </div>`
-                                ).join('') : 
-                                '<p class="text-gray-600">No especificadas</p>'
-                            }
+                    ).join('') :
+                    '<p class="text-gray-600">No especificadas</p>'
+                }
                         </div>
                     </div>
                 </div>
@@ -214,15 +235,15 @@
                     </h2>
                     <div class="ml-6">
                         <div class="grid grid-cols-2 gap-4">
-                            ${userData.idiomas ? 
-                                userData.idiomas.split(',').map(idioma => 
-                                    `<div class="flex items-center">
+                            ${userData.idiomas ?
+                    userData.idiomas.split(',').map(idioma =>
+                        `<div class="flex items-center">
                                         <ion-icon name="checkmark-circle-outline" class="text-verde mr-2"></ion-icon>
                                         <span>${idioma.trim()}</span>
                                     </div>`
-                                ).join('') : 
-                                '<p class="text-gray-600">No especificadas</p>'
-                            }
+                    ).join('') :
+                    '<p class="text-gray-600">No especificadas</p>'
+                }
                         </div>
                     </div>
                 </div>
@@ -233,6 +254,96 @@
         document.getElementById('menuToggle').addEventListener('click', () => {
             document.getElementById('menu').classList.toggle('hidden');
         });
+    </script>
+    <script>
+        async function verPostulaciones() {
+            try {
+                const user = JSON.parse(localStorage.getItem('user'));
+                const response = await fetch(`http://localhost:3000/api/postulaciones/${user.correo}`);
+
+                if (response.ok) {
+                    const postulaciones = await response.json();
+                    const listaPostulaciones = document.getElementById('listaPostulaciones');
+
+                    if (postulaciones.length === 0) {
+                        listaPostulaciones.innerHTML = `
+                    <div class="text-center p-4 bg-gray-100 rounded-lg">
+                        <p>No hay postulaciones actualmente.</p>
+                    </div>
+                `;
+                    } else {
+                        listaPostulaciones.innerHTML = postulaciones.map(postulacion => `
+                    <div class="bg-gray-50 p-4 rounded-lg shadow mb-4">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-bold text-lg">${postulacion.empresa}</h3>
+                                <p class="text-gray-600">Nombre de Vacante: ${postulacion.nombre_vacante}</p>
+                                <p class="text-gray-600">Tipo de Vacante: ${postulacion.tipo_vacante}</p>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="verDetallesVacante('${postulacion.id_vacante}')" 
+                                    class="bg-azul text-white px-3 py-1 rounded hover:bg-opacity-90 transition">
+                                    Ver Detalles
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                    }
+
+                    document.getElementById('modalPostulaciones').classList.remove('hidden');
+                } else {
+                    throw new Error('Error al cargar las postulaciones');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('listaPostulaciones').innerHTML = `
+            <div class="text-center p-4 bg-red-100 rounded-lg">
+                <p class="text-red-600">Error al cargar las postulaciones. Por favor, intente nuevamente.</p>
+            </div>
+        `;
+            }
+        }
+
+        // Función para ver detalles de una vacante específica
+        async function verDetallesVacante(idVacante) {
+            try {
+                const response = await fetch(`http://localhost:3000/api/vacante/${idVacante}`);
+                if (response.ok) {
+                    const vacante = await response.json();
+                    // Aquí puedes manejar la visualización de los detalles de la vacante
+                    alert(`Detalles de la vacante: ${JSON.stringify(vacante)}`);
+                }
+            } catch (error) {
+                console.error('Error al cargar los detalles de la vacante:', error);
+                alert('Error al cargar los detalles de la vacante');
+            }
+        }
+
+        // Función para cerrar el modal de postulaciones
+        function cerrarModalPostulaciones() {
+            document.getElementById('modalPostulaciones').classList.add('hidden');
+        }
+
+        // Event listeners para el modal de postulaciones
+        document.addEventListener('DOMContentLoaded', () => {
+            const modalPostulaciones = document.getElementById('modalPostulaciones');
+            if (modalPostulaciones) {
+                modalPostulaciones.addEventListener('click', function (e) {
+                    if (e.target === this) {
+                        cerrarModalPostulaciones();
+                    }
+                });
+
+                const modalContent = modalPostulaciones.querySelector('div');
+                if (modalContent) {
+                    modalContent.addEventListener('click', function (e) {
+                        e.stopPropagation();
+                    });
+                }
+            }
+        });
+
     </script>
 </body>
 
