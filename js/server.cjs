@@ -492,48 +492,118 @@ app.delete("/api/servicio-social/:vacante/:nombreEmpresa", (req, res) => {
 app.post("/api/postulaciones", (req, res) => {
     const { correo_postulado, tipo_vacante, empresa, nombre_vacante } = req.body;
 
-    // Primero verificar si ya existe una postulación similar
-    const checkQuery = `
-        SELECT * FROM postulaciones 
-        WHERE correo_postulado = ? 
-        AND nombre_vacante = ? 
-        AND empresa = ?`;
+    // Insertar directamente la nueva postulación
+    const insertQuery = `
+        INSERT INTO postulaciones 
+        (correo_postulado, tipo_vacante, empresa, nombre_vacante) 
+        VALUES (?, ?, ?, ?)`;
 
-    conexion.query(checkQuery, [correo_postulado, nombre_vacante, empresa], (err, results) => {
-        if (err) {
-            console.error("Error al verificar postulación existente:", err);
-            return res.status(500).json({ error: "Error al verificar postulación" });
-        }
-
-        // Si ya existe una postulación similar
-        if (results.length > 0) {
-            return res.status(400).json({ message: "Ya te has postulado a esta vacante" });
-        }
-
-        // Si no existe, proceder a insertar la nueva postulación
-        const insertQuery = `
-            INSERT INTO postulaciones 
-            (correo_postulado, tipo_vacante, empresa, nombre_vacante) 
-            VALUES (?, ?, ?, ?)`;
-
-        conexion.query(
-            insertQuery,
-            [correo_postulado, tipo_vacante, empresa, nombre_vacante],
-            (err, results) => {
-                if (err) {
-                    console.error("Error al insertar postulación:", err);
-                    return res.status(500).json({ error: "Error al procesar la postulación" });
-                }
-
-                res.status(201).json({
-                    message: "Postulación realizada con éxito",
-                    id: results.insertId
-                });
+    conexion.query(
+        insertQuery,
+        [correo_postulado, tipo_vacante, empresa, nombre_vacante],
+        (err, results) => {
+            if (err) {
+                console.error("Error al insertar postulación:", err);
+                return res.status(500).json({ error: "Error al procesar la postulación" });
             }
-        );
+
+            res.status(201).json({
+                message: "Postulación realizada con éxito",
+                id: results.insertId
+            });
+        }
+    );
+});
+
+
+// Ruta para obtener postulaciones de un usuario
+app.get('/api/postulaciones/:email', (req, res) => {
+    const { email } = req.params;
+    const query = "SELECT * FROM postulaciones WHERE correo_postulado = ?";
+
+    conexion.query(query, [email], (err, results) => {
+        if (err) {
+            console.error("Error al ejecutar la consulta: ", err);
+            return res.status(500).json({ error: "Error al obtener las postulaciones" });
+        }
+        res.json(results);
     });
 });
 
+// Ruta para eliminar una postulación
+app.delete('/api/postulaciones', (req, res) => {
+    const { correo_postulado, empresa, nombre_vacante } = req.body;
+    const query = `
+        DELETE FROM postulaciones 
+        WHERE correo_postulado = ? 
+        AND empresa = ? 
+        AND nombre_vacante = ?
+    `;
+
+    conexion.query(query, [correo_postulado, empresa, nombre_vacante], (err, results) => {
+        if (err) {
+            console.error("Error al ejecutar la consulta: ", err);
+            return res.status(500).json({ error: "Error al eliminar la postulación" });
+        }
+
+        if (results.affectedRows === 0) {
+            return res.status(404).json({ error: "Postulación no encontrada" });
+        }
+
+        res.json({ message: "Postulación eliminada correctamente" });
+    });
+});
+
+// Ruta para ver postulaciones
+app.get("/api/candidatos/:nombre_empresa", (req, res) => {
+    const nombre_empresa = req.params.nombre_empresa;
+    console.log("Buscando candidatos para empresa:", nombre_empresa); // Agrega este log
+
+    const query = `
+        SELECT 
+            correo_postulado,
+            tipo_vacante,
+            empresa,
+            nombre_vacante
+        FROM postulaciones
+        WHERE empresa = ?
+        ORDER BY correo_postulado
+    `;
+
+    conexion.query(query, [nombre_empresa], (err, results) => {
+        if (err) {
+            console.error("Error en la consulta:", err);
+            return res.status(500).json({ error: "Error al obtener los candidatos" });
+        }
+        
+        console.log("Resultados encontrados:", results); // Agrega este log
+        res.json(results);
+    });
+});
+
+// Ruta para ver info del egresado
+app.get("/api/perfil-egresado/:correo", (req, res) => {
+    const correo = req.params.correo;
+    
+    const query = `
+        SELECT *
+        FROM datos_egresado
+        WHERE correo = ?
+    `;
+
+    conexion.query(query, [correo], (err, results) => {
+        if (err) {
+            console.error("Error en la consulta:", err);
+            return res.status(500).json({ error: "Error al obtener los datos del egresado" });
+        }
+        
+        if (results.length === 0) {
+            return res.status(404).json({ error: "Egresado no encontrado" });
+        }
+
+        res.json(results[0]);
+    });
+});
 
 // Iniciar el servidor
 app.listen(port, () => {

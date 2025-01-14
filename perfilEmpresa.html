@@ -36,6 +36,51 @@
         .border-verde {
             border-color: #009a70;
         }
+        .modal-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-scroll::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .modal-scroll::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+        .modal-scroll::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        .modal-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .modal-scroll::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        .modal-scroll::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        
+        .modal-scroll::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        /* Añade estas clases de color */
+        .bg-azul {
+            background-color: #0d213f; /* Este es un azul estándar, puedes cambiarlo por el color exacto que necesites */
+        }
+        
+        .bg-verde {
+            background-color: #009a70; /* Este es un verde estándar, puedes cambiarlo por el color exacto que necesites */
+        }
+        
+        .hover\:bg-opacity-90:hover {
+            opacity: 0.9;
+        }
     </style>
 </head>
 
@@ -100,11 +145,11 @@
                     <ion-icon name="briefcase-outline" class="align-middle mr-2"></ion-icon>
                     Publicar Servicio Social
                 </a>
-                <a href="candidatos.html"
+                <button onclick="verCandidatos()"
                     class="rounded-xl bg-verde px-6 py-2 text-white hover:opacity-90 transition duration-300">
                     <ion-icon name="people-outline" class="align-middle mr-2"></ion-icon>
                     Ver Candidatos
-                </a>
+                </button>
                 <a href="administracion.html" id="adminButton"
                     class="hidden rounded-xl bg-verde px-6 py-2 text-white hover:opacity-90 transition duration-300">
                     <ion-icon name="people-outline" class="align-middle mr-2"></ion-icon>
@@ -114,6 +159,19 @@
 
         </div>
     </div>
+
+    <div id="modalCandidatos" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+        <div class="bg-white p-8 rounded-xl max-w-4xl w-full mx-4 max-h-[80vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-azul">Candidatos Postulados</h2>
+                <button onclick="cerrarModal()" class="text-gray-600 hover:text-gray-800">
+                    <ion-icon name="close-outline" class="text-2xl"></ion-icon>
+                </button>
+            </div>
+            <div id="listaCandidatos" class="space-y-4">
+            </div>
+        </div>
+    </div>    
 
     <footer class="bg-gradient-to-b from-verde to-azul p-5 text-center text-white">
         <div class="text-sm">
@@ -126,7 +184,7 @@
         function confirmarCierreSesion() {
             if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
                 localStorage.clear();
-                window.location.href = 'login.html';
+                window.location.href = 'IniciarSesion.html';
             }
         }
 
@@ -171,6 +229,113 @@
             document.getElementById('adminButton').classList.remove('hidden');
         }
     </script>
+    <script>
+        async function verCandidatos() {
+            try {
+                const user = JSON.parse(localStorage.getItem('user'));
+                const response = await fetch(`http://localhost:3000/api/candidatos/${user.nombre_empresa}`);
+                
+                if (response.ok) {
+                    const candidatos = await response.json();
+                    const listaCandidatos = document.getElementById('listaCandidatos');
+                    
+                    if (candidatos.length === 0) {
+                        listaCandidatos.innerHTML = `
+                            <div class="text-center p-4 bg-gray-100 rounded-lg">
+                                <p>No hay candidatos postulados actualmente.</p>
+                            </div>
+                        `;
+                    } else {
+                        listaCandidatos.innerHTML = candidatos.map(candidato => `
+                            <div class="bg-gray-50 p-4 rounded-lg shadow">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="font-bold text-lg">${candidato.correo_postulado}</h3>
+                                        <p class="text-gray-600">Tipo de Vacante: ${candidato.tipo_vacante}</p>
+                                        <p class="text-gray-600">Nombre de Vacante: ${candidato.nombre_vacante}</p>
+                                    </div>
+                                    <div class="flex gap-2">
+                                        <button onclick="verPerfil('${candidato.correo_postulado}')" 
+                                           class="bg-azul text-white px-3 py-1 rounded hover:bg-opacity-90 transition">
+                                            Ver Perfil
+                                        </button>
+                                        <button onclick="elegirPostulado('${candidato.correo_postulado}', '${candidato.nombre_vacante}')"
+                                                class="bg-verde text-white px-3 py-1 rounded hover:bg-opacity-90 transition">
+                                            Elegir Postulado
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('');
+                    }
+                    
+                    document.getElementById('modalCandidatos').classList.remove('hidden');
+                } else {
+                    throw new Error('Error al cargar los candidatos');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('listaCandidatos').innerHTML = `
+                    <div class="text-center p-4 bg-red-100 rounded-lg">
+                        <p class="text-red-600">Error al cargar los candidatos. Por favor, intente nuevamente.</p>
+                    </div>
+                `;
+            }
+        }
+    
+        async function verPerfil(correo) {
+            try {
+                const response = await fetch(`http://localhost:3000/api/perfil-egresado/${correo}`);
+                
+                if (response.ok) {
+                    const perfilData = await response.json();
+                    // Guardar los datos del perfil en localStorage
+                    localStorage.setItem('perfil_actual', JSON.stringify(perfilData));
+                    // Redirigir a la página de perfil
+                    window.location.href = 'verPerfil.html';
+                } else {
+                    throw new Error('Error al obtener el perfil');
+                }
+            } catch (error) {
+                console.error('Error al cargar el perfil:', error);
+                alert('Error al cargar el perfil del egresado');
+            }
+        }
+    
+        async function elegirPostulado(correoPostulado, nombreVacante) {
+            try {
+                if (confirm(`¿Está seguro de elegir a ${correoPostulado} para la vacante ${nombreVacante}?`)) {
+                    const user = JSON.parse(localStorage.getItem('user'));
+                    
+                    // Aquí deberías agregar la llamada a tu API para actualizar el estado del postulado
+                    // Por ahora solo mostraremos un mensaje
+                    alert(`Postulado ${correoPostulado} elegido para la vacante ${nombreVacante}`);
+                    
+                    // Actualizar la lista de candidatos
+                    await verCandidatos();
+                }
+            } catch (error) {
+                console.error('Error al elegir postulado:', error);
+                alert('Error al elegir el postulado');
+            }
+        }
+    
+        function cerrarModal() {
+            document.getElementById('modalCandidatos').classList.add('hidden');
+        }
+    
+        // Event listeners para el modal
+        document.getElementById('modalCandidatos').addEventListener('click', function(e) {
+            if (e.target === this) {
+                cerrarModal();
+            }
+        });
+    
+        document.querySelector('#modalCandidatos > div').addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    </script>
+    
 </body>
 
 </html>

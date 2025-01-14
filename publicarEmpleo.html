@@ -128,70 +128,67 @@
         </div>
     </footer>
     <script>
-        // Función para confirmar el cierre de sesión
-        function confirmarCierreSesion() {
-            if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
-                localStorage.clear();
-                window.location.href = 'login.html';
-            }
-        }
-    
         // Manejo del envío del formulario
-        document.getElementById('publicarServicioSocial').addEventListener('submit', async function (event) {
-            event.preventDefault(); // Prevenir el envío del formulario
-    
-            // Obtener los datos del usuario del localStorage
-            const user = JSON.parse(localStorage.getItem('user'));
-    
-            // Verificar si tenemos el nombre de la empresa
-            if (!user || !user.nombre_empresa) {
-                alert('Error: No se encontró el nombre de la empresa');
-                return;
-            }
-    
-            const servicioData = {
-                vacante: this.vacante.value,
-                nombre_empresa: user.nombre_empresa, // nombre de la empresa desde el localStorage
-                modalidad: this.modalidad.value,
-                descripcion: this.descripcion.value
-            };
-    
-            try {
-                const response = await fetch('http://localhost:3000/api/servicio_social', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${localStorage.getItem('sessionToken')}`
-                    },
-                    body: JSON.stringify(servicioData) // Enviamos los datos como un JSON
-                });
-    
-                // Manejo de la respuesta del servidor
-                if (response.ok) {
-                    const data = await response.json();
-                    alert('Servicio social publicado con éxito! ID: ' + data.id); // Alertar éxito
-                    window.location.href = 'perfilEmpresa.html'; // Redirigir al perfil de la empresa
-                } else {
-                    const error = await response.json();
-                    alert('Error al publicar el servicio social: ' + error.message); // Informar error
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Error al publicar el servicio social. Por favor, intente nuevamente.');
-            }
+document.getElementById('publicarOferta').addEventListener('submit', async function (event) {
+    event.preventDefault();
+
+    // Obtener los datos del usuario del localStorage
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    // Verificar si tenemos la empresa
+    if (!user || !user.nombre_empresa) {
+        alert('Error: No se encontró el nombre de la empresa');
+        return;
+    }
+
+    // Crear el objeto con los datos de la vacante
+    const vacante = {
+        vacante: this.vacante.value,
+        empresa: user.nombre_empresa,
+        modalidad: this.modalidad.value,
+        salario: this.salario.value.replace(/[^0-9]/g, ''), // Eliminar caracteres no numéricos
+        descripcion: this.descripcion.value
+    };
+
+    try {
+        const response = await fetch('http://localhost:3000/api/vacantes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(vacante)
         });
+
+        if (response.ok) {
+            alert('Vacante publicada correctamente');
+            window.location.href = 'perfilEmpresa.html';
+        } else {
+            const errorData = await response.json();
+            alert(errorData.error || 'Error al publicar la vacante');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error al conectar con el servidor');
+    }
+});
+
+// Formatear el campo de salario mientras el usuario escribe
+document.getElementById('salario').addEventListener('input', function(e) {
+    // Eliminar todos los caracteres no numéricos
+    let valor = this.value.replace(/[^0-9]/g, '');
     
-        // Toggle para el menú móvil
-        document.getElementById('menuToggle').addEventListener('click', () => {
-            document.getElementById('menu').classList.toggle('hidden');
-        });
-    
-        // Comprobar los datos del usuario al cargar la página
-        document.addEventListener('DOMContentLoaded', function() {
-            const user = JSON.parse(localStorage.getItem('user'));
-            console.log('Datos del usuario:', user);
-            console.log('Nombre de la empresa:', user ? user.nombre_empresa : 'No disponible');
-        });
+    // Convertir a número y formatear con separadores de miles
+    if (valor) {
+        const numero = parseInt(valor);
+        this.value = numero.toLocaleString('es-MX');
+    }
+});
+
+// Toggle para el menú móvil
+document.getElementById('menuToggle').addEventListener('click', () => {
+    document.getElementById('menu').classList.toggle('hidden');
+});
+
     </script>
     
 </body>

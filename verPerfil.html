@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>ESCO-NECTADOS - Perfil</title>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        verde: '#009a70',
+                        azul: '#0d213f',
+                    },
+                    screens: {
+                        'custom': '768px'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .bg-principal {
+            background-color: #f7f7f7;
+        }
+
+        .text-verde {
+            color: #4CAF50;
+        }
+
+        .text-azul {
+            color: #2196F3;
+        }
+
+        .bg-verde {
+            background-color: #4CAF50;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        footer {
+            margin-top: auto;
+        }
+    </style>
+</head>
+
+<body class="w-full bg-principal">
+    <header>
+        <nav class="m-auto bg-principal text-base font-bold text-azul drop-shadow-md">
+            <div class="relative flex items-center justify-between custom:mx-7">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <img src="./public/logo.png" alt="Logo" class="h-16 w-auto" />
+                    <span class="font-bold">ESCO-NECTADOS</span>
+                </div>
+
+                <ul id="menu"
+                    class="absolute top-16 hidden w-full flex-col justify-between justify-items-center gap-8 bg-principal py-6 custom:relative custom:top-0 custom:flex custom:w-auto custom:flex-row custom:items-center custom:gap-6">
+                    <li><a href="index.html" class="hover:text-verde">INICIO</a></li>
+                    <li><a href="empleos.html" class="hover:text-verde">EMPLEOS</a></li>
+                    <li><a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a></li>
+                    <li><a href="certificaciones.html" class="hover:text-verde">CERTIFICACIONES</a></li>
+                    <li><a href="servicioSocial.html" class="hover:text-verde">SERVICIO SOCIAL</a></li>
+                    <li><a href="sobreNosotros.html" class="hover:text-verde">SOBRE NOSOTROS</a></li>
+                </ul>
+
+                <!-- Botón Iniciar Sesión e icono de menú -->
+                <div class="flex items-center justify-end gap-4">
+                    <script>
+                        const sessionToken = localStorage.getItem('sessionToken');
+                        const userType = localStorage.getItem('userType');
+
+                        if (sessionToken) {
+                            document.write(`
+                                <div class="relative group">
+                                    <button class="sm:text-sm rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde flex items-center gap-2">
+                                        <ion-icon name="person-circle-outline"></ion-icon>
+                                        MI PERFIL
+                                    </button>
+                                    <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-2">
+                                        <a href="${userType === 'empresa' ? 'perfilEmpresa.html' : 'perfilEgresado.html'}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-verde hover:text-white">Ver Perfil</a>
+                                        <button onclick="confirmarCierreSesion()" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-verde hover:text-white">Cerrar Sesión</button>
+                                    </div>
+                                </div>
+                            `);
+                        } else {
+                            document.write(`
+                                <a href="./iniciarSesion.html" class="sm:text-sm rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde">INICIAR SESIÓN</a>
+                            `);
+                        }
+                    </script>
+                    <ion-icon class="cursor-pointer text-3xl custom:hidden" id="menuToggle" name="menu"></ion-icon>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="content space-y-8">
+        <!-- Botón Regresar -->
+        <div class="container mx-auto px-4 pt-8">
+            <button onclick="window.history.back()" 
+                    class="bg-verde hover:bg-verde/80 text-white font-bold py-2 px-4 rounded inline-flex items-center mb-4">
+                <ion-icon name="arrow-back-outline" class="mr-2"></ion-icon>
+                Regresar
+            </button>
+        </div>
+
+        <div class="container mx-auto px-4">
+            <div id="egresadoInfo" class="bg-white rounded-lg shadow-lg p-8">
+                <!-- El contenido del perfil se insertará aquí mediante JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <footer
+        class="mt-4 bg-gradient-to-b from-verde to-azul p-5 text-center text-white sm:relative sm:mt-8 lg:inset-x-0 lg:bottom-0">
+        <div class="text-1xl">
+            © 2024 Copyright:
+            <a href="#" class="text-verde underline">KICR, IMO, MFLP, JELG, JUMJ</a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const perfilData = JSON.parse(localStorage.getItem('perfil_actual'));
+            if (perfilData) {
+                mostrarPerfil(perfilData);
+            } else {
+                alert('No se encontraron datos del perfil');
+                window.location.href = 'index.html';
+            }
+        });
+        
+        function mostrarPerfil(perfil) {
+            document.getElementById('egresadoInfo').innerHTML = `
+                <div class="border-b-2 border-verde pb-6 mb-8">
+                    <h1 class="text-3xl font-bold text-azul mb-4">${perfil.nombre} ${perfil.apellidos}</h1>
+                    <div class="flex flex-col gap-2 text-gray-600">
+                        <p class="flex items-center">
+                            <ion-icon name="mail-outline" class="mr-2"></ion-icon>
+                            ${perfil.correo}
+                        </p>
+                        <p class="flex items-center">
+                            <ion-icon name="call-outline" class="mr-2"></ion-icon>
+                            ${perfil.telefono}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h2 class="text-xl font-semibold text-verde mb-4 flex items-center">
+                        <ion-icon name="school-outline" class="mr-2"></ion-icon>
+                        Formación Académica
+                    </h2>
+                    <div class="ml-6">
+                        <p class="font-semibold text-lg">${perfil.carrera}</p>
+                        <p class="text-gray-600">${perfil.institucion_academica || 'No especificada'}</p>
+                        <p class="text-gray-600">Fecha de egreso: ${perfil.fecha_egreso || 'No especificada'}</p>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h2 class="text-xl font-semibold text-verde mb-4 flex items-center">
+                        <ion-icon name="person-outline" class="mr-2"></ion-icon>
+                        Perfil Profesional
+                    </h2>
+                    <div class="ml-6">
+                        <p class="text-gray-700 leading-relaxed">
+                            Egresado de ${perfil.carrera} con especialización en 
+                            ${perfil.area_interes_profesional || 'áreas diversas'}. 
+                            Enfocado en el desarrollo profesional y la mejora continua.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h2 class="text-xl font-semibold text-verde mb-4 flex items-center">
+                        <ion-icon name="ribbon-outline" class="mr-2"></ion-icon>
+                        Habilidades Profesionales
+                    </h2>
+                    <div class="ml-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            ${perfil.habilidades_clave ? 
+                                perfil.habilidades_clave.split(',').map(habilidad => 
+                                    `<div class="flex items-center">
+                                        <ion-icon name="checkmark-circle-outline" class="text-verde mr-2"></ion-icon>
+                                        <span>${habilidad.trim()}</span>
+                                    </div>`
+                                ).join('') : 
+                                '<p class="text-gray-600">No especificadas</p>'
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h2 class="text-xl font-semibold text-verde mb-4 flex items-center">
+                        <ion-icon name="briefcase-outline" class="mr-2"></ion-icon>
+                        Intereses Profesionales
+                    </h2>
+                    <div class="ml-6">
+                        <p class="text-gray-700">${perfil.area_interes_profesional || 'No especificados'}</p>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h2 class="text-xl font-semibold text-verde mb-4 flex items-center">
+                        <ion-icon name="alarm-outline" class="mr-2"></ion-icon>
+                        Experiencia Laboral
+                    </h2>
+                    <div class="ml-6">
+                        <p class="text-gray-700">${perfil.experiencia_laboral || 'No especificada'}</p>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h2 class="text-xl font-semibold text-verde mb-4 flex items-center">
+                        <ion-icon name="desktop-outline" class="mr-2"></ion-icon>
+                        Certificaciones
+                    </h2>
+                    <div class="ml-6">
+                        <p class="text-gray-700">${perfil.certificaciones || 'No especificadas'}</p>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h2 class="text-xl font-semibold text-verde mb-4 flex items-center">
+                        <ion-icon name="language-outline" class="mr-2"></ion-icon>
+                        Idiomas
+                    </h2>
+                    <div class="ml-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            ${perfil.idiomas ? 
+                                perfil.idiomas.split(',').map(idioma => 
+                                    `<div class="flex items-center">
+                                        <ion-icon name="checkmark-circle-outline" class="text-verde mr-2"></ion-icon>
+                                        <span>${idioma.trim()}</span>
+                                    </div>`
+                                ).join('') : 
+                                '<p class="text-gray-600">No especificadas</p>'
+                            }
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Toggle menú móvil
+        document.getElementById('menuToggle')?.addEventListener('click', () => {
+            document.getElementById('menu').classList.toggle('hidden');
+        });
+
+        function confirmarCierreSesion() {
+            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+                localStorage.removeItem('sessionToken');
+                localStorage.removeItem('userType');
+                window.location.href = 'index.html';
+            }
+        }
+    </script>
+</body>
+
+</html>

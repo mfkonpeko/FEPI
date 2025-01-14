@@ -150,11 +150,11 @@
     <script>
         async function handleLogin(event) {
             event.preventDefault();
-
+        
             const email = document.querySelector('input[name="username"]').value;
             const password = document.querySelector('input[name="password"]').value;
             const userType = document.querySelector('select[name="userType"]').value;
-
+        
             try {
                 const response = await fetch('http://localhost:3000/api/login', {
                     method: 'POST',
@@ -167,33 +167,90 @@
                         userType
                     })
                 });
-
+        
                 const data = await response.json();
-
+        
                 if (response.ok) {
-                
+                    console.log('Datos recibidos del servidor:', data);
+        
                     // Guardar la información del usuario y el token en localStorage
                     localStorage.setItem('user', JSON.stringify(data.user));
                     localStorage.setItem('userType', data.userType);
                     localStorage.setItem('sessionToken', data.token);
-                    localStorage.setItem('userEmail', data.email);
-
+                    localStorage.setItem('userEmail', email);
+        
+                    console.log('Datos guardados en localStorage:', {
+                        user: localStorage.getItem('user'),
+                        userType: localStorage.getItem('userType'),
+                        sessionToken: localStorage.getItem('sessionToken'),
+                        userEmail: localStorage.getItem('userEmail')
+                    });
+        
+                    // Función helper para verificar la sesión
+                    const checkSession = () => {
+                        const storedEmail = localStorage.getItem('userEmail');
+                        const storedToken = localStorage.getItem('sessionToken');
+                        const storedType = localStorage.getItem('userType');
+        
+                        return {
+                            isValid: !!(storedEmail && storedToken && storedType),
+                            email: storedEmail,
+                            token: storedToken,
+                            type: storedType
+                        };
+                    };
+        
+                    // Verificar la sesión antes de redirigir
+                    const sessionStatus = checkSession();
+                    console.log('Estado de la sesión antes de redirigir:', sessionStatus);
+        
+                    if (!sessionStatus.isValid) {
+                        throw new Error('Error al guardar los datos de sesión');
+                    }
+        
                     // Redirigir según el tipo de usuario
                     if (email === 'admin@gmail.com' && password === 'admin') {
-                        window.location.href = 'administracion.html'; // Redirige a la pantalla de administración
+                        window.location.href = 'administracion.html';
                     } else if (data.userType === 'empresa') {
                         window.location.href = 'perfilEmpresa.html';
                     } else if (data.userType === 'egresado') {
                         window.location.href = 'perfilEgresado.html';
                     }
                 } else {
+                    console.error('Error en la respuesta:', data);
                     alert(data.error || 'Error al iniciar sesión');
                 }
             } catch (error) {
-                console.error('Error:', error);
-                alert('Error al conectar con el servidor');
+                console.error('Error en el proceso de login:', error);
+                alert('Error: ' + error.message);
             }
         }
+        
+        // Función para verificar el estado de la sesión
+        function verificarSesion() {
+            const sessionData = {
+                email: localStorage.getItem('userEmail'),
+                token: localStorage.getItem('sessionToken'),
+                type: localStorage.getItem('userType'),
+                user: localStorage.getItem('user')
+            };
+        
+            console.log('Estado actual de la sesión:', sessionData);
+            return sessionData.email && sessionData.token;
+        }
+        
+        // Event listener para cuando se carga el documento
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Verificando estado inicial de la sesión...');
+            const sesionActiva = verificarSesion();
+            console.log('¿Sesión activa?:', sesionActiva);
+        
+            // Event listener para el formulario
+            const loginForm = document.querySelector('form');
+            if (loginForm) {
+                loginForm.addEventListener('submit', handleLogin);
+            }
+        });        
     </script>
 </body>
 
