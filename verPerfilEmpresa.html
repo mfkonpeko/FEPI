@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>ESCO-NECTADOS - Perfil Empresa</title>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        verde: '#009a70',
+                        azul: '#0d213f',
+                    },
+                    screens: {
+                        'custom': '768px'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .bg-principal {
+            background-color: #f7f7f7;
+        }
+
+        .text-verde {
+            color: #4CAF50;
+        }
+
+        .text-azul {
+            color: #2196F3;
+        }
+
+        .bg-verde {
+            background-color: #4CAF50;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        footer {
+            margin-top: auto;
+        }
+    </style>
+</head>
+
+<body class="w-full bg-principal">
+    <header>
+        <nav class="m-auto bg-principal text-base font-bold text-azul drop-shadow-md">
+            <div class="relative flex items-center justify-between custom:mx-7">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <img src="./public/logo.png" alt="Logo" class="h-16 w-auto" />
+                    <span class="font-bold">ESCO-NECTADOS</span>
+                </div>
+
+                <ul id="menu"
+                    class="absolute top-16 hidden w-full flex-col justify-between gap-8 bg-principal py-6 custom:relative custom:top-0 custom:flex custom:w-auto custom:flex-row custom:items-center custom:gap-6">
+                    <li><a href="index.html" class="hover:text-verde">INICIO</a></li>
+                    <li><a href="empleos.html" class="hover:text-verde">EMPLEOS</a></li>
+                    <li><a href="tips.html" class="hover:text-verde">TIPS Y CONSEJOS</a></li>
+                    <li><a href="certificaciones.html" class="hover:text-verde">CERTIFICACIONES</a></li>
+                    <li><a href="servicioSocial.html" class="hover:text-verde">SERVICIO SOCIAL</a></li>
+                    <li><a href="sobreNosotros.html" class="hover:text-verde">SOBRE NOSOTROS</a></li>
+                </ul>
+
+                <!-- Botón Iniciar Sesión e icono de menú -->
+                <div class="flex items-center justify-end gap-4">
+                    <script>
+                        const sessionToken = localStorage.getItem('sessionToken');
+                        const userType = localStorage.getItem('userType');
+
+                        if (sessionToken) {
+                            document.write(`
+                                <div class="relative group">
+                                    <button class="sm:text-sm rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde flex items-center gap-2">
+                                        <ion-icon name="person-circle-outline"></ion-icon>
+                                        MI PERFIL
+                                    </button>
+                                    <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-2">
+                                        <a href="${userType === 'empresa' ? 'perfilEmpresa.html' : 'perfilEgresado.html'}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-verde hover:text-white">Ver Perfil</a>
+                                        <button onclick="confirmarCierreSesion()" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-verde hover:text-white">Cerrar Sesión</button>
+                                    </div>
+                                </div>
+                            `);
+                        } else {
+                            document.write(`
+                                <a href="./iniciarSesion.html" class="sm:text-sm rounded-xl bg-verde px-5 py-1 text-white hover:border hover:border-verde hover:bg-principal hover:text-verde">INICIAR SESIÓN</a>
+                            `);
+                        }
+                    </script>
+                    <ion-icon class="cursor-pointer text-3xl custom:hidden" id="menuToggle" name="menu"></ion-icon>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="content space-y-8">
+        <!-- Botón Regresar -->
+        <div class="container mx-auto px-4 pt-8">
+            <button onclick="window.history.back()" 
+                    class="bg-verde hover:bg-verde/80 text-white font-bold py-2 px-4 rounded inline-flex items-center mb-4">
+                <ion-icon name="arrow-back-outline" class="mr-2"></ion-icon>
+                Regresar
+            </button>
+        </div>
+
+        <div class="container mx-auto px-4">
+            <div id="empresaInfo" class="bg-white rounded-lg shadow-lg p-8">
+                <!-- El contenido del perfil se insertará aquí mediante JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <footer
+        class="mt-4 bg-gradient-to-b from-verde to-azul p-5 text-center text-white sm:relative sm:mt-8 lg:inset-x-0 lg:bottom-0">
+        <div class="text-1xl">
+            © 2024 Copyright:
+            <a href="#" class="text-verde underline">KICR, IMO, MFLP, JELG, JUMJ</a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const perfilData = JSON.parse(localStorage.getItem('perfil_empresa_actual'));
+            if (perfilData) {
+                mostrarPerfilEmpresa(perfilData);
+            } else {
+                alert('No se encontraron datos del perfil de la empresa');
+                window.location.href = 'index.html';
+            }
+        });
+        
+        function mostrarPerfilEmpresa(perfil) {
+            const empresaInfo = document.getElementById('empresaInfo');
+            empresaInfo.innerHTML = `
+                <div class="space-y-6">
+                    <div class="border-b pb-4">
+                        <h1 class="text-3xl font-bold text-azul">${perfil.nombre_empresa}</h1>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h2 class="text-xl font-semibold mb-4 text-verde">Información de la Empresa</h2>
+                            <div class="space-y-3">
+                                <p><span class="font-semibold">Representante Legal:</span> ${perfil.representante_legal}</p>
+                                <p><span class="font-semibold">Área de Trabajo:</span> ${perfil.area_trabajo}</p>
+                                <p><span class="font-semibold">RFC:</span> ${perfil.rfc}</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-semibold mb-4 text-verde">Contacto</h2>
+                            <div class="space-y-3">
+                                <p><span class="font-semibold">Teléfono:</span> ${perfil.telefono}</p>
+                                <p><span class="font-semibold">Correo:</span> ${perfil.correo}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Toggle menú móvil
+        document.getElementById('menuToggle')?.addEventListener('click', () => {
+            document.getElementById('menu').classList.toggle('hidden');
+        });
+
+        function confirmarCierreSesion() {
+            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+                localStorage.removeItem('sessionToken');
+                localStorage.removeItem('userType');
+                window.location.href = 'index.html';
+            }
+        }
+    </script>
+</body>
+
+</html>

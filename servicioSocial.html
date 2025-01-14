@@ -189,16 +189,23 @@
         </div>
 
         <!-- Botones -->
-        <div class="flex justify-center gap-4 mt-6">
-            <a href="registroEmpresa.html"
-                class="px-6 py-2 text-white bg-verde hover:bg-white hover:border-verde hover:text-verde border rounded-full">
-                Regístrate como Empresa
-            </a>
-            <a href="formUsuario.html"
-                class="px-6 py-2 text-white bg-verde hover:bg-white hover:border-verde hover:text-verde border rounded-full">
-                Regístrate como Estudiante
-            </a>
-        </div>
+        <div class="mx-auto flex w-full justify-center font-bold">
+            <script>
+              // Si no hay un token de sesión, mostramos los botones de registro
+              if (!sessionToken) {
+                document.write(`
+                  <a href="registroEmpresa.html"
+                    class="mr-4 rounded-xl bg-verde px-5 py-1 text-white hover:border hover:opacity-90">
+                    Registrate como empresa
+                  </a>
+                  <a href="/formUsuario.html"
+                    class="ml-4 rounded-xl border border-verde bg-principal px-5 py-1 text-verde hover:opacity-90">
+                    Registrate como Egresado
+                  </a>
+                `);
+              }
+            </script>
+          </div>
     </main>
 
     <footer

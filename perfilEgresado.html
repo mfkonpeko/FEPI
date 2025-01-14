@@ -260,37 +260,37 @@
             try {
                 const user = JSON.parse(localStorage.getItem('user'));
                 const response = await fetch(`http://localhost:3000/api/postulaciones/${user.correo}`);
-
+        
                 if (response.ok) {
                     const postulaciones = await response.json();
                     const listaPostulaciones = document.getElementById('listaPostulaciones');
-
+        
                     if (postulaciones.length === 0) {
                         listaPostulaciones.innerHTML = `
-                    <div class="text-center p-4 bg-gray-100 rounded-lg">
-                        <p>No hay postulaciones actualmente.</p>
-                    </div>
-                `;
+                            <div class="text-center p-4 bg-gray-100 rounded-lg">
+                                <p>No hay postulaciones actualmente.</p>
+                            </div>
+                        `;
                     } else {
                         listaPostulaciones.innerHTML = postulaciones.map(postulacion => `
-                    <div class="bg-gray-50 p-4 rounded-lg shadow mb-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-bold text-lg">${postulacion.empresa}</h3>
-                                <p class="text-gray-600">Nombre de Vacante: ${postulacion.nombre_vacante}</p>
-                                <p class="text-gray-600">Tipo de Vacante: ${postulacion.tipo_vacante}</p>
+                            <div class="bg-gray-50 p-4 rounded-lg shadow mb-4">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="font-bold text-lg">${postulacion.empresa}</h3>
+                                        <p class="text-gray-600">Tipo de Vacante: ${postulacion.tipo_vacante}</p>
+                                        <p class="text-gray-600">Nombre de Vacante: ${postulacion.nombre_vacante}</p>
+                                    </div>
+                                    <div class="flex gap-2">
+                                        <button onclick="verPerfil('${postulacion.empresa}')" 
+                                            class="rounded-xl bg-verde px-6 py-2 text-white hover:opacity-90 transition duration-300">
+                                            Ver Perfil
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="flex gap-2">
-                                <button onclick="verDetallesVacante('${postulacion.id_vacante}')" 
-                                    class="bg-azul text-white px-3 py-1 rounded hover:bg-opacity-90 transition">
-                                    Ver Detalles
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
+                        `).join('');
                     }
-
+        
                     document.getElementById('modalPostulaciones').classList.remove('hidden');
                 } else {
                     throw new Error('Error al cargar las postulaciones');
@@ -298,27 +298,33 @@
             } catch (error) {
                 console.error('Error:', error);
                 document.getElementById('listaPostulaciones').innerHTML = `
-            <div class="text-center p-4 bg-red-100 rounded-lg">
-                <p class="text-red-600">Error al cargar las postulaciones. Por favor, intente nuevamente.</p>
-            </div>
-        `;
+                    <div class="text-center p-4 bg-red-100 rounded-lg">
+                        <p class="text-red-600">Error al cargar las postulaciones. Por favor, intente nuevamente.</p>
+                    </div>
+                `;
             }
         }
-
-        // Función para ver detalles de una vacante específica
-        async function verDetallesVacante(idVacante) {
+        
+        // Función para ver detalles de una empresa
+        async function verPerfil(nombreEmpresa) {
             try {
-                const response = await fetch(`http://localhost:3000/api/vacante/${idVacante}`);
+                const response = await fetch(`http://localhost:3000/api/perfil-empresa/${nombreEmpresa}`);
+                
                 if (response.ok) {
-                    const vacante = await response.json();
-                    // Aquí puedes manejar la visualización de los detalles de la vacante
-                    alert(`Detalles de la vacante: ${JSON.stringify(vacante)}`);
+                    const perfilData = await response.json();
+                    // Guardar los datos del perfil en localStorage
+                    localStorage.setItem('perfil_empresa_actual', JSON.stringify(perfilData));
+                    // Redirigir a la página de perfil
+                    window.location.href = 'verPerfilEmpresa.html';
+                } else {
+                    throw new Error('Error al obtener el perfil de la empresa');
                 }
             } catch (error) {
-                console.error('Error al cargar los detalles de la vacante:', error);
-                alert('Error al cargar los detalles de la vacante');
+                console.error('Error al cargar el perfil de la empresa:', error);
+                alert('Error al cargar el perfil de la empresa');
             }
         }
+        
 
         // Función para cerrar el modal de postulaciones
         function cerrarModalPostulaciones() {

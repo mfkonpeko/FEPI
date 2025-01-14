@@ -605,6 +605,31 @@ app.get("/api/perfil-egresado/:correo", (req, res) => {
     });
 });
 
+// Ruta para ver info de la empresa
+app.get("/api/perfil-empresa/:nombreEmpresa", (req, res) => {
+    const nombreEmpresa = req.params.nombreEmpresa;
+    
+    const query = `
+        SELECT *
+        FROM datos_empresa
+        WHERE nombre_empresa = ?
+    `;
+
+    conexion.query(query, [nombreEmpresa], (err, results) => {
+        if (err) {
+            console.error("Error en la consulta:", err);
+            return res.status(500).json({ error: "Error al obtener los datos de la empresa" });
+        }
+        
+        if (results.length === 0) {
+            return res.status(404).json({ error: "Empresa no encontrado" });
+        }
+
+        res.json(results[0]);
+    });
+});
+
+
 // Iniciar el servidor
 app.listen(port, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);
