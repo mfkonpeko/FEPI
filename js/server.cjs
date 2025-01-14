@@ -368,6 +368,100 @@ app.get("/api/egresados", (req, res) => {
     });
 });
 
+// Ruta para obtener las vacantes de una empresa específica
+app.get("/api/servicio/empresa/:nombreEmpresa", (req, res) => {
+    const { nombreEmpresa } = req.params;
+    const query = "SELECT * FROM servicio_social WHERE nombre_empresa = ?";
+
+    conexion.query(query, [nombreEmpresa], (err, results) => {
+        if (err) {
+            console.error("Error al ejecutar la consulta: ", err);
+            return res.status(500).json({ error: "Error al obtener las vacantes" });
+        }
+        res.json(results);
+    });
+});
+
+// Ruta para eliminar una vacante de una empresa específica
+app.delete("/api/servicio/:nombreEmpresa/:vacante", (req, res) => {
+    const { nombreEmpresa, vacante } = req.params;
+
+    const query = "DELETE FROM servicio_social WHERE nombre_empresa = ? AND vacante = ?";
+
+    conexion.query(query, [nombreEmpresa, vacante], (err, results) => {
+        if (err) {
+            console.error("Error al ejecutar la consulta: ", err);
+            return res.status(500).json({ error: "Error al eliminar la vacante" });
+        }
+
+        if (results.affectedRows === 0) {
+            return res.status(404).json({ error: "Vacante no encontrada" });
+        }
+
+        res.json({ message: "Vacante eliminada correctamente" });
+    });
+});
+
+// Ruta para obtener todas las vacantes
+app.get("/api/servicio", (req, res) => {
+    const query = "SELECT * FROM servicio_social";
+
+    conexion.query(query, (err, results) => {
+        if (err) {
+            console.error("Error al ejecutar la consulta: ", err);
+            return res.status(500).json({ error: "Error al obtener las vacantes" });
+        }
+        res.json(results);
+    });
+});
+
+// Ruta para obtener los empleos de una empresa específica
+app.get("/api/empleo/empresa/:nombreEmpresa", (req, res) => {
+    const { nombreEmpresa } = req.params;
+    const query = "SELECT * FROM empleos WHERE empresa = ?";
+
+    conexion.query(query, [nombreEmpresa], (err, results) => {
+        if (err) {
+            console.error("Error al ejecutar la consulta: ", err);
+            return res.status(500).json({ error: "Error al obtener las vacantes" });
+        }
+        res.json(results);
+    });
+});
+
+// Ruta para eliminar un empleo de una empresa específica
+app.delete("/api/empleo/:nombreEmpresa/:vacante", (req, res) => {
+    const { nombreEmpresa, vacante } = req.params;
+
+    const query = "DELETE FROM empleos WHERE empresa = ? AND vacante = ?";
+
+    conexion.query(query, [nombreEmpresa, vacante], (err, results) => {
+        if (err) {
+            console.error("Error al ejecutar la consulta: ", err);
+            return res.status(500).json({ error: "Error al eliminar la vacante" });
+        }
+
+        if (results.affectedRows === 0) {
+            return res.status(404).json({ error: "Vacante no encontrada" });
+        }
+
+        res.json({ message: "Vacante eliminada correctamente" });
+    });
+});
+
+// Si aún necesitas la ruta para obtener todas las vacantes, puedes mantenerla
+app.get("/api/servicio", (req, res) => {
+    const query = "SELECT * FROM servicio_social";
+
+    conexion.query(query, (err, results) => {
+        if (err) {
+            console.error("Error al ejecutar la consulta: ", err);
+            return res.status(500).json({ error: "Error al obtener las vacantes" });
+        }
+        res.json(results);
+    });
+});
+
 
 // Ruta para eliminar un usuario
 app.delete("/api/usuario/:correo", (req, res) => {
