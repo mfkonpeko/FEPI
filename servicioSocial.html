@@ -224,27 +224,48 @@
                 const response = await fetch('http://localhost:3000/api/vacantes');
                 const vacantes = await response.json();
         
-                const wrapper = document.getElementById('vacantes-wrapper');
-                wrapper.innerHTML = ''; // Limpia el contenedor
-        
-                // Obtener el tipo de usuario y el token de sesión del localStorage
                 const userType = localStorage.getItem('userType');
-                const sessionToken = localStorage.getItem('sessionToken'); // Añadir esta línea para obtener el token.
+                const sessionToken = localStorage.getItem('sessionToken');
+                const userEmail = localStorage.getItem('userEmail');
+        
+                // Obtener las postulaciones del usuario actual
+                let postulacionesUsuario = [];
+                if (sessionToken && userEmail) {
+                    const responsePostulaciones = await fetch(`http://localhost:3000/api/postulaciones/${userEmail}`);
+                    postulacionesUsuario = await responsePostulaciones.json();
+                }
+        
+                const wrapper = document.getElementById('vacantes-wrapper');
+                wrapper.innerHTML = '';
         
                 vacantes.forEach(vacante => {
                     const slide = document.createElement('div');
                     slide.className = 'swiper-slide';
+        
+                    // Verificar si el usuario está postulado a esta vacante
+                    const estaPostulado = postulacionesUsuario.some(postulacion =>
+                        postulacion.nombre_vacante === vacante.vacante &&
+                        postulacion.empresa === vacante.nombre_empresa
+                    );
+        
+                    // Crear el botón correspondiente según el estado de postulación
+                    const postularseButton = sessionToken && userType !== 'empresa' ? `
+                        <button 
+                            onclick="${estaPostulado ?
+                            `eliminarPostulacion('${vacante.nombre_empresa}', '${vacante.vacante}')` :
+                            `postular('${vacante.nombre_empresa}', '${vacante.vacante}')`}"
+                            class="bg-verde mt-4 border rounded-full inline-block py-3 px-7 text-center text-base font-medium text-white hover:bg-white hover:border-verde hover:text-verde">
+                            ${estaPostulado ? 'Eliminar postulación' : 'Postularse'}
+                        </button>
+                    ` : '';
+        
                     slide.innerHTML = `
                         <div class="card-content p-6 bg-yellow-50 rounded-xl shadow-md">
                             <h3 class="text-xl font-bold text-green-700">${vacante.vacante}</h3>
                             <p class="mt-2 font-semibold">${vacante.nombre_empresa}</p>
                             <p class="mt-1 text-gray-800"><strong>Modalidad:</strong> ${vacante.modalidad}</p>
                             <p class="mt-2 text-gray-600 text-sm">${vacante.descripcion}</p>
-                            ${
-                                sessionToken && userType !== 'empresa' 
-                                ? `<a href="#" class="bg-verde mt-4 border rounded-full inline-block py-3 px-7 text-center text-base font-medium text-white hover:bg-white hover:border-verde hover:text-verde">Postularse</a>`
-                                : ''
-                            }
+                            ${postularseButton}
                         </div>
                     `;
                     wrapper.appendChild(slide);
@@ -255,6 +276,80 @@
                 console.error('Error cargando vacantes:', error);
             }
         }
+    
+        // Función para postularse
+        window.postular = async function (empresa, nombreVacante) {
+            const correoPostulado = localStorage.getItem('userEmail');
+        
+            if (!correoPostulado) {
+                alert('Debes iniciar sesión para postularte');
+                return;
+            }
+        
+            try {
+                const response = await fetch('http://localhost:3000/api/postulaciones', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('sessionToken')}`
+                    },
+                    body: JSON.stringify({
+                        correo_postulado: correoPostulado,
+                        tipo_vacante: 'servicio social',
+                        empresa: empresa,
+                        nombre_vacante: nombreVacante
+                    })
+                });
+        
+                if (response.ok) {
+                    alert('¡Postulación exitosa!');
+                    await cargarVacantes(); // Recargar las vacantes para actualizar la vista
+                } else {
+                    const error = await response.json();
+                    alert(error.message || 'Error al realizar la postulación');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al procesar la postulación');
+            }
+        };
+
+        window.eliminarPostulacion = async function (empresa, nombreVacante) {
+            const correoPostulado = localStorage.getItem('userEmail');
+        
+            if (!correoPostulado) {
+                alert('Debes iniciar sesión');
+                return;
+            }
+        
+            if (confirm('¿Estás seguro que deseas eliminar tu postulación?')) {
+                try {
+                    const response = await fetch('http://localhost:3000/api/postulaciones', {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('sessionToken')}`
+                        },
+                        body: JSON.stringify({
+                            correo_postulado: correoPostulado,
+                            empresa: empresa,
+                            nombre_vacante: nombreVacante
+                        })
+                    });
+        
+                    if (response.ok) {
+                        alert('Postulación eliminada exitosamente');
+                        await cargarVacantes(); // Recargar las vacantes para actualizar la vista
+                    } else {
+                        const error = await response.json();
+                        alert(error.message || 'Error al eliminar la postulación');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Error al procesar la eliminación de la postulación');
+                }
+            }
+        };
 
         // Función para inicializar Swiper
         function initSwiper() {
